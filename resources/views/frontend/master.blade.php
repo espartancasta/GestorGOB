@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <link rel="icon" sizes="16x16" href="{{ asset("favicon.ico") }}"/>
     <title>@yield("title")</title>
+    
+    {{-- Estilos Originales --}}
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/bootstrap.min.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/owl.carousel.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/line-awesome.min.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/fontawesome.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/style.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/frontend/css/custom.css") }}"/>
+    
+    {{-- ¡NUEVO! Carga de estilos GOB.MX al final para sobrescribir los colores --}}
+    <link rel="stylesheet" href="{{ asset("assets/frontend/css/estilos-gobmx.css") }}"/>
+    
 </head>
 <body>
     <div class="loader">

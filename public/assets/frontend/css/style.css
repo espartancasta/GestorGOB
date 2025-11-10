@@ -5562,3 +5562,12 @@ input:checked + .slider:before {
     background-color: #101213;
   }
 }
+/* ==== Ajuste del orden: Sidebar a la izquierda ==== */
+@media (min-width: 992px) {
+  .oreedo-content {
+    order: 2;
+  }
+  .oreedo-sidebar {
+    order: 1;
+  }
+}

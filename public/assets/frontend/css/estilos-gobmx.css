@@ -1,0 +1,51 @@
+/* CONTENIDO FINAL DEL estilos-gobmx.css */
+:root {
+  /* Variables de GOB.MX */
+  --bs-primary: #611232; 
+  --bs-secondary: #545454; 
+  --bs-success: #a57f2c; 
+  --bs-info: #9d2449; 
+}
+
+/* 1. Sobrescribir colores de Bootstrap (Boton y Fondo Guinda) */
+.btn-primary, .bg-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #fff !important; 
+}
+
+/* 2. Forzar el Guinda del GOB.MX en la clase específica de tu tema para el botón Log In */
+.btn-subscribe {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #fff !important; 
+    /* Mantiene las propiedades de botón de Bootstrap si se usa junto a .btn */
+    padding: 0.5rem 1rem !important; 
+    border-radius: 0.25rem !important;
+}
+
+/* 3. Colores para el Texto y Títulos de la barra lateral (Guinda) */
+/* La clase 'widget-title' es común en temas de blog para títulos de barra lateral */
+.widget-title, h1, h2, h3, h4, h5, h6 {
+    color: var(--bs-primary) !important; /* Fuerza los títulos a Guinda */
+}
+
+/* 4. Color para enlaces (Guinda) */
+a, .text-primary {
+    color: var(--bs-primary) !important;
+}
+a:hover {
+    color: var(--bs-info) !important; /* Guinda claro al pasar el ratón */
+}
+
+/* 5. Color del texto principal y de búsqueda */
+body, .text-body {
+    color: var(--bs-secondary) !important;
+}
+
+/* 6. Botón de Búsqueda (el cuadrado a la derecha del input de búsqueda) */
+.search-form .search-btn {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #fff !important; 
+}

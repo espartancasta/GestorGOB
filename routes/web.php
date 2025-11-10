@@ -24,6 +24,10 @@ use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
+
+// La ruta POST para recibir la petición AJAX
+Route::post('/upload-file', [FileUploadController::class, 'store'])->name('upload.file');
 
 Route::name("frontend.")->group(function() {
     Route::get("/", [HomeController::class, "index"])->name("home");

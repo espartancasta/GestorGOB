@@ -26,6 +26,7 @@
                     @endif
                 </a>
             </div>
+
             <div class="header-navbar">
                 <nav class="navbar">
                     <div class="collapse navbar-collapse" id="main_nav">
@@ -42,19 +43,22 @@
                     </div>
                 </nav>
             </div>
+
             <div class="header-right">
                 <div class="theme-switch-wrapper">
                     <label class="theme-switch" for="checkbox">
                         <input type="checkbox" id="checkbox" />
-                        <span class="slider round ">
+                        <span class="slider round">
                             <i class="lar la-sun icon-light"></i>
                             <i class="lar la-moon icon-dark"></i>
                         </span>
                     </label>
                 </div>
+
                 <div class="search-icon">
                     <i class="las la-search"></i>
                 </div>
+
                 @auth
                     <div class="botton-sub">
                         <a href="{{ route('dashboard.home') }}" class="btn-subscribe">Dashboard</a>
@@ -64,6 +68,7 @@
                         <a href="{{ route('auth.login') }}" class="btn-subscribe">Log In</a>
                     </div>
                 @endauth
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
