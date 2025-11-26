@@ -49,3 +49,35 @@ body, .text-body {
     border-color: var(--bs-primary) !important;
     color: #fff !important; 
 }
+
+/* ------------------------------------------------------------
+   LOGO RESPONSIVO (FINAL FINAL)
+------------------------------------------------------------ */
+.logo-img {
+    max-width: 160px;   /* Tamaño máximo del logo */
+    width: 100%;        /* Flexible */
+    height: auto;       /* Mantiene proporción */
+    display: block;
+    margin-top: -18px;  /* 🔥 SUBE el logo */
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .logo-img {
+        max-width: 130px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .logo-img {
+        max-width: 110px;
+    }
+}
+
+/* Evitar efecto espejo o duplicación */
+.logo img,
+.logo .logo-dark,
+.logo .logo-white {
+    display: block !important;
+}

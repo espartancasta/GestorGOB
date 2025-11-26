@@ -21,7 +21,7 @@
             </div>
         </div>
         @empty
-        <p>No post found!</p>
+        <p>Publicacion no encontrada!</p>
         @endforelse
         <div class="pagination">
             <div class="pagination-area">

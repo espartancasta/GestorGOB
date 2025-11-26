@@ -11,7 +11,7 @@
                     <div class="section-heading-2-title">
                         <h1>{{ $category->title }}</h1>
                         <p class="links">
-                            <a href="{{ route('frontend.home') }}">Home <i class="las la-angle-right"></i></a> 
+                            <a href="{{ route('frontend.home') }}">Inicio <i class="las la-angle-right"></i></a> 
                             {{ $category->title }}
                         </p>
                     </div>
@@ -56,7 +56,7 @@
                                     </a>
                                 </li>
                                 <li class="post-date">
-                                    <span class="line"></span>{{ $post->created_at->format('F d, Y') }}
+                                    <span class="line"></span>{{ $post->created_at->format('d M, Y') }}
                                 </li>
                             </ul>
                             <div class="post-exerpt">
@@ -64,13 +64,13 @@
                             </div>
                             <div class="post-btn">
                                 <a href="{{ route('frontend.post', $post->slug) }}" class="btn-read-more">
-                                    Continue Reading <i class="las la-long-arrow-alt-right"></i>
+                                    Leer más <i class="las la-long-arrow-alt-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
                 @empty
-                    <div>No post found!</div>
+                    <div>No se encontraron publicaciones.</div>
                 @endforelse
             </div>
         </div>

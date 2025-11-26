@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading-2-title text-left">
-                        <h2>Search results for "{{ $query }}"</h2>
+                        <h2>Resultados de búsqueda para «{{ $query }}»</h2>
                     </div>
                 </div>
             </div>

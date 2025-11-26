@@ -6,7 +6,7 @@
                     @if (count($menu) > 0)
                         <div class="col-md-3">
                             <div class="menu">
-                                <h6>Menu</h6>
+                                <h6>Menú</h6> <!-- Traducido -->
                                 <ul>
                                     @foreach ($menu as $item)
                                         <li><a href="{{ $item['href'] }}">{{ $item['text'] }}</a></li>
@@ -17,7 +17,6 @@
                     @endif
 
                     <div class="col-md-6 text-center">
-                        {{-- ✅ Fixed image path syntax --}}
                         <img src="{{ asset('uploads/logo/' . $sitesettings->logo_dark) }}" 
                              alt="{{ $sitesettings->site_title }}" 
                              class="logo-white"/>
@@ -28,7 +27,7 @@
                     @if ($socialmedia->count() > 0)
                         <div class="col-md-3">
                             <div class="menu">
-                                <h6>Follow Us</h6>
+                                <h6>Síguenos</h6> <!-- Traducido -->
                                 <ul>
                                     @foreach ($socialmedia as $media)
                                         <li><a href="{{ $media->link }}" target="_blank">{{ $media->title }}</a></li>

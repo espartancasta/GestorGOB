@@ -10,7 +10,9 @@
                             <div class="image">
                                 <img src="{{ asset("uploads/category/".($category->image ?? "default.webp")) }}" alt="{{ $category->title }}"/>
                             </div>
-                            <p>{{ $category->title }}<span>{{ count($category->posts->where("status", true)) }}</span></p>
+                            <p>{{ $category->title }}
+                                <span>{{ count($category->posts->where("status", true)) }}</span>
+                            </p>
                         </a>
                         @endforeach
                     </div>
@@ -19,4 +21,6 @@
         </div>
     </div>
 </div>
+@else
+<p>No se encontraron categorías.</p>
 @endif

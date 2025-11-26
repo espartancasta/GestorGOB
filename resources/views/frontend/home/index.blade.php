@@ -1,19 +1,27 @@
 @extends("frontend.master")
 
-@section("title", config('app.sitesettings')::first()->site_title." - ".config('app.sitesettings')::first()->tagline)
+@section("title", config('app.sitesettings')::first()->site_title . " - " . config('app.sitesettings')::first()->tagline)
 
 @section("content")
 
+{{-- Carrusel de destacados --}}
 @include("frontend.home.inc.featuredpost")
-@include("frontend.home.inc.category")
 
+{{-- Categorías --}}
+@include("frontend.home.inc.category")
 
 <section class="section-feature-1">
     <div class="container-fluid">
         <div class="row">
-            @include("frontend.home.inc.recentpost")
+
+            {{-- ⭐ Sidebar a la IZQUIERDA --}}
             @include("frontend.home.inc.sidebar")
+
+            {{-- ⭐ Artículos recientes a la DERECHA --}}
+            @include("frontend.home.inc.recentpost")
+
         </div>
     </div>
 </section>
+
 @endsection
