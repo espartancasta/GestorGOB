@@ -1,0 +1,56 @@
+@extends('frontend.master')
+
+@section('title', 'Perfil - ' . ($user->name ?? 'Usuario'))
+
+@section('content')
+<div class="container" style="padding-top:120px; padding-bottom:40px;">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+
+            <div class="card" style="border-radius:16px; border:1px solid #eee;">
+                <div class="card-body" style="padding:24px;">
+
+                    @php
+                        $avatar = !empty($user->avatar)
+                            ? asset($user->avatar)
+                            : asset('assets/frontend/img/default-avatar.svg');
+                    @endphp
+
+                    <div class="d-flex align-items-center" style="gap:16px;">
+                        <img src="{{ $avatar }}" alt="avatar"
+                             style="width:88px;height:88px;border-radius:50%;object-fit:cover;border:1px solid #eee;">
+
+                        <div>
+                            <h3 style="margin:0; font-weight:800;">
+                                {{ $user->name ?? 'Usuario' }}
+                            </h3>
+                            <div style="color:#666;">
+                                @{{ $user->username }}
+                            </div>
+                            <div style="color:#666;">
+                                {{ $user->email }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h5 style="font-weight:800;">Información</h5>
+
+                    <ul style="margin:0; padding-left:18px;">
+                        <li><strong>Perfil:</strong> {{ $user->profile ?? 'Sin información' }}</li>
+                        <li><strong>Acerca de:</strong> {{ $user->about ?? 'Sin información' }}</li>
+                        <li><strong>Facebook:</strong> {{ $user->facebook ?? '—' }}</li>
+                        <li><strong>Twitter:</strong> {{ $user->twitter ?? '—' }}</li>
+                        <li><strong>Instagram:</strong> {{ $user->instagram ?? '—' }}</li>
+                        <li><strong>LinkedIn:</strong> {{ $user->linkedin ?? '—' }}</li>
+                        <li><strong>YouTube:</strong> {{ $user->youtube ?? '—' }}</li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endsection

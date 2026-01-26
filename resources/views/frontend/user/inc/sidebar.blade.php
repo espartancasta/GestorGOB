@@ -6,6 +6,6 @@
             <x-frontend.popular-posts/>
             <x-frontend.sidebar-social/>
             <x-frontend.tags/>
-         </div>
+        </div>
     </div>
 </div>

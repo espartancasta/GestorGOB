@@ -1,83 +1,137 @@
-/* CONTENIDO FINAL DEL estilos-gobmx.css */
+/* CONTENIDO FINAL DEL estilos-gobmx.css (MODIFICADO) */
+
+/* =========================================================
+   0) Variables (paleta institucional)
+========================================================= */
 :root {
-  /* Variables de GOB.MX */
-  --bs-primary: #611232; 
-  --bs-secondary: #545454; 
-  --bs-success: #a57f2c; 
-  --bs-info: #9d2449; 
+  --bs-primary: #611232;     /* Guinda */
+  --bs-secondary: #545454;   /* Gris */
+  --bs-success: #a57f2c;     /* Dorado */
+  --bs-info: #9d2449;        /* Guinda claro */
 }
 
-/* 1. Sobrescribir colores de Bootstrap (Boton y Fondo Guinda) */
-.btn-primary, .bg-primary {
-    background-color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-    color: #fff !important; 
+/* =========================================================
+   1) Sobrescribir colores de Bootstrap (alcance controlado)
+========================================================= */
+.btn-primary,
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  color: #fff !important;
 }
 
-/* 2. Forzar el Guinda del GOB.MX en la clase específica de tu tema para el botón Log In */
+/* Botón del tema (Login/CTA) */
 .btn-subscribe {
-    background-color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-    color: #fff !important; 
-    /* Mantiene las propiedades de botón de Bootstrap si se usa junto a .btn */
-    padding: 0.5rem 1rem !important; 
-    border-radius: 0.25rem !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  color: #fff !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.25rem !important;
 }
 
-/* 3. Colores para el Texto y Títulos de la barra lateral (Guinda) */
-/* La clase 'widget-title' es común en temas de blog para títulos de barra lateral */
-.widget-title, h1, h2, h3, h4, h5, h6 {
-    color: var(--bs-primary) !important; /* Fuerza los títulos a Guinda */
-}
-
-/* 4. Color para enlaces (Guinda) */
-a, .text-primary {
-    color: var(--bs-primary) !important;
-}
-a:hover {
-    color: var(--bs-info) !important; /* Guinda claro al pasar el ratón */
-}
-
-/* 5. Color del texto principal y de búsqueda */
-body, .text-body {
-    color: var(--bs-secondary) !important;
-}
-
-/* 6. Botón de Búsqueda (el cuadrado a la derecha del input de búsqueda) */
+/* Botón de búsqueda */
 .search-form .search-btn {
-    background-color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-    color: #fff !important; 
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  color: #fff !important;
 }
 
-/* ------------------------------------------------------------
-   LOGO RESPONSIVO (FINAL FINAL)
------------------------------------------------------------- */
+/* =========================================================
+   2) Tipografía / encabezados / enlaces (acotado)
+========================================================= */
+
+/* Títulos en widgets + headings dentro del contenido */
+.widget-title,
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6,
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+  color: var(--bs-primary) !important;
+}
+
+/* Enlaces: acotado a contenido */
+.content a,
+.post-content a,
+.widget a {
+  color: var(--bs-primary) !important;
+}
+
+.content a:hover,
+.post-content a:hover,
+.widget a:hover {
+  color: var(--bs-info) !important;
+}
+
+/* Texto general */
+body,
+.text-body {
+  color: var(--bs-secondary) !important;
+}
+
+/* =========================================================
+   3) HEADER: logo a la izquierda y controles a la derecha
+========================================================= */
+
+/* Quita padding lateral del contenedor del header */
+header.header .container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Ajusta el área del header para ocupar todo el ancho */
+header.header .header-area {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  /* margen interno leve */
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* Logo pegado a la izquierda */
+header.header .logo {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Controles al extremo derecho */
+header.header .header-right {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  padding-right: 0 !important;
+  justify-content: flex-end !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* =========================================================
+   4) LOGO RESPONSIVO
+========================================================= */
 .logo-img {
-    max-width: 160px;   /* Tamaño máximo del logo */
-    width: 100%;        /* Flexible */
-    height: auto;       /* Mantiene proporción */
-    display: block;
-    margin-top: -18px;  /* 🔥 SUBE el logo */
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 0 !important;
 }
 
 /* Tablets */
 @media (max-width: 768px) {
-    .logo-img {
-        max-width: 130px;
-    }
+  .logo-img {
+    max-width: 130px;
+  }
 }
 
 /* Móviles */
 @media (max-width: 480px) {
-    .logo-img {
-        max-width: 110px;
-    }
+  .logo-img {
+    max-width: 110px;
+  }
 }
 
 /* Evitar efecto espejo o duplicación */
 .logo img,
 .logo .logo-dark,
 .logo .logo-white {
-    display: block !important;
+  display: block !important;
 }
