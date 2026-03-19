@@ -37,23 +37,7 @@
         </a>
     </div>
 
-    <div class="search">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-10 m-auto">
-                    <div class="search-width">
-                        <button type="button" class="close">
-                            <i class="far fa-times"></i>
-                        </button>
-                        <form class="search-form" action="{{ route('frontend.search') }}">
-                            <input type="search" name="q" value="{{ request()->route()->getName() == 'frontend.search' ? request()->q : '' }}" placeholder="What are you looking for?">
-                            <button type="submit" class="search-btn">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     {{-- Scripts --}}
     <script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
