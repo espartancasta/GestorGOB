@@ -3,46 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
     public function index()
     {
         if (Auth::check()) {
-            return redirect()->route("dashboard.home");
+            return redirect()->route('frontend.home');
         }
 
-        return view("auth.login");
+        return view('auth.login');
     }
 
     public function login(Request $request)
     {
         if (Auth::check()) {
-            return redirect()->route("dashboard.home");
+            return redirect()->route('frontend.home');
         }
 
         $validated = $request->validate([
-            "email_or_username" => ["required"],
-            "password" => ["required"]
+            'email_or_username' => ['required'],
+            'password' => ['required'],
         ]);
 
-        $user = User::where("username", $validated["email_or_username"])
-            ->orWhere("email", $validated["email_or_username"])
-            ->first();
+        $loginField = filter_var($validated['email_or_username'], FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'username';
 
-        if ($user && !$user->status) {
-            return back()->withErrors("Your account is currently inactive!");
+        if (Auth::attempt([$loginField => $validated['email_or_username'], 'password' => $validated['password']])) {
+            $request->session()->regenerate();
+            return redirect()->route('frontend.home');
         }
 
-        if ($user && Hash::check($validated["password"], $user->password)) {
-            Auth::login($user, $request->has("remember"));
-            return redirect()->route("dashboard.home");
-        }
-
-        return back()->withErrors("Your login credentials don't match!");
+        return back()
+            ->withErrors(['email_or_username' => 'Credenciales inválidas.'])
+            ->withInput();
     }
 }

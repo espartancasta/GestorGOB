@@ -4,21 +4,18 @@
 
 @section("content")
 
-{{-- Carrusel de destacados --}}
 @include("frontend.home.inc.featuredpost")
-
-{{-- Categorías --}}
 @include("frontend.home.inc.category")
 
 <section class="section-feature-1">
     <div class="container-fluid">
         <div class="row">
 
-            {{-- ⭐ Sidebar a la IZQUIERDA --}}
-            @include("frontend.home.inc.sidebar")
-
-            {{-- ⭐ Artículos recientes a la DERECHA --}}
+            {{-- CONTENIDO PRINCIPAL --}}
             @include("frontend.home.inc.recentpost")
+
+            {{-- SIDEBAR DERECHO --}}
+            @include("frontend.home.inc.sidebar")
 
         </div>
     </div>

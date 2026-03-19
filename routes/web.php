@@ -6,19 +6,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 
-use App\Http\Controllers\Dashboard\CategoryController as DashboardCategoryController;
-use App\Http\Controllers\Dashboard\CommentController as DashboardCommentController;
-use App\Http\Controllers\Dashboard\HomeController as DashboardHomeController;
-use App\Http\Controllers\Dashboard\MediaController;
-use App\Http\Controllers\Dashboard\MenuController;
-use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
-use App\Http\Controllers\Dashboard\PostController as DashboardPostController;
-use App\Http\Controllers\Dashboard\ProfileController;
-use App\Http\Controllers\Dashboard\SiteSettingController;
-use App\Http\Controllers\Dashboard\SocialMediaController;
-use App\Http\Controllers\Dashboard\TagController as DashboardTagController;
-use App\Http\Controllers\Dashboard\UserController as DashboardUserController;
-
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -27,154 +14,77 @@ use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\TagController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Frontend\SubmissionController;
 
 use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
-| Rutas custom
+| Upload
 |--------------------------------------------------------------------------
 */
-
-// Ruta POST para recibir la petición AJAX
 Route::post('/upload-file', [FileUploadController::class, 'store'])->name('upload.file');
 
 /*
 |--------------------------------------------------------------------------
-| Rutas Frontend
+| Frontend
 |--------------------------------------------------------------------------
 */
-Route::name("frontend.")->group(function () {
-    Route::get("/", [HomeController::class, "index"])->name("home");
-    Route::get("/search", [SearchController::class, "index"])->name("search");
-    Route::get("/post/{slug}", [PostController::class, "show"])->name("post");
-
-    Route::post("/comment/{id}", [CommentController::class, "index"])->name("comment");
-    Route::post("/comment-reply", [CommentController::class, "reply"])->name("comment.reply");
-
-    Route::get("/category/{slug}", [CategoryController::class, "show"])->name("category");
-    Route::get("/user/{username}", [UserController::class, "show"])->name("user");
-    Route::get("/tag/{name}", [TagController::class, "index"])->name("tag");
-    Route::get("/page/{slug}", [PageController::class, "index"])->name("page");
+Route::name('frontend.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::get('/post/{slug}', [PostController::class, 'show'])->name('post');
+    Route::post('/comment/{id}', [CommentController::class, 'index'])->name('comment');
+    Route::post('/comment-reply', [CommentController::class, 'reply'])->name('comment.reply');
+    Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category');
+    Route::get('/user/{username}', [UserController::class, 'show'])->name('user');
+    Route::get('/tag/{name}', [TagController::class, 'index'])->name('tag');
+    Route::get('/page/{slug}', [PageController::class, 'index'])->name('page');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Rutas Auth
+| Auth
 |--------------------------------------------------------------------------
 */
-Route::name("auth.")->group(function () {
-    Route::get("/signup", [SignupController::class, "index"])->name("signup");
-    Route::post("/signup", [SignupController::class, "signup"])->name("signup.submit");
+Route::name('auth.')->group(function () {
+    Route::get('/signup', [SignupController::class, 'index'])->name('signup');
+    Route::post('/signup', [SignupController::class, 'signup'])->name('signup.submit');
 
-    Route::get("/login", [LoginController::class, "index"])->name("login");
-    Route::post("/login", [LoginController::class, "login"])->name("login.submit");
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-    Route::post("/logout", [LogoutController::class, "index"])->name("logout");
+    Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Rutas Dashboard
+| Submissions (🔥 SEMANA 7 PRO)
 |--------------------------------------------------------------------------
 */
-Route::name("dashboard.")->prefix("/dashboard")->middleware(["auth"])->group(function () {
+Route::middleware('auth')->prefix('submissions')->name('submissions.')->group(function () {
 
-    // Dashboard Home
-    Route::get("/", [DashboardHomeController::class, "index"])->name("home");
+    // 🔥 Pantalla del Secretario
+    Route::get('/', [SubmissionController::class, 'index'])->name('index');
 
-    /* ----------------------------------------------
-       POSTS (Dashboard) - NUEVA VERSION FINAL
-    ---------------------------------------------- */
-    Route::prefix("posts")->name("posts.")->group(function () {
+    // Crear y guardar
+    Route::get('/create', [SubmissionController::class, 'create'])->name('create');
+    Route::post('/', [SubmissionController::class, 'store'])->name('store');
 
-        Route::get("/", [DashboardPostController::class, "index"])->name("index");
-        Route::get("/create", [DashboardPostController::class, "create"])->name("create");
-        Route::post("/store", [DashboardPostController::class, "store"])->name("store");
-        Route::get("/edit/{id}", [DashboardPostController::class, "edit"])->name("edit");
-        Route::post("/update/{id}", [DashboardPostController::class, "update"])->name("update");
-        Route::get("/delete/{id}", [DashboardPostController::class, "destroy"])->name("destroy");
+    // 🔥 VER DETALLE REAL
+    Route::get('/{submission}', [SubmissionController::class, 'show'])->name('show');
 
-        // Estado (Publicado / Borrador)
-        Route::get("/status/{id}", [DashboardPostController::class, "status"])->name("status");
+    // 🔥 DESCARGAR ARCHIVO
+    Route::get('/{submission}/download', [SubmissionController::class, 'download'])->name('download');
+});
 
-        // Destacado
-        Route::get("/featured/{id}", [DashboardPostController::class, "featured"])->name("featured");
-
-        // Habilitar/Deshabilitar comentarios
-        Route::get("/comment/{id}", [DashboardPostController::class, "comment"])->name("comment");
-
-        // Papelera
-        Route::get("/trashed", [DashboardPostController::class, "trashed"])->name("trashed");
-
-        // Restaurar
-        Route::get("/restore/{id}", [DashboardPostController::class, "restore"])->name("restore");
-
-        // Eliminar de la papelera (force delete)
-        Route::get("/delete-permanent/{id}", [DashboardPostController::class, "delete"])->name("delete-permanent");
-    });
-
-    // Media
-    Route::resource("/media", MediaController::class)->except(["show", "edit", "update"]);
-
-    // Comments
-    Route::prefix("/comments")->name("comments.")->controller(DashboardCommentController::class)->group(function () {
-        Route::get("/{id}/status", "status")->name("status");
-        Route::get("/trashed", "trashed")->name("trashed");
-        Route::get("/{id}/restore", "restore")->name("restore");
-        Route::delete("/{id}/delete", "delete")->name("delete");
-    });
-    Route::resource("/comments", DashboardCommentController::class)->only(["index", "show", "destroy"]);
-
-    // Categories
-    Route::prefix("/categories")->name("categories.")->controller(DashboardCategoryController::class)->middleware(["admin"])->group(function () {
-        Route::get("/{id}/status", "status")->name("status");
-        Route::get("/trashed", "trashed")->name("trashed");
-        Route::get("/{id}/restore", "restore")->name("restore");
-        Route::delete("/{id}/delete", "delete")->name("delete");
-    });
-    Route::resource("/categories", DashboardCategoryController::class)->middleware(["admin"]);
-
-    // Tags
-    Route::prefix("/tags")->name("tags.")->controller(DashboardTagController::class)->middleware(["admin"])->group(function () {
-        Route::get("/index", "index")->name("index");
-        Route::delete("/{id}/destroy", "destroy")->name("destroy");
-    });
-
-    // Users
-    Route::prefix("/users")->name("users.")->controller(DashboardUserController::class)->middleware(["admin"])->group(function () {
-        Route::get("/{id}/status", "status")->name("status");
-    });
-    Route::resource("/users", DashboardUserController::class)->middleware(["admin"]);
-
-    // Pages
-    Route::prefix("/pages")->name("pages.")->controller(DashboardPageController::class)->middleware(["admin"])->group(function () {
-        Route::get("/{id}/status", "status")->name("status");
-        Route::get("/trashed", "trashed")->name("trashed");
-        Route::get("/{id}/restore", "restore")->name("restore");
-        Route::delete("/{id}/delete", "delete")->name("delete");
-    });
-    Route::resource("/pages", DashboardPageController::class)->except(["show"])->middleware(["admin"]);
-
-    // Settings
-    Route::prefix("/settings")->name("settings.")->middleware(["admin"])->group(function () {
-        Route::get("/site-settings", [SiteSettingController::class, "index"])->name("site");
-        Route::post("/site-settings", [SiteSettingController::class, "update"])->name("site.update");
-
-        Route::get("/profile", [ProfileController::class, "index"])->withoutMiddleware(["admin"])->name("profile");
-        Route::post("/profile", [ProfileController::class, "update"])->withoutMiddleware(["admin"])->name("profile.update");
-
-        Route::get("/change-password", [ProfileController::class, "password"])->withoutMiddleware(["admin"])->name("password");
-        Route::post("/change-password", [ProfileController::class, "passwordUpdate"])->withoutMiddleware(["admin"])->name("password.update");
-
-        Route::get("/social-media", [SocialMediaController::class, "index"])->name("social.media");
-        Route::post("/social-media", [SocialMediaController::class, "add"])->name("social.media.add");
-        Route::get("/social-media/{id}/status", [SocialMediaController::class, "status"])->name("social.media.status");
-        Route::delete("/social-media/{id}/delete", [SocialMediaController::class, "delete"])->name("social.media.delete");
-
-        Route::get("/menus/header", [MenuController::class, "header"])->name("menus.header");
-        Route::post("/menus/header", [MenuController::class, "headerUpdate"])->name("menus.header.update");
-        Route::get("/menus/footer", [MenuController::class, "footer"])->name("menus.footer");
-        Route::post("/menus/footer", [MenuController::class, "footerUpdate"])->name("menus.footer.update");
-    });
+/*
+|--------------------------------------------------------------------------
+| Dashboard redirect
+|--------------------------------------------------------------------------
+*/
+Route::prefix('/dashboard')->group(function () {
+    Route::any('{any?}', function () {
+        return redirect()->route('frontend.home');
+    })->where('any', '.*');
 });

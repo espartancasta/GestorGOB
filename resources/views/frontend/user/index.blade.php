@@ -5,32 +5,38 @@
 @section("content")
 @include("frontend.user.inc.author")
 
-<section class="blog-author mt-30">
-    <div class="container-fluid">
-        <div class="row">
+<section class="blog-author mt-30 gob-user-layout">
+    <div class="container">
+        <div class="row align-items-start">
 
-            {{-- Sidebar --}}
-            <div class="col-lg-4 order-lg-1 order-2">
-                @include("frontend.user.inc.sidebar")
-            </div>
+            {{-- CONTENIDO PRINCIPAL --}}
+            <div class="col-lg-8 gob-main-content">
 
-            {{-- Contenido --}}
-            <div class="col-lg-8 order-lg-2 order-1">
+                <div class="gob-upload-card">
+                    <div class="gob-upload-card__inner">
+                        <div>
+                            <h4 class="gob-upload-card__title">
+                                Sube tu primer documento para revisión :)
+                            </h4>
+                            <div class="gob-upload-card__text">
+                                Word (.docx). (Semana 5: pantalla de envío)
+                            </div>
+                        </div>
 
-                {{-- CTA (frontend) --}}
-                <div class="text-center p-5">
-                    <h4 class="mb-4">
-                        Sube tu primer documento para revisión :)
-                    </h4>
-
-                    <button class="btn btn-primary btn-lg" type="button">
-                        Subir documento
-                    </button>
+                        <div>
+                            <a href="{{ route('submissions.create') }}" class="gob-upload-btn">
+                                Subir documento
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                {{-- Posts del usuario (funcionalidad original) --}}
                 @include("frontend.user.inc.post")
+            </div>
 
+            {{-- SIDEBAR DERECHO --}}
+            <div class="col-lg-4 gob-sidebar-col">
+                @include("frontend.user.inc.sidebar")
             </div>
 
         </div>
