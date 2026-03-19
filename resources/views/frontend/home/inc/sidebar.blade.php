@@ -1,4 +1,4 @@
-<div class="col-lg-4 oredoo-sidebar gob-home-sidebar-col">
+<div class="col-lg-3 oredoo-sidebar gob-home-sidebar-col">
     <div class="theiaStickySidebar">
         <div class="sidebar gob-home-sidebar-box">
             <x-frontend.sidebar-search/>

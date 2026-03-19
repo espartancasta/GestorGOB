@@ -8,7 +8,7 @@
 @include("frontend.home.inc.category")
 
 <section class="section-feature-1">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
 
             {{-- CONTENIDO PRINCIPAL --}}

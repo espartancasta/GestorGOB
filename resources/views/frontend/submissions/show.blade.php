@@ -8,13 +8,8 @@
 <div class="container-fluid">
 <div class="row">
 
-    {{-- SIDEBAR --}}
-    <div class="col-lg-4 order-lg-1 order-2">
-        @include('frontend.user.inc.sidebar')
-    </div>
-
     {{-- CONTENIDO --}}
-    <div class="col-lg-8 order-lg-2 order-1">
+    <div class="col-lg-9 gob-main-content">
 
         <div style="
         background:#fff;
@@ -95,6 +90,11 @@
 
         </div>
 
+    </div>
+
+    {{-- SIDEBAR --}}
+    <div class="col-lg-3 gob-sidebar-col">
+        @include('frontend.user.inc.sidebar')
     </div>
 
 </div>

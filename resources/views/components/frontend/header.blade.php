@@ -1,43 +1,33 @@
 @php
+    use Illuminate\Support\Facades\Auth;
     $userAvatar = (Auth::check() && !empty(Auth::user()->avatar))
         ? asset(Auth::user()->avatar)
         : asset('assets/frontend/img/default-avatar.svg');
 @endphp
 
-<header class="header navbar-expand-lg fixed-top">
-    <div class="container-fluid">
-        <div class="header-area">
+<header class="header fixed-top" style="background-color: var(--gob-primary-dark) !important; box-shadow: none !important; border-bottom: none !important; min-height: 80px; display: flex; align-items: center; width: 100%;">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between w-100" style="padding:0; min-height: 80px;">
 
-            {{-- LOGO --}}
-            <div class="logo">
-                <a href="{{ route('frontend.home') }}">
-                    @php
-                        if (!empty($sitesettings->logo_light) && file_exists(public_path('uploads/logo/'.$sitesettings->logo_light))) {
-                            $logo = asset('uploads/logo/'.$sitesettings->logo_light);
-                        } elseif (!empty($sitesettings->logo_dark) && file_exists(public_path('uploads/logo/'.$sitesettings->logo_dark))) {
-                            $logo = asset('uploads/logo/'.$sitesettings->logo_dark);
-                        } else {
-                            $logo = asset('uploads/logo/logo_dark.png');
-                        }
-                    @endphp
-
-                    <img src="{{ $logo }}" alt="Logo" class="logo-img"/>
+            {{-- LOGO OFICIAL --}}
+            <div class="logo m-0 p-0" style="display:flex; align-items:center;">
+                <a href="https://www.gob.mx/" target="_blank">
+                    <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg" alt="logo gobierno de méxico" style="height:48px; width:auto; max-width:none;"/>
                 </a>
             </div>
 
-            {{-- NAVBAR VACÍO (para que no aparezca la fila fea) --}}
-            <div class="header-navbar">
-                <nav class="navbar">
-                    <div class="collapse navbar-collapse" id="main_nav"></div>
-                </nav>
-            </div>
-
             {{-- DERECHA --}}
-            <div class="header-right" style="display:flex; align-items:center; gap:12px;">
+            <div class="header-right ms-auto d-flex align-items-center justify-content-end" style="gap:24px; padding-right:0; margin-left:auto;">
+
+                {{-- LINKS OFICIALES --}}
+                <div class="gob-header-links" style="display:flex; gap:24px; font-size:16px; font-weight:300;">
+                    <a href="https://www.gob.mx/tramites" target="_blank" style="color:#fff; text-decoration:none;">Trámites</a>
+                    <a href="https://www.gob.mx/gobierno" target="_blank" style="color:#fff; text-decoration:none;">Gobierno</a>
+                </div>
 
                 {{-- BUSCADOR --}}
-                <div class="search-icon" style="cursor:pointer;">
-                    <i class="las la-search"></i>
+                <div class="search-icon gob-circle-btn" style="cursor:pointer; width:auto; height:auto;">
+                    <i class="las la-search" style="font-size:20px;"></i>
                 </div>
 
                 @auth
@@ -62,9 +52,8 @@
                     <div class="dropdown">
                         <button type="button" class="gob-circle-btn" id="userMenu"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                title="Tu cuenta" style="padding:0; overflow:hidden;">
-                            <img src="{{ $userAvatar }}" alt="avatar"
-                                 style="width:100%;height:100%;object-fit:cover;"/>
+                                title="Tu cuenta" style="padding:0; overflow:hidden; border:none; background:transparent;">
+                            <i class="las la-user-circle" style="font-size:32px; color:#fff;"></i>
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right gob-dropdown" aria-labelledby="userMenu">
@@ -152,13 +141,14 @@
     .gob-circle-btn{
         width:42px;height:42px;
         border-radius:50%;
-        border:1px solid rgba(0,0,0,.08);
-        background:#fff;
+        border:1px solid transparent;
+        background:transparent;
         display:flex;align-items:center;justify-content:center;
         position:relative;
         cursor:pointer;
+        color:#fff;
     }
-    .gob-circle-btn i{ font-size:20px; color:#5b5b5b; }
+    .gob-circle-btn i{ font-size:24px; color:#fff; }
     .gob-badge{
         position:absolute;
         top:-6px; right:-6px;
@@ -227,23 +217,7 @@
         padding:10px 12px;
     }
 
-    /* Bordes: logo izq, iconos der */
-    header.header .container-fluid{ padding-left:0 !important; padding-right:0 !important; }
-    header.header .header-area{
-        width:100% !important;
-        display:flex !important;
-        align-items:center !important;
-        justify-content:space-between !important;
-        padding-left:8px !important;
-        padding-right:8px !important;
-    }
-    header.header .logo{ margin-left:0 !important; padding-left:0 !important; }
-    header.header .header-right{
-        margin-left:auto !important;
-        margin-right:0 !important;
-        padding-right:0 !important;
-        justify-content:flex-end !important;
-    }
+    /* Estilos estructurales movidos a estilos-gobmx.css */
 </style>
 
 <script>

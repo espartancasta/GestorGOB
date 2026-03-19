@@ -7,15 +7,17 @@
    0) Variables institucionales
 ========================================================= */
 :root {
-  --gob-primary: #7a0c34;         /* guinda principal */
-  --gob-primary-dark: #5c0a27;    /* guinda oscuro */
+  --gob-primary: #9F2241;         /* guinda principal V3 */
+  --gob-primary-dark: #611232;    /* guinda oscuro V3 para encabezados */
   --gob-primary-soft: #f6eef1;    /* fondo suave guinda */
-  --gob-gold: #b38e3f;            /* dorado institucional */
-  --gob-gold-soft: #d4b26a;
-  --gob-text: #3c3c3c;            /* texto fuerte */
-  --gob-muted: #6f7271;           /* gris institucional */
+  --gob-gold: #BC955C;            /* dorado institucional V3 */
+  --gob-gold-soft: #DDC9A3;       /* dorado claro V3 */
+  --gob-text: #545454;            /* texto fuerte V3 documentos */
+  --gob-text-doc: #545454;
+  --gob-muted: #98989A;           /* gris institucional V3 */
+  --gob-green-dark: #13322e;      /* verde oscuro Semarnat */
   --gob-light: #f5f5f5;           /* fondo general */
-  --gob-white: #ffffff;
+  --gob-white: #FFFFFF;           /* blanco V3 */
   --gob-border: #e6e6e6;
   --gob-border-strong: #d7d7d7;
   --gob-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
@@ -194,25 +196,31 @@ h1, h2, h3, h4, h5, h6,
    4) Header institucional
 ========================================================= */
 header.header {
-  background: var(--gob-white) !important;
-  border-bottom: 1px solid #d9d9d9 !important;
+  background: var(--gob-primary-dark) !important;
+  border-bottom: none !important;
   box-shadow: none !important;
+  min-height: 80px !important;
 }
 
-header.header .container-fluid {
+header.header .container-fluid,
+header.header .container {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
 header.header .header-area {
   width: 100% !important;
-  min-height: 98px !important;
+  min-height: 80px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  background: var(--gob-white) !important;
-  border-bottom: 1px solid #d9d9d9 !important;
-  padding: 0 28px !important;
+  background: transparent !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
 }
 
 header.header .logo {
@@ -220,8 +228,8 @@ header.header .logo {
   padding-left: 0 !important;
   display: flex !important;
   align-items: center !important;
-  background: var(--gob-primary) !important;
-  min-height: 98px !important;
+  background: transparent !important;
+  min-height: 80px !important;
   padding: 0 20px !important;
 }
 
@@ -875,15 +883,118 @@ header.header {
     justify-content: flex-end;
 }
 
+/* EL CAJÓN GRANDE FLOTANTE */
 .gob-home-sidebar-box {
     width: 100%;
-    max-width: 270px; /* antes se veía muy ancho */
-    background: transparent;
+    max-width: 290px;
+    background: #ffffff !important;
+    border: 1px solid #e4e4e4 !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important; /* Flotando */
+    overflow: hidden !important;
 }
 
+/* CAJONERAS INTERNAS: Destruir cajitas antiguas y fusionar */
 .gob-home-sidebar-box .widget {
-    padding-left: 10px;
-    padding-right: 10px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+/* Las cajoneras llevan padding enorme para NO estar achocadas,
+   y una raya sutil debajo para dividirlas de lado a lado */
+.gob-home-sidebar-box .widget-title,
+.gob-home-sidebar-box .widget-search,
+.gob-home-sidebar-box .widget-categories,
+.gob-home-sidebar-box .widget-tags,
+.gob-home-sidebar-box .popular-posts-item {
+    padding: 24px !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border-bottom: 1px solid #e4e4e4 !important;
+}
+
+/* Quitar doble margen inferiror en las listas si existen */
+.gob-home-sidebar-box .widget-categories ul,
+.gob-home-sidebar-box .widget-tags ul {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.gob-home-sidebar-box .widget-categories ul li,
+.gob-home-sidebar-box .widget-tags ul li {
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #f2f2f2 !important;
+}
+
+.gob-home-sidebar-box .widget-categories ul li:last-child,
+.gob-home-sidebar-box .widget-tags ul li:last-child {
+    border-bottom: none !important;
+}
+
+/* Textos informativos de "No se encontraron..." para separarlos */
+.gob-home-sidebar-box .widget-categories div,
+.gob-home-sidebar-box .widget-tags div {
+    font-size: 15px !important;
+    color: #666 !important;
+}
+
+/* Quitar linea del final */
+.gob-home-sidebar-box .widget:last-child .widget-categories,
+.gob-home-sidebar-box .widget:last-child .widget-tags {
+    border-bottom: none !important;
+}
+
+/* Titulo en Oro Elegante */
+.gob-home-sidebar-box .widget-title {
+    padding-bottom: 8px !important;
+    border-bottom: none !important;
+}
+
+.gob-home-sidebar-box .widget-title h5 {
+    color: var(--gob-gold) !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+    font-family: inherit !important;
+}
+
+/* Estilo del buscador */
+.gob-home-sidebar-box .widget-search form {
+    display: flex !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+.gob-home-sidebar-box .widget-search input {
+    border: 1px solid #ccc !important;
+    padding: 10px 12px !important;
+    flex: 1 !important;
+    border-radius: 0 !important;
+}
+.gob-home-sidebar-box .widget-search button {
+    background: var(--gob-primary-dark) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 0 16px !important;
+}
+
+/* Links (Como Barra de accesibilidad) */
+.gob-home-sidebar-box .widget-categories ul li a,
+.gob-home-sidebar-box .widget-tags ul li a {
+    color: var(--gob-text-doc) !important;
+    font-weight: 300 !important;
+    font-size: 15px !important;
+    text-decoration: none !important;
+    display: block !important;
+}
+
+.gob-home-sidebar-box .widget-categories ul li a:hover,
+.gob-home-sidebar-box .widget-tags ul li a:hover {
+    color: var(--gob-primary) !important;
 }
 
 @media (max-width: 991.98px) {
@@ -897,5 +1008,6 @@ header.header {
 
     .gob-home-sidebar-box {
         max-width: 100%;
+        margin-top: 30px;
     }
 }

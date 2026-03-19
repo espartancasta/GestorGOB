@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}"/>
+    <link href="https://framework-gb.cdn.gob.mx/gm/v3/assets/images/favicon.ico" rel="shortcut icon">
     <title>@yield('title')</title>
     
     {{-- Estilos Originales --}}
@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/line-awesome.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/fontawesome.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom.css') }}"/>
     
-    {{-- Sobrescribir estilos --}}
+    {{-- Sobrescribir estilos gobierno locales --}}
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/estilos-gobmx.css') }}"/>
     
 </head>
@@ -26,7 +25,9 @@
 
     <x-frontend.header/>
 
-    @yield('content')
+    <main class="page">
+        @yield('content')
+    </main>
 
     <x-frontend.footer/>
 

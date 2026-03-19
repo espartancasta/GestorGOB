@@ -1,4 +1,4 @@
-<div class="col-lg-8 oredoo-content">
+<div class="col-lg-9 oredoo-content">
     <div class="theiaStickySidebar">
         <div class="section-title">
             <h3>Artículos Recientes</h3>

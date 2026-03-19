@@ -10,7 +10,7 @@
         <div class="row align-items-start">
 
             {{-- CONTENIDO PRINCIPAL --}}
-            <div class="col-lg-8 gob-main-content">
+            <div class="col-lg-9 gob-main-content">
 
                 <div class="gob-upload-card">
                     <div class="gob-upload-card__inner">
@@ -35,7 +35,7 @@
             </div>
 
             {{-- SIDEBAR DERECHO --}}
-            <div class="col-lg-4 gob-sidebar-col">
+            <div class="col-lg-3 gob-sidebar-col">
                 @include("frontend.user.inc.sidebar")
             </div>
 
