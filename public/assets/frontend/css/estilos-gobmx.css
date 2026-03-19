@@ -9,6 +9,7 @@
 :root {
   --gob-primary: #9F2241;         /* guinda principal V3 */
   --gob-primary-dark: #611232;    /* guinda oscuro V3 para encabezados */
+  --gob-footer-bg: #611232;       /* regresando a guinda por peticiÃ³n del usuario */
   --gob-primary-soft: #f6eef1;    /* fondo suave guinda */
   --gob-gold: #BC955C;            /* dorado institucional V3 */
   --gob-gold-soft: #DDC9A3;       /* dorado claro V3 */
@@ -70,7 +71,7 @@ a:focus {
 }
 
 /* =========================================================
-   2) Tipografía / encabezados
+   2) TipografÃ­a / encabezados
 ========================================================= */
 h1, h2, h3, h4, h5, h6,
 .widget-title,
@@ -175,7 +176,7 @@ h1, h2, h3, h4, h5, h6,
   text-decoration: none !important;
 }
 
-/* Botón de búsqueda */
+/* BotÃ³n de bÃºsqueda */
 .search-form .search-btn,
 .search-form button,
 .sidebar .search-form button {
@@ -252,6 +253,23 @@ header.header .header-right {
   height: auto;
   display: block;
   margin-top: 0 !important;
+}
+
+/* =========================================================
+   6) Botón Iniciar Sesión (Encabezado)
+========================================================= */
+header.header .btn-subscribe {
+  background-color: var(--gob-primary-dark) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+header.header .btn-subscribe:hover {
+  background-color: var(--gob-primary) !important;
+  border-color: #fff !important;
 }
 
 .logo img,
@@ -556,7 +574,7 @@ input:focus {
 }
 
 /* =========================================================
-   14) Títulos de sección
+   14) TÃ­tulos de secciÃ³n
 ========================================================= */
 .gob-section-title {
   font-weight: 800 !important;
@@ -645,7 +663,7 @@ input:focus {
 }
 
 /* =========================================================
-   18) Dropdowns / menús
+   18) Dropdowns / menÃºs
 ========================================================= */
 .dropdown-menu {
   border: 1px solid #e4e4e4 !important;
@@ -685,329 +703,4 @@ footer a:hover,
   color: #fff !important;
 }
 
-/* =========================================================
-   20) Responsive
-========================================================= */
-@media (max-width: 991px) {
-  .blog-author .col-lg-4 {
-    min-width: 100% !important;
-  }
 
-  .blog-author .container,
-  .blog-author .container-fluid {
-    max-width: 100% !important;
-  }
-
-  .gob-upload-panel__content {
-    align-items: flex-start;
-  }
-
-  .gob-upload-panel__action {
-    width: 100%;
-  }
-
-  .gob-upload-btn {
-    width: 100% !important;
-  }
-}
-/* =========================================================
-   HEADER ESTILO GOB.MX REAL
-========================================================= */
-
-header.header {
-  background: var(--gob-primary) !important;
-  border-bottom: none !important;
-}
-
-/* contenedor interno */
-header.header .header-area {
-  background: var(--gob-primary) !important;
-  border-bottom: none !important;
-}
-
-/* texto e iconos en blanco */
-header.header,
-header.header a,
-header.header i,
-header.header svg {
-  color: #fff !important;
-}
-
-/* botones del header (lupa, campana, perfil) */
-.header-right .notification-btn,
-.header-right .profile-btn,
-.header-right .search-toggle {
-  background: transparent !important;
-  border: 1px solid rgba(255,255,255,0.3) !important;
-  color: #fff !important;
-}
-
-/* hover */
-.header-right .notification-btn:hover,
-.header-right .profile-btn:hover,
-.header-right .search-toggle:hover {
-  background: rgba(255,255,255,0.1) !important;
-  border-color: #fff !important;
-}
-/* =========================================================
-   HEADER ALINEACIÓN GOB.MX
-========================================================= */
-
-header.header .header-area {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-}
-
-/* contenedor derecho */
-header.header .header-right {
-  margin-left: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 12px !important; /* separación entre iconos */
-}
-
-/* iconos */
-.header-right .notification-btn,
-.header-right .profile-btn,
-.header-right .search-toggle {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 999px !important;
-}
-
-/* margen derecho limpio */
-header.header {
-  padding-right: 10px !important;
-}
-/* =========================================================
-   AJUSTE DE MÁRGENES LATERALES (PEGA TODO A LOS BORDES)
-========================================================= */
-
-/* quitar padding lateral global */
-.blog-author .container-fluid {
-  padding-left: 5px !important;
-  padding-right: 5px !important;
-}
-
-/* reducir espacio entre columnas */
-.blog-author .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* columnas sin padding exagerado */
-.blog-author .row > [class*="col-"] {
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-}
-
-/* sidebar más pegado */
-.blog-author .col-lg-4 {
-  padding-left: 5px !important;
-}
-
-/* contenido principal más pegado */
-.blog-author .col-lg-8 {
-  padding-right: 5px !important;
-}
-
-/* =========================================================
-   AJUSTE REAL DEL LAYOUT USER / SIDEBAR / CONTENIDO
-========================================================= */
-
-.blog-author .container-fluid {
-  max-width: 100% !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-}
-
-.blog-author .row {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.blog-author .row > [class*="col-"] {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
-}
-
-.blog-author .col-lg-4.order-lg-1 {
-  padding-left: 0 !important;
-}
-
-.blog-author .col-lg-8.order-lg-2 {
-  padding-right: 0 !important;
-}
-
-.oredoo-sidebar {
-  width: 100% !important;
-  margin-left: 0 !important;
-  padding-left: 0 !important;
-}
-
-.oredoo-sidebar .sidebar {
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-.blog-author .widget,
-.blog-author .sidebar-widget,
-.blog-author .oredoo-sidebar .sidebar > div {
-  margin-left: 0 !important;
-}
-
-@media (min-width: 992px) {
-  .blog-author .col-lg-4 {
-    flex: 0 0 29% !important;
-    max-width: 29% !important;
-  }
-
-  .blog-author .col-lg-8 {
-    flex: 0 0 71% !important;
-    max-width: 71% !important;
-  }
-}
-/* ==========================================
-   SIDEBAR HOME MÁS ANGOSTO Y FLOTANTE
-========================================== */
-
-.gob-home-sidebar-col {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.gob-home-sidebar-col .theiaStickySidebar {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-
-/* EL CAJÓN GRANDE FLOTANTE */
-.gob-home-sidebar-box {
-    width: 100%;
-    max-width: 290px;
-    background: #ffffff !important;
-    border: 1px solid #e4e4e4 !important;
-    border-radius: 4px !important;
-    padding: 0 !important;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important; /* Flotando */
-    overflow: hidden !important;
-}
-
-/* CAJONERAS INTERNAS: Destruir cajitas antiguas y fusionar */
-.gob-home-sidebar-box .widget {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-}
-
-/* Las cajoneras llevan padding enorme para NO estar achocadas,
-   y una raya sutil debajo para dividirlas de lado a lado */
-.gob-home-sidebar-box .widget-title,
-.gob-home-sidebar-box .widget-search,
-.gob-home-sidebar-box .widget-categories,
-.gob-home-sidebar-box .widget-tags,
-.gob-home-sidebar-box .popular-posts-item {
-    padding: 24px !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border-bottom: 1px solid #e4e4e4 !important;
-}
-
-/* Quitar doble margen inferiror en las listas si existen */
-.gob-home-sidebar-box .widget-categories ul,
-.gob-home-sidebar-box .widget-tags ul {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-.gob-home-sidebar-box .widget-categories ul li,
-.gob-home-sidebar-box .widget-tags ul li {
-    padding: 10px 0 !important;
-    border-bottom: 1px solid #f2f2f2 !important;
-}
-
-.gob-home-sidebar-box .widget-categories ul li:last-child,
-.gob-home-sidebar-box .widget-tags ul li:last-child {
-    border-bottom: none !important;
-}
-
-/* Textos informativos de "No se encontraron..." para separarlos */
-.gob-home-sidebar-box .widget-categories div,
-.gob-home-sidebar-box .widget-tags div {
-    font-size: 15px !important;
-    color: #666 !important;
-}
-
-/* Quitar linea del final */
-.gob-home-sidebar-box .widget:last-child .widget-categories,
-.gob-home-sidebar-box .widget:last-child .widget-tags {
-    border-bottom: none !important;
-}
-
-/* Titulo en Oro Elegante */
-.gob-home-sidebar-box .widget-title {
-    padding-bottom: 8px !important;
-    border-bottom: none !important;
-}
-
-.gob-home-sidebar-box .widget-title h5 {
-    color: var(--gob-gold) !important;
-    font-size: 18px !important;
-    font-weight: 600 !important;
-    margin: 0 !important;
-    font-family: inherit !important;
-}
-
-/* Estilo del buscador */
-.gob-home-sidebar-box .widget-search form {
-    display: flex !important;
-    width: 100% !important;
-    margin: 0 !important;
-}
-.gob-home-sidebar-box .widget-search input {
-    border: 1px solid #ccc !important;
-    padding: 10px 12px !important;
-    flex: 1 !important;
-    border-radius: 0 !important;
-}
-.gob-home-sidebar-box .widget-search button {
-    background: var(--gob-primary-dark) !important;
-    color: #fff !important;
-    border: none !important;
-    padding: 0 16px !important;
-}
-
-/* Links (Como Barra de accesibilidad) */
-.gob-home-sidebar-box .widget-categories ul li a,
-.gob-home-sidebar-box .widget-tags ul li a {
-    color: var(--gob-text-doc) !important;
-    font-weight: 300 !important;
-    font-size: 15px !important;
-    text-decoration: none !important;
-    display: block !important;
-}
-
-.gob-home-sidebar-box .widget-categories ul li a:hover,
-.gob-home-sidebar-box .widget-tags ul li a:hover {
-    color: var(--gob-primary) !important;
-}
-
-@media (max-width: 991.98px) {
-    .gob-home-sidebar-col {
-        justify-content: flex-start;
-    }
-
-    .gob-home-sidebar-col .theiaStickySidebar {
-        justify-content: flex-start;
-    }
-
-    .gob-home-sidebar-box {
-        max-width: 100%;
-        margin-top: 30px;
-    }
-}
