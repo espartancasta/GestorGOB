@@ -3,75 +3,26 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Submission;
-use App\Models\User;
-use App\Notifications\NewSubmissionCreatedNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Submission;
+use App\Models\SubmissionFile;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class SubmissionController extends Controller
 {
     /**
-     * Semana 7
-     * Listado de documentos pendientes de asignación
+     * 📋 Lista de documentos (SECRETARIO)
      */
     public function index()
     {
-        $submissions = Submission::with('author')
-            ->where('status', 'pending_assignment')
-            ->latest()
-            ->get();
-
+        $submissions = Submission::latest()->get();
         return view('frontend.submissions.index', compact('submissions'));
     }
 
     /**
-     * Semana 7 (mejora)
-     * Ver detalle del documento
-     */
-    public function show(Submission $submission)
-    {
-        $submission->load('author');
-
-        $originalFile = DB::table('submission_files')
-            ->where('submission_id', $submission->id)
-            ->where('type', 'original_docx')
-            ->latest()
-            ->first();
-
-        return view('frontend.submissions.show', compact('submission', 'originalFile'));
-    }
-
-    /**
-     * Semana 7 (mejora)
-     * Descargar archivo original
-     */
-    public function download(Submission $submission)
-    {
-        $file = DB::table('submission_files')
-            ->where('submission_id', $submission->id)
-            ->where('type', 'original_docx')
-            ->latest()
-            ->first();
-
-        if (!$file) {
-            abort(404, 'No se encontró el archivo del documento.');
-        }
-
-        if (!Storage::exists($file->path)) {
-            abort(404, 'El archivo no existe en el almacenamiento.');
-        }
-
-        return Storage::download($file->path);
-    }
-
-    /**
-     * Semana 5
-     * Mostrar formulario de envío
+     * 📝 Formulario (AUTOR)
      */
     public function create()
     {
@@ -79,82 +30,150 @@ class SubmissionController extends Controller
     }
 
     /**
-     * Semana 6
-     * Guardar documento enviado por el autor
+     * 🔥 GUARDAR DOCUMENTO (AUTOR)
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        // 🔐 Solo autores
+        if (!Auth::check() || Auth::user()->role != 1) {
+            abort(403, 'No autorizado');
+        }
+
+        // ✅ Validación
+        $request->validate([
             'title'   => ['required', 'string', 'max:255'],
             'summary' => ['required', 'string'],
             'file'    => ['required', 'file', 'mimes:docx', 'max:10240'],
-        ], [
-            'file.mimes' => 'El archivo debe estar en formato Word (.docx).',
         ]);
 
         DB::beginTransaction();
 
         try {
-            // 1) Insertar submission
-            $submissionId = DB::table('submissions')->insertGetId([
-                'author_id'   => Auth::id(),
-                'title'       => $validated['title'],
-                'summary'     => $validated['summary'],
-                'status'      => 'pending_assignment',
-                'final_notes' => null,
-                'created_at'  => now(),
-                'updated_at'  => now(),
-            ]);
 
-            // 2) Guardar archivo
+            // 📁 Archivo
             $file = $request->file('file');
 
-            $folder = "private/submissions/{$submissionId}";
-            $filename = 'original_' . Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs($folder, $filename);
+            // nombre único limpio
+            $filename = time() . '_' . Str::slug($request->title) . '.docx';
 
-            // 3) Insertar en submission_files
-            DB::table('submission_files')->insert([
-                'submission_id' => $submissionId,
+            // guardar en storage/app/submissions
+            $path = $file->storeAs('submissions', $filename, 'local');
+
+            // 💾 Crear submission
+            $submission = Submission::create([
+                'author_id' => Auth::id(),
+                'title'     => $request->title,
+                'summary'   => $request->summary,
+                'status'    => 'pending_assignment',
+            ]);
+
+            // 📎 Guardar archivo
+            SubmissionFile::create([
+                'submission_id' => $submission->id,
                 'uploaded_by'   => Auth::id(),
                 'type'          => 'original_docx',
                 'path'          => $path,
-                'mime'          => $file->getClientMimeType(),
+                'mime'          => $file->getMimeType(),
                 'size'          => $file->getSize(),
-                'created_at'    => now(),
-                'updated_at'    => now(),
             ]);
-
-            // 4) Notificar
-            $recipients = User::whereIn('role', [
-                User::IS_ADMIN,
-            ])->get();
-
-            if ($recipients->isNotEmpty()) {
-                Notification::send(
-                    $recipients,
-                    new NewSubmissionCreatedNotification(
-                        (object) [
-                            'id'     => $submissionId,
-                            'title'  => $validated['title'],
-                            'status' => 'pending_assignment',
-                            'author' => (object) ['name' => Auth::user()->name],
-                        ]
-                    )
-                );
-            }
 
             DB::commit();
 
-            return redirect()
-                ->route('submissions.create')
-                ->with('success', 'Documento enviado correctamente. Quedó en estado: Pendiente de asignación.');
+            // 🔥 AQUÍ ESTÁ LA CLAVE (NO REDIRIGE AL HOME)
+            return back()->with('success', 'Documento enviado correctamente 🚀');
+
         } catch (\Throwable $e) {
+
             DB::rollBack();
 
-            return back()
-                ->withInput()
-                ->with('error', 'Ocurrió un error al enviar el documento.');
+            return back()->with([
+                'error' => 'Error al subir documento',
+                'debug' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * 👁️ Ver detalle
+     */
+    public function show(Submission $submission)
+    {
+        $originalFile = SubmissionFile::where('submission_id', $submission->id)
+            ->where('type', 'original_docx')
+            ->first();
+
+        return view('frontend.submissions.show', compact('submission', 'originalFile'));
+    }
+
+    /**
+     * 📥 Descargar archivo
+     */
+    public function download(Submission $submission)
+    {
+        $file = SubmissionFile::where('submission_id', $submission->id)
+            ->where('type', 'original_docx')
+            ->firstOrFail();
+
+        return response()->download(
+            storage_path('app/' . $file->path)
+        );
+    }
+
+    /**
+     * 👥 Asignar revisores (SECRETARIO)
+     */
+    public function assign(Request $request, Submission $submission)
+    {
+        if (!Auth::check() || Auth::user()->role != 3) {
+            abort(403, 'No autorizado');
+        }
+
+        $request->validate([
+            'reviewers' => ['required', 'array', 'size:2']
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+
+            $links = [];
+
+            foreach ($request->reviewers as $reviewerId) {
+
+                $token = Str::random(40);
+
+                DB::table('submission_reviewers')->insert([
+                    'submission_id'      => $submission->id,
+                    'reviewer_id'        => $reviewerId,
+                    'status'             => 'invited',
+                    'invite_token_hash'  => $token,
+                    'invite_expires_at'  => now()->addDays(5),
+                    'created_at'         => now(),
+                    'updated_at'         => now(),
+                ]);
+
+                $links[] = url('/review-invite/' . $token);
+            }
+
+            $submission->update([
+                'status' => 'waiting_acceptance'
+            ]);
+
+            DB::commit();
+
+            return back()->with([
+                'success' => 'Revisores asignados correctamente',
+                'links' => $links
+            ]);
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            return back()->with([
+                'error' => 'Error al asignar revisores',
+                'debug' => $e->getMessage()
+            ]);
         }
     }
 }

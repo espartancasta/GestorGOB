@@ -28,21 +28,34 @@
         Complete los siguientes campos y adjunte su documento en formato Word (.docx)
         </p>
 
-        {{-- SUCCESS --}}
+        {{-- ✅ SUCCESS BONITO --}}
         @if(session('success'))
-            <div class="alert alert-success">
+            <div style="
+                background:#e6ffed;
+                border:1px solid #b7ebc6;
+                color:#155724;
+                padding:16px;
+                border-radius:10px;
+                margin-bottom:20px;
+                display:flex;
+                align-items:center;
+                gap:10px;
+                font-weight:600;
+                animation:fadeIn 0.4s ease-in-out;
+            ">
+                <span style="font-size:20px;">✅</span>
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- ERROR --}}
+        {{-- ❌ ERROR --}}
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
             </div>
         @endif
 
-        {{-- VALIDACIONES --}}
+        {{-- ⚠ VALIDACIONES --}}
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul class="mb-0">
@@ -53,6 +66,7 @@
             </div>
         @endif
 
+        {{-- 🔥 FORM --}}
         <form method="POST" action="{{ route('submissions.store') }}" enctype="multipart/form-data">
         @csrf
 
@@ -122,11 +136,19 @@
 
     {{-- SIDEBAR --}}
     <div class="col-lg-3 gob-sidebar-col">
-        @include('frontend.user.inc.sidebar')
+        {{-- si ya quitaste ese sidebar roto, puedes dejar vacío o poner otro --}}
     </div>
 
 </div>
 </div>
 </section>
+
+{{-- 🔥 ANIMACIÓN --}}
+<style>
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(-10px); }
+    to { opacity:1; transform:translateY(0); }
+}
+</style>
 
 @endsection

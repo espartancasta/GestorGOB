@@ -8,7 +8,7 @@
                    value="{{ request()->route()->getName() == 'frontend.search' ? request()->q : '' }}" 
                    id="gsearch" 
                    name="q" 
-                   placeholder="Buscar..."> <!-- Placeholder en español -->
+                   placeholder="Busque artículos recientes"> <!-- Placeholder en español -->
             <button type="submit" class="btn-submit"><i class="las la-search"></i></button>
         </form>
     </div>

@@ -23,4 +23,12 @@ class Submission extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    /**
+     * 🔥 RELACIÓN CON ARCHIVOS (SEMANA 7)
+     */
+    public function files()
+    {
+        return $this->hasMany(SubmissionFile::class);
+    }
 }

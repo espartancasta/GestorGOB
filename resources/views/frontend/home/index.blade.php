@@ -9,15 +9,15 @@
 
 <section class="section-feature-1">
     <div class="container">
-        <div class="row">
+       <div class="row">
 
-            {{-- CONTENIDO PRINCIPAL --}}
-            @include("frontend.home.inc.recentpost")
+    {{-- SIDEBAR IZQUIERDO 🔥 --}}
+    @include("frontend.home.inc.sidebar")
 
-            {{-- SIDEBAR DERECHO --}}
-            @include("frontend.home.inc.sidebar")
+    {{-- CONTENIDO PRINCIPAL --}}
+    @include("frontend.home.inc.recentpost")
 
-        </div>
+</div>
     </div>
 </section>
 

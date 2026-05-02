@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,11 +21,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * Roles del sistema
+     * 🔥 ROLES DEL SISTEMA (OFICIAL)
      */
-    public const IS_VISITOR = 1;
-    public const IS_AUTHOR = 2;
-    public const IS_ADMIN = 3;
+    public const ROLE_AUTHOR = 1;
+    public const ROLE_REVIEWER = 2;
+    public const ROLE_SECRETARY = 3;
+    public const ROLE_DICOVI = 4;
 
     /**
      * Campos asignables
@@ -66,7 +65,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Mutator para username (siempre minúsculas)
+     * Username siempre minúsculas
      */
     protected function username(): Attribute
     {
@@ -76,7 +75,44 @@ class User extends Authenticatable
     }
 
     /**
-     * Relaciones existentes
+     * 🔥 NOMBRE DEL ROL (PARA VISTAS)
+     */
+    public function getRoleNameAttribute()
+    {
+        return match ($this->role) {
+            self::ROLE_AUTHOR => 'Autor',
+            self::ROLE_REVIEWER => 'Revisor',
+            self::ROLE_SECRETARY => 'Secretario',
+            self::ROLE_DICOVI => 'DICOVI',
+            default => 'Desconocido',
+        };
+    }
+
+    /**
+     * 🔐 HELPERS DE PERMISOS
+     */
+    public function isAuthor()
+    {
+        return $this->role === self::ROLE_AUTHOR;
+    }
+
+    public function isReviewer()
+    {
+        return $this->role === self::ROLE_REVIEWER;
+    }
+
+    public function isSecretary()
+    {
+        return $this->role === self::ROLE_SECRETARY;
+    }
+
+    public function isDicovi()
+    {
+        return $this->role === self::ROLE_DICOVI;
+    }
+
+    /**
+     * Relaciones
      */
     public function posts()
     {
@@ -94,8 +130,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 🔥 RELACIÓN CLAVE SEMANA 6
-     * Un usuario (autor) puede tener muchos submissions
+     * 🔥 Autor → submissions
      */
     public function submissions()
     {

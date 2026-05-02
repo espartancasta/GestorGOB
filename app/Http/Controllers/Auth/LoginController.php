@@ -32,13 +32,16 @@ class LoginController extends Controller
             ? 'email'
             : 'username';
 
-        if (Auth::attempt([$loginField => $validated['email_or_username'], 'password' => $validated['password']])) {
+        if (Auth::attempt([
+            $loginField => $validated['email_or_username'],
+            'password' => $validated['password']
+        ])) {
             $request->session()->regenerate();
             return redirect()->route('frontend.home');
         }
 
-        return back()
-            ->withErrors(['email_or_username' => 'Credenciales inválidas.'])
-            ->withInput();
+        return back()->withErrors([
+            'email_or_username' => 'Credenciales inválidas.'
+        ]);
     }
 }
