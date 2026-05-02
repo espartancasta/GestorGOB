@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Submission;
 use App\Models\SubmissionFile;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -34,12 +35,10 @@ class SubmissionController extends Controller
      */
     public function store(Request $request)
     {
-        // 🔐 Solo autores
         if (!Auth::check() || Auth::user()->role != 1) {
             abort(403, 'No autorizado');
         }
 
-        // ✅ Validación
         $request->validate([
             'title'   => ['required', 'string', 'max:255'],
             'summary' => ['required', 'string'],
@@ -50,16 +49,10 @@ class SubmissionController extends Controller
 
         try {
 
-            // 📁 Archivo
             $file = $request->file('file');
-
-            // nombre único limpio
             $filename = time() . '_' . Str::slug($request->title) . '.docx';
-
-            // guardar en storage/app/submissions
             $path = $file->storeAs('submissions', $filename, 'local');
 
-            // 💾 Crear submission
             $submission = Submission::create([
                 'author_id' => Auth::id(),
                 'title'     => $request->title,
@@ -67,7 +60,6 @@ class SubmissionController extends Controller
                 'status'    => 'pending_assignment',
             ]);
 
-            // 📎 Guardar archivo
             SubmissionFile::create([
                 'submission_id' => $submission->id,
                 'uploaded_by'   => Auth::id(),
@@ -79,7 +71,6 @@ class SubmissionController extends Controller
 
             DB::commit();
 
-            // 🔥 AQUÍ ESTÁ LA CLAVE (NO REDIRIGE AL HOME)
             return back()->with('success', 'Documento enviado correctamente 🚀');
 
         } catch (\Throwable $e) {
@@ -120,7 +111,7 @@ class SubmissionController extends Controller
     }
 
     /**
-     * 👥 Asignar revisores (SECRETARIO)
+     * 👥 ASIGNAR REVISORES
      */
     public function assign(Request $request, Submission $submission)
     {
@@ -128,17 +119,36 @@ class SubmissionController extends Controller
             abort(403, 'No autorizado');
         }
 
+        if ($submission->status !== 'pending_assignment') {
+            return back()->with('error', 'Este documento ya fue asignado');
+        }
+
         $request->validate([
-            'reviewers' => ['required', 'array', 'size:2']
+            'reviewers' => ['required', 'array', 'size:2'],
+            'reviewers.*' => ['exists:users,id']
         ]);
+
+        if ($request->reviewers[0] == $request->reviewers[1]) {
+            return back()->with('error', 'Debes seleccionar dos revisores diferentes');
+        }
 
         DB::beginTransaction();
 
         try {
 
+            DB::table('submission_reviewers')
+                ->where('submission_id', $submission->id)
+                ->delete();
+
             $links = [];
 
             foreach ($request->reviewers as $reviewerId) {
+
+                $user = User::findOrFail($reviewerId);
+
+                if ($user->role != 2) {
+                    throw new \Exception('Usuario inválido como revisor');
+                }
 
                 $token = Str::random(40);
 
@@ -162,7 +172,7 @@ class SubmissionController extends Controller
             DB::commit();
 
             return back()->with([
-                'success' => 'Revisores asignados correctamente',
+                'success' => 'Revisores asignados correctamente 🔥',
                 'links' => $links
             ]);
 
@@ -175,5 +185,19 @@ class SubmissionController extends Controller
                 'debug' => $e->getMessage()
             ]);
         }
+    }
+
+    /**
+     * 🔥 SEMANA 13 — VER PROBLEMAS DE REVISIÓN
+     */
+    public function pendingReviews()
+    {
+        if (!Auth::check() || Auth::user()->role != 3) {
+            abort(403);
+        }
+
+        $submissions = Submission::with('reviewers')->latest()->get();
+
+        return view('frontend.submissions.pending', compact('submissions'));
     }
 }

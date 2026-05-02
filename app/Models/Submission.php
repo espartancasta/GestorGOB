@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\SubmissionFile;
+use App\Models\SubmissionReviewer;
 
 class Submission extends Model
 {
@@ -16,19 +19,18 @@ class Submission extends Model
         'status',
     ];
 
-    /**
-     * Relación con el autor
-     */
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    /**
-     * 🔥 RELACIÓN CON ARCHIVOS (SEMANA 7)
-     */
     public function files()
     {
         return $this->hasMany(SubmissionFile::class);
+    }
+
+    public function reviewers()
+    {
+        return $this->hasMany(SubmissionReviewer::class, 'submission_id');
     }
 }

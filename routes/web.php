@@ -75,13 +75,8 @@ Route::middleware(['auth', 'role:1'])
     ->name('submissions.')
     ->group(function () {
 
-        // 📄 Crear envío
         Route::get('/create', [SubmissionController::class, 'create'])->name('create');
-
-        // 💾 Guardar envío
         Route::post('/', [SubmissionController::class, 'store'])->name('store');
-
-        // 👁️ Ver propio envío
         Route::get('/{submission}', [SubmissionController::class, 'show'])->name('show');
 });
 
@@ -95,13 +90,9 @@ Route::middleware(['auth', 'role:3'])
     ->name('submissions.')
     ->group(function () {
 
-        // 📋 Lista de documentos
         Route::get('/', [SubmissionController::class, 'index'])->name('index');
-
-        // 📥 Descargar archivo
+        Route::get('/{submission}', [SubmissionController::class, 'show'])->name('show');
         Route::get('/{submission}/download', [SubmissionController::class, 'download'])->name('download');
-
-        // 👥 Asignar revisores
         Route::post('/{submission}/assign', [SubmissionController::class, 'assign'])->name('assign');
 });
 
@@ -112,11 +103,30 @@ Route::middleware(['auth', 'role:3'])
 */
 Route::middleware(['auth', 'role:2'])
     ->prefix('review-invite')
+    ->name('review.')
     ->group(function () {
 
+        // 👉 LISTA DE INVITACIONES
+        Route::get('/my', [ReviewInviteController::class, 'myInvitations'])
+            ->name('invites');
+
+        // 👉 VER INVITACIÓN
         Route::get('/{token}', [ReviewInviteController::class, 'show']);
+
+        // 👉 ACCIONES
+        Route::post('/{token}/accept', [ReviewInviteController::class, 'accept']);
         Route::post('/{token}/reject', [ReviewInviteController::class, 'reject']);
+        Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| 🔥 SEMANA 13 — PROBLEMAS DE REVISIÓN (SECRETARIO)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:3'])
+    ->get('/submissions-pending', [SubmissionController::class, 'pendingReviews'])
+    ->name('submissions.pending');
 
 /*
 |--------------------------------------------------------------------------

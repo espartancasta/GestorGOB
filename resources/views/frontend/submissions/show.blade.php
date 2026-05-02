@@ -4,26 +4,46 @@
 
 @section('content')
 
+<style>
+/* 🎨 BOTÓN GOB */
+.btn-gob {
+    background-color: #611232;
+    color: #fff;
+    border: none;
+}
+.btn-gob:hover {
+    background-color: #4a0e26;
+    color: #fff;
+}
+
+/* 🔥 ALERTA BONITA */
+.alert-gob {
+    background-color: #e6f4ea;
+    border-left: 5px solid #28a745;
+    color: #155724;
+}
+</style>
+
 <section class="mt-50 mb-50">
 <div class="container-fluid">
 <div class="row">
 
     <div class="col-lg-9 gob-main-content">
 
-        {{-- 🔥 MENSAJES --}}
+        {{-- 🔥 MENSAJES PRO --}}
         @if(session('success'))
-            <div class="alert alert-success mb-4">
-                {{ session('success') }}
+            <div class="alert alert-gob mb-4">
+                ✔ {{ session('success') ?? 'Invitación enviada correctamente 🔥' }}
             </div>
         @endif
 
         @if(session('error'))
             <div class="alert alert-danger mb-4">
-                {{ session('error') }}
+                ❌ {{ session('error') }}
             </div>
         @endif
 
-        {{-- 🔥 FILTRAR REVISORES CORRECTAMENTE --}}
+        {{-- 🔥 TRAER REVISORES --}}
         @php
             $reviewers = \App\Models\User::where('role', 2)->get();
         @endphp
@@ -67,7 +87,7 @@
 
                     </div>
 
-                    <button class="btn btn-primary mt-2">
+                    <button class="btn btn-gob mt-2">
                         Asignar revisores
                     </button>
 
@@ -77,7 +97,7 @@
         </div>
 
 
-        {{-- 🔥 CARD: DETALLE --}}
+        {{-- 🔥 DETALLE --}}
         <div class="card shadow-sm" style="border-radius:12px;">
             <div class="card-body">
 
@@ -115,6 +135,10 @@
                                     Pendiente de asignación
                                 @elseif($submission->status === 'waiting_acceptance')
                                     Esperando aceptación de revisores
+                                @elseif($submission->status === 'in_review')
+                                    En revisión
+                                @elseif($submission->status === 'completed')
+                                    Completado
                                 @else
                                     {{ $submission->status }}
                                 @endif
@@ -131,7 +155,7 @@
                             <td>
                                 @if($originalFile)
                                     <a href="{{ route('submissions.download', $submission->id) }}"
-                                       class="btn btn-sm btn-success">
+                                       class="btn btn-sm btn-gob">
                                         Descargar documento
                                     </a>
                                 @else
@@ -151,7 +175,6 @@
         </div>
 
     </div>
-
 
     {{-- SIDEBAR --}}
     <div class="col-lg-3 gob-sidebar-col">
