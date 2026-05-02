@@ -114,78 +114,79 @@ class SubmissionController extends Controller
      * 👥 ASIGNAR REVISORES
      */
     public function assign(Request $request, Submission $submission)
-    {
-        if (!Auth::check() || Auth::user()->role != 3) {
-            abort(403, 'No autorizado');
-        }
+{
+    if (!Auth::check() || Auth::user()->role != 3) {
+        abort(403, 'No autorizado');
+    }
 
-        if ($submission->status !== 'pending_assignment') {
-            return back()->with('error', 'Este documento ya fue asignado');
-        }
+    if ($submission->status !== 'pending_assignment') {
+        return back()->with('error', 'Este documento ya fue asignado');
+    }
 
-        $request->validate([
-            'reviewers' => ['required', 'array', 'size:2'],
-            'reviewers.*' => ['exists:users,id']
-        ]);
+    $request->validate([
+        'reviewers' => ['required', 'array', 'size:2'],
+        'reviewers.*' => ['exists:users,id']
+    ]);
 
-        if ($request->reviewers[0] == $request->reviewers[1]) {
-            return back()->with('error', 'Debes seleccionar dos revisores diferentes');
-        }
+    if ($request->reviewers[0] == $request->reviewers[1]) {
+        return back()->with('error', 'Debes seleccionar dos revisores diferentes');
+    }
 
-        DB::beginTransaction();
+    DB::beginTransaction();
 
-        try {
+    try {
 
-            DB::table('submission_reviewers')
-                ->where('submission_id', $submission->id)
-                ->delete();
+        DB::table('submission_reviewers')
+            ->where('submission_id', $submission->id)
+            ->delete();
 
-            $links = [];
+        $links = [];
 
-            foreach ($request->reviewers as $reviewerId) {
+        foreach ($request->reviewers as $reviewerId) {
 
-                $user = User::findOrFail($reviewerId);
+            $user = User::findOrFail($reviewerId);
 
-                if ($user->role != 2) {
-                    throw new \Exception('Usuario inválido como revisor');
-                }
-
-                $token = Str::random(40);
-
-                DB::table('submission_reviewers')->insert([
-                    'submission_id'      => $submission->id,
-                    'reviewer_id'        => $reviewerId,
-                    'status'             => 'invited',
-                    'invite_token_hash'  => $token,
-                    'invite_expires_at'  => now()->addDays(5),
-                    'created_at'         => now(),
-                    'updated_at'         => now(),
-                ]);
-
-                $links[] = url('/review-invite/' . $token);
+            if ($user->role != 2) {
+                throw new \Exception('Usuario inválido como revisor');
             }
 
-            $submission->update([
-                'status' => 'waiting_acceptance'
+            // 🔥 TOKEN PRO SEGURO
+            $token = hash('sha256', Str::random(60) . now());
+
+            DB::table('submission_reviewers')->insert([
+                'submission_id'      => $submission->id,
+                'reviewer_id'        => $reviewerId,
+                'status'             => 'invited',
+                'invite_token_hash'  => $token,
+                'invite_expires_at'  => now()->addDays(5),
+                'created_at'         => now(),
+                'updated_at'         => now(),
             ]);
 
-            DB::commit();
-
-            return back()->with([
-                'success' => 'Revisores asignados correctamente 🔥',
-                'links' => $links
-            ]);
-
-        } catch (\Throwable $e) {
-
-            DB::rollBack();
-
-            return back()->with([
-                'error' => 'Error al asignar revisores',
-                'debug' => $e->getMessage()
-            ]);
+            $links[] = url('/review-invite/' . $token);
         }
+
+        $submission->update([
+            'status' => 'waiting_acceptance'
+        ]);
+
+        DB::commit();
+
+        return back()->with([
+            'success' => '✔ Invitación enviada correctamente 🔥',
+            'links' => $links
+        ]);
+
+    } catch (\Throwable $e) {
+
+        DB::rollBack();
+
+        return back()->with([
+            'error' => 'Error al asignar revisores',
+            'debug' => $e->getMessage()
+        ]);
     }
+}
 
     /**
      * 🔥 SEMANA 13 — VER PROBLEMAS DE REVISIÓN
