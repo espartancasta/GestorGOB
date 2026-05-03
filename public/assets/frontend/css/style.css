@@ -5645,8 +5645,9 @@ input:checked + .slider:before {
 }
 
 .gob-menu li.active {
-    background: #611232;
-    color: #fff;
+    background: transparent !important;
+    color: #611232 !important;
+    font-weight: 700 !important;
 }
 
 /* MAIN */
@@ -5897,4 +5898,541 @@ input:checked + .slider:before {
         width: 100%;
         justify-content: center;
     }
+}
+
+/* =========================================================
+   HOME DASHBOARD - PROYECTOS APROBADOS GESTORGOB
+   Pegar al FINAL de style.css
+========================================================= */
+
+.gob-dashboard {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    background: #f5f5f5;
+}
+
+.gob-main {
+    flex: 1;
+    padding: 22px 30px 40px 30px;
+    overflow-x: hidden;
+}
+
+.gob-header {
+    margin-bottom: 18px;
+}
+
+.gob-header h2 {
+    margin: 0 0 5px 0;
+    font-weight: 800;
+    color: #2f3742;
+}
+
+.gob-header p {
+    margin: 0;
+    color: #777;
+}
+
+/* Caja desplegable */
+.gob-projects-dropdown {
+    background: transparent;
+    border: none;
+}
+
+.gob-projects-dropdown[open] .gob-projects-summary-icon {
+    transform: rotate(180deg);
+}
+
+.gob-projects-summary {
+    list-style: none;
+    cursor: pointer;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.035);
+}
+
+.gob-projects-summary::-webkit-details-marker {
+    display: none;
+}
+
+.gob-projects-summary h3 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #2f3742;
+}
+
+.gob-projects-summary p {
+    margin: 0;
+    color: #777;
+}
+
+.gob-projects-summary-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f6eef1;
+    color: #611232;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .25s ease;
+}
+
+/* Grid tipo:
+   Nuevo proyecto | Proyecto 1
+   Proyecto 2     | Proyecto 3
+*/
+.gob-grid,
+.gob-approved-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Cards */
+.gob-card {
+    position: relative;
+    display: block;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #e6e6e6;
+    text-decoration: none !important;
+    color: inherit;
+    min-height: 190px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.035);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.gob-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(97,18,50,.22);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.07);
+}
+
+.gob-card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #f6eef1;
+    color: #611232;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 14px;
+}
+
+.gob-card h4 {
+    margin: 0 0 8px 0;
+    color: #2f3742;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.gob-card p {
+    margin: 0;
+    color: #7a7f88;
+    line-height: 1.55;
+}
+
+.gob-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    color: #777;
+    font-size: 14px;
+}
+
+.gob-new-project-card {
+    border: 1px dashed rgba(97,18,50,.45);
+    background: linear-gradient(180deg, #ffffff 0%, #fff9fb 100%);
+}
+
+.gob-new-project-card h4 {
+    color: #611232;
+}
+
+.gob-card-disabled {
+    opacity: .72;
+    cursor: not-allowed;
+}
+
+.gob-empty-card {
+    background: #ffffff;
+}
+
+.gob-status-approved {
+    color: #611232;
+    font-weight: 800;
+}
+
+.gob-card-link {
+    display: inline-flex;
+    margin-top: 18px;
+    color: #611232 !important;
+    font-weight: 800;
+    text-decoration: none !important;
+}
+
+.gob-card-link:hover {
+    color: #4a0e26 !important;
+    text-decoration: underline !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .gob-dashboard {
+        flex-direction: column;
+    }
+
+    .gob-main {
+        padding: 20px;
+    }
+
+    .gob-grid,
+    .gob-approved-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .gob-projects-summary {
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .gob-card {
+        padding: 20px;
+    }
+
+    .gob-card h4 {
+        font-size: 19px;
+    }
+}
+/* =========================================================
+   GESTORGOB - SUBNAV HORIZONTAL TIPO GOB.MX
+   Reemplaza visualmente el sidebar izquierdo por barra superior
+========================================================= */
+
+/* El dashboard ya no se parte en sidebar + contenido */
+.gob-dashboard {
+    display: block !important;
+    width: 100% !important;
+    min-height: calc(100vh - 80px);
+    background: #f5f5f5;
+}
+
+/* Segunda barra debajo del header */
+.gob-subnav {
+    width: 100%;
+    background: #4a0e26;
+    border-top: 4px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+
+/* Contenedor interno de navegación */
+.gob-subnav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 22px;
+    overflow-x: auto;
+}
+
+/* Links */
+.gob-subnav-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: background .2s ease, color .2s ease;
+}
+
+/* Hover */
+.gob-subnav-link:hover {
+    background: rgba(255,255,255,.12);
+    color: #ffffff !important;
+}
+
+/* Activo */
+.gob-subnav-link.active {
+    background: #611232;
+    color: #ffffff !important;
+}
+
+/* Contenido principal ahora ocupa todo el ancho */
+.gob-main {
+    width: 100% !important;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 30px 22px 45px 22px !important;
+}
+
+/* Grid mantiene dos columnas */
+.gob-grid,
+.gob-approved-grid {
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .gob-subnav-inner {
+        max-width: 100%;
+        padding: 0 14px;
+        min-height: 58px;
+    }
+
+    .gob-subnav-link {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .gob-main {
+        padding: 22px 16px 35px 16px !important;
+    }
+
+    .gob-grid,
+    .gob-approved-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================
+   FIX FINAL - RESTAURAR SIDEBAR IZQUIERDO GESTORGOB
+   Pegar al FINAL de style.css
+========================================================= */
+
+/* Regresa dashboard a estructura izquierda + contenido */
+.gob-dashboard {
+    display: flex !important;
+    width: 100% !important;
+    min-height: calc(100vh - 80px) !important;
+    background: #f5f5f5 !important;
+}
+
+/* Sidebar izquierdo original */
+.gob-sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    min-height: calc(100vh - 80px) !important;
+    background: #ffffff !important;
+    border-right: 1px solid #eeeeee !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Logo del sidebar */
+.gob-logo {
+    display: block !important;
+    margin-bottom: 24px !important;
+}
+
+.gob-logo h4 {
+    margin: 0 !important;
+    color: #611232 !important;
+    font-weight: 800 !important;
+}
+
+.gob-logo small {
+    color: #777777 !important;
+}
+
+/* Menú vertical */
+.gob-menu {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+}
+
+/* Items */
+.gob-menu li {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
+    padding: 0 !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    color: #777777 !important;
+}
+
+/* Links */
+.gob-menu li a {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    border-radius: 8px !important;
+}
+
+/* Items sin link, por si queda alguno */
+.gob-menu li:not(:has(a)) {
+    padding: 12px !important;
+}
+
+/* Activo */
+.gob-menu li.active {
+    background: transparent !important;
+    color: #611232 !important;
+    font-weight: 700 !important;
+}
+
+/* Hover */
+.gob-menu li:hover {
+    background: #f6eef1 !important;
+    color: #611232 !important;
+}
+
+.gob-menu li.active:hover {
+    background: #611232 !important;
+    color: #ffffff !important;
+}
+
+/* Contenido a la derecha */
+.gob-main {
+    flex: 1 !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 30px !important;
+    overflow-x: hidden !important;
+}
+
+/* Tarjetas en 2 columnas */
+.gob-grid,
+.gob-approved-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+/* Apagar clases de la subbarra rota si todavía existen */
+.gob-subnav,
+.gestorgob-subbar {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .gob-dashboard {
+        flex-direction: column !important;
+    }
+
+    .gob-sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
+        border-right: none !important;
+        border-bottom: 1px solid #eeeeee !important;
+    }
+
+    .gob-menu {
+        display: flex !important;
+        overflow-x: auto !important;
+        gap: 8px !important;
+    }
+
+    .gob-menu li {
+        width: auto !important;
+        white-space: nowrap !important;
+        margin-bottom: 0 !important;
+    }
+
+    .gob-main {
+        padding: 22px 16px 35px 16px !important;
+    }
+
+    .gob-grid,
+    .gob-approved-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* QUITAR ILUMINADO/HOVER DEL MENÚ LATERAL */
+.gob-menu li:hover {
+    background: transparent !important;
+    color: #7a7f88 !important;
+}
+
+.gob-menu li a:hover {
+    background: transparent !important;
+    color: #7a7f88 !important;
+}
+
+/* Si el item está activo, tampoco cambia al pasar cursor */
+.gob-menu li.active:hover {
+    background: transparent !important;
+    color: #611232 !important;
+}
+
+.gob-menu li.active a:hover {
+    background: transparent !important;
+    color: #611232 !important;
+}
+.gob-menu li.active {
+    background: transparent !important;
+    color: #611232 !important;
+    font-weight: 700 !important;
+}
+
+/* TODOS LOS ITEMS DEL MENÚ LATERAL EN COLOR GUINDA */
+.gob-menu li,
+.gob-menu li a {
+    color: #611232 !important;
+}
+
+/* Quitar fondo del activo */
+.gob-menu li.active {
+    background: transparent !important;
+    color: #611232 !important;
+    font-weight: 700 !important;
+}
+
+/* Quitar iluminación al pasar cursor y mantener guinda */
+.gob-menu li:hover,
+.gob-menu li a:hover,
+.gob-menu li.active:hover,
+.gob-menu li.active a:hover {
+    background: transparent !important;
+    color: #611232 !important;
+}
+
+/* IGUALAR PESO DE TODOS LOS ITEMS DEL MENÚ */
+.gob-menu li,
+.gob-menu li a,
+.gob-menu li.active,
+.gob-menu li.active a {
+    color: #611232 !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+}
+
+/* Sin cambio visual al pasar cursor */
+.gob-menu li:hover,
+.gob-menu li a:hover,
+.gob-menu li.active:hover,
+.gob-menu li.active a:hover {
+    color: #611232 !important;
+    font-weight: 500 !important;
+    background: transparent !important;
 }
