@@ -1,83 +1,277 @@
 @php
     use Illuminate\Support\Facades\Auth;
+    use App\Models\Submission;
+    use App\Models\SubmissionReviewer;
+
     $userAvatar = (Auth::check() && !empty(Auth::user()->avatar))
         ? asset(Auth::user()->avatar)
         : asset('assets/frontend/img/default-avatar.svg');
+
+    /*
+    |--------------------------------------------------------------------------
+    | NOTIFICACIONES POR ROL
+    |--------------------------------------------------------------------------
+    | role 1 = Autor
+    | role 2 = Revisor
+    | role 3 = Secretario
+    | role 4 = DICOVI
+    */
+
+    $notificationCount = 0;
+    $notificationTitle = 'Sin notificaciones';
+    $notificationText = 'No tienes pendientes por ahora.';
+    $notificationUrl = '#';
+
+    if (Auth::check()) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | AUTOR
+        |--------------------------------------------------------------------------
+        | Por ahora se cuentan documentos que regresaron a corrección.
+        | Cuando tengas pantalla de correcciones, aquí se cambia la URL.
+        */
+        if (Auth::user()->role == 1) {
+            $notificationCount = Submission::where('author_id', Auth::id())
+                ->where('status', 'pending_correction')
+                ->count();
+
+            $notificationTitle = 'Correcciones pendientes';
+            $notificationText = 'Tienes documentos que requieren corrección.';
+            $notificationUrl = route('frontend.home');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | REVISOR
+        |--------------------------------------------------------------------------
+        | Cuenta invitaciones pendientes.
+        */
+        if (Auth::user()->role == 2) {
+            $notificationCount = SubmissionReviewer::where('reviewer_id', Auth::id())
+                ->where('status', 'invited')
+                ->count();
+
+            $notificationTitle = 'Invitaciones pendientes';
+            $notificationText = 'Tienes solicitudes de revisión por atender.';
+            $notificationUrl = url('/review-invite/my');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | SECRETARIO
+        |--------------------------------------------------------------------------
+        | Cuenta documentos pendientes de asignación.
+        */
+        if (Auth::user()->role == 3) {
+            $notificationCount = Submission::where('status', 'pending_assignment')
+                ->count();
+
+            $notificationTitle = 'Documentos pendientes';
+            $notificationText = 'Hay documentos esperando asignación de revisores.';
+            $notificationUrl = route('submissions.index');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | DICOVI
+        |--------------------------------------------------------------------------
+        | Por ahora no tiene flujo activo en pantalla.
+        */
+        if (Auth::user()->role == 4) {
+            $notificationCount = Submission::where('status', 'completed')
+                ->count();
+
+            $notificationTitle = 'Procesos completados';
+            $notificationText = 'Hay documentos completados en el sistema.';
+            $notificationUrl = route('frontend.home');
+        }
+    }
 @endphp
 
-<header class="header fixed-top" style="background-color: var(--gob-primary-dark) !important; min-height: 80px; display: flex; align-items: center; width: 100%;">
+<header class="header fixed-top"
+        style="background-color: var(--gob-primary-dark) !important; min-height:80px; display:flex; align-items:center; width:100%;">
+
     <div class="container">
         <div class="d-flex align-items-center justify-content-between w-100">
 
-            {{-- 🔥 LOGO (YA NO VA A GOB.MX) --}}
+            {{-- LOGO --}}
             <div class="logo d-flex align-items-center">
                 <a href="{{ route('frontend.home') }}">
                     <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg"
-                         alt="logo gobierno de méxico"
+                         alt="Logo Gobierno de México"
                          style="height:48px;">
                 </a>
             </div>
 
-            {{-- 🔥 DERECHA --}}
+            {{-- DERECHA --}}
             <div class="header-right d-flex align-items-center" style="gap:20px;">
 
-                {{-- ❌ QUITADO: TRÁMITES --}}
-                {{-- SOLO DEJAMOS GOBIERNO --}}
+                {{-- LINK GOBIERNO --}}
                 <div class="gob-header-links d-flex" style="gap:20px;">
-                    <a href="https://www.gob.mx/gobierno" target="_blank"
+                    <a href="https://www.gob.mx/gobierno"
+                       target="_blank"
                        style="color:#fff; text-decoration:none;">
                         Gobierno
                     </a>
                 </div>
 
-                {{-- 🔍 BUSCADOR --}}
-                <div class="search-icon gob-circle-btn">
-                    <i class="las la-search"></i>
+                {{-- BUSCADOR FUNCIONAL --}}
+                <div class="dropdown">
+
+                    <button type="button"
+                            class="gob-circle-btn"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        <i class="las la-search"></i>
+                    </button>
+
+                    <div class="dropdown-menu dropdown-menu-right gob-search-dropdown">
+
+                        <form method="GET"
+                              action="{{ route('frontend.search') }}"
+                              style="margin:0;">
+
+                            <label class="gob-search-label">
+                                Buscar documentos
+                            </label>
+
+                            <div class="gob-search-box">
+                                <input type="text"
+                                       name="q"
+                                       class="gob-search-input"
+                                       placeholder="Título, autor o palabra clave..."
+                                       autocomplete="off">
+
+                                <button type="submit"
+                                        class="gob-search-submit">
+                                    Buscar
+                                </button>
+                            </div>
+
+                            <small class="gob-search-help">
+                                Puedes buscar publicaciones o documentos registrados en el sistema.
+                            </small>
+
+                        </form>
+
+                    </div>
+
                 </div>
 
                 @auth
 
-                {{-- 🔔 NOTIFICACIONES --}}
-                <div class="dropdown">
-                    <button class="gob-circle-btn" data-toggle="dropdown">
-                        <i class="las la-bell"></i>
-                        <span class="gob-badge">1</span>
-                    </button>
-                </div>
+                    {{-- NOTIFICACIONES POR ROL --}}
+                    <div class="dropdown">
 
-                {{-- 👤 PERFIL --}}
-                <div class="dropdown">
-                    <button class="gob-circle-btn" data-toggle="dropdown">
-                        <i class="las la-user-circle" style="font-size:30px;"></i>
-                    </button>
+                        <button type="button"
+                                class="gob-circle-btn"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
 
-                    <div class="dropdown-menu dropdown-menu-right gob-dropdown">
+                            <i class="las la-bell"></i>
 
-                        <a class="gob-profile-card" href="{{ route('frontend.user', Auth::user()->username) }}">
-                            <img src="{{ $userAvatar }}" class="gob-profile-avatar">
-                            <div>
-                                <div class="fw-bold">{{ Auth::user()->name }}</div>
-                                <small>Ir a tu perfil</small>
+                            @if($notificationCount > 0)
+                                <span class="gob-badge">
+                                    {{ $notificationCount }}
+                                </span>
+                            @endif
+
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right gob-dropdown">
+
+                            <div class="gob-dropdown-title">
+                                Notificaciones
                             </div>
-                        </a>
 
-                        <div class="dropdown-divider"></div>
+                            <div class="dropdown-divider"></div>
 
-                        <form method="POST" action="{{ route('auth.logout') }}">
-                            @csrf
-                            <button type="submit" class="dropdown-item">
-                                Cerrar sesión
-                            </button>
-                        </form>
+                            @if($notificationCount > 0)
+
+                                <a href="{{ $notificationUrl }}"
+                                   class="gob-notification-item">
+
+                                    <div class="gob-notification-title">
+                                        {{ $notificationTitle }}
+                                    </div>
+
+                                    <small class="gob-notification-text">
+                                        {{ $notificationText }}
+                                    </small>
+
+                                </a>
+
+                            @else
+
+                                <div class="gob-empty-notification">
+                                    No tienes notificaciones pendientes.
+                                </div>
+
+                            @endif
+
+                        </div>
 
                     </div>
-                </div>
+
+                    {{-- PERFIL --}}
+                    <div class="dropdown">
+
+                        <button type="button"
+                                class="gob-circle-btn"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            <i class="las la-user-circle" style="font-size:30px;"></i>
+                        </button>
+
+                        <div class="dropdown-menu dropdown-menu-right gob-dropdown">
+
+                            <a class="gob-profile-card"
+                               href="{{ route('frontend.user', Auth::user()->username) }}">
+
+                                <img src="{{ $userAvatar }}"
+                                     class="gob-profile-avatar"
+                                     alt="Avatar de usuario">
+
+                                <div>
+                                    <div class="fw-bold">
+                                        {{ Auth::user()->name }}
+                                    </div>
+
+                                    <small>
+                                        Ir a tu perfil
+                                    </small>
+                                </div>
+
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            {{-- CERRAR SESIÓN CORRECTO: POST + CSRF --}}
+                            <form method="POST"
+                                  action="{{ route('auth.logout') }}"
+                                  style="margin:0;">
+                                @csrf
+
+                                <button type="submit"
+                                        class="dropdown-item gob-logout-btn">
+                                    Cerrar sesión
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
 
                 @else
 
-                <a href="{{ route('auth.login') }}" class="btn btn-light">
-                    Iniciar sesión
-                </a>
+                    <a href="{{ route('auth.login') }}"
+                       class="btn btn-light">
+                        Iniciar sesión
+                    </a>
 
                 @endauth
 
@@ -85,39 +279,209 @@
 
         </div>
     </div>
+
 </header>
 
 <style>
-.gob-circle-btn{
-    width:40px;height:40px;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    color:#fff; cursor:pointer;
+/* =========================================================
+   HEADER GOB
+========================================================= */
+
+.gob-circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+    padding: 0;
 }
 
-.gob-badge{
-    position:absolute;
-    top:-5px; right:-5px;
-    background:red; color:#fff;
-    font-size:10px; padding:2px 6px;
-    border-radius:50%;
+.gob-circle-btn:hover {
+    background: rgba(255,255,255,0.12);
 }
 
-.gob-dropdown{
-    min-width:250px;
-    border-radius:12px;
-    padding:10px;
+.gob-circle-btn i {
+    font-size: 22px;
 }
 
-.gob-profile-card{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    text-decoration:none;
-    color:inherit;
+/* BADGE DE NOTIFICACIÓN */
+.gob-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e60023;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    padding: 2px 5px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.gob-profile-avatar{
-    width:40px;height:40px;border-radius:50%;
+/* DROPDOWN GENERAL */
+.gob-dropdown {
+    min-width: 270px;
+    border-radius: 12px;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.gob-dropdown-title {
+    padding: 8px 10px;
+    font-weight: 700;
+    color: #545454;
+}
+
+/* PERFIL */
+.gob-profile-card {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none !important;
+    color: inherit !important;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.gob-profile-card:hover {
+    background: #f5f5f5;
+}
+
+.gob-profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* LOGOUT */
+.gob-logout-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    font-weight: 700;
+    color: #545454;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.gob-logout-btn:hover {
+    background: #f5f5f5;
+    color: #611232;
+}
+
+/* NOTIFICACIONES */
+.gob-notification-item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none !important;
+    white-space: normal;
+}
+
+.gob-notification-item:hover {
+    background: #f6eef1;
+}
+
+.gob-notification-title {
+    font-weight: 700;
+    color: #611232;
+    margin-bottom: 3px;
+}
+
+.gob-notification-text {
+    color: #777;
+    font-size: 13px;
+}
+
+.gob-empty-notification {
+    padding: 10px 12px;
+    color: #777;
+    font-size: 14px;
+}
+
+/* BUSCADOR */
+.gob-search-dropdown {
+    min-width: 380px;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+.gob-search-label {
+    font-weight: 700;
+    color: #545454;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.gob-search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.gob-search-input {
+    flex: 1;
+    min-height: 42px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 12px;
+    color: #545454;
+    outline: none;
+}
+
+.gob-search-input:focus {
+    border-color: #611232;
+    box-shadow: 0 0 0 0.15rem rgba(97,18,50,0.12);
+}
+
+.gob-search-submit {
+    min-height: 42px;
+    border: none;
+    border-radius: 8px;
+    background: #611232;
+    color: #fff;
+    font-weight: 700;
+    padding: 0 16px;
+    cursor: pointer;
+}
+
+.gob-search-submit:hover {
+    background: #4a0e26;
+}
+
+.gob-search-help {
+    display: block;
+    margin-top: 8px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .gob-header-links {
+        display: none !important;
+    }
+
+    .gob-search-dropdown {
+        min-width: 300px;
+    }
+
+    .header-right {
+        gap: 10px !important;
+    }
 }
 </style>

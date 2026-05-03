@@ -1,12 +1,14 @@
-<div class="col-lg-9 oredoo-content">
+<div class="col-lg-9" style="padding-left:30px;">
+
     <div class="theiaStickySidebar">
-        <div class="section-title">
-            <h3>Artículos Recientes</h3>
-            <p>Descubre los artículos más destacados sobre diferentes temas.</p>
+
+        <div class="section-title" style="margin-bottom:20px;">
+            <h3 style="font-weight:700;">Artículos recientes</h3>
+            <p style="color:#777;">Consulta publicaciones disponibles en el sistema.</p>
         </div>
 
         @forelse ($recentposts as $recentpost)
-            <div class="post-list post-list-style4">
+            <div class="post-list post-list-style4" style="margin-bottom:20px;">
                 <div class="post-list-image">
                     <a href="{{ route('frontend.post', $recentpost->slug) }}">
                         <img src="{{ asset('uploads/post/'.$recentpost->thumbnail) }}" alt="{{ $recentpost->title }}"/>
@@ -14,14 +16,15 @@
                 </div>
 
                 <div class="post-list-content">
+
                     <ul class="entry-meta">
                         <li class="entry-cat">
-                            <a href="{{ route('frontend.category', $recentpost->category->slug) }}" class="category-style-1">
+                            <a href="{{ route('frontend.category', $recentpost->category->slug) }}">
                                 {{ $recentpost->category->title }}
                             </a>
                         </li>
                         <li class="post-date">
-                            <span class="line"></span>{{ $recentpost->created_at->format('d F, Y') }}
+                            {{ $recentpost->created_at->format('d F, Y') }}
                         </li>
                     </ul>
 
@@ -31,21 +34,28 @@
                         </a>
                     </h5>
 
-                    <div class="post-btn">
-                        <a href="{{ route('frontend.post', $recentpost->slug) }}" class="btn-read-more">
-                            Continuar Leyendo <i class="las la-long-arrow-alt-right"></i>
-                        </a>
-                    </div>
+                    <a href="{{ route('frontend.post', $recentpost->slug) }}" class="btn btn-sm btn-outline-primary">
+                        Ver más
+                    </a>
+
                 </div>
             </div>
+
         @empty
-            <div>¡No se encontraron publicaciones!</div>
+            <div style="
+                background:#fff;
+                padding:20px;
+                border-radius:10px;
+                border:1px solid #eee;
+            ">
+                Actualmente no hay publicaciones disponibles.
+            </div>
         @endforelse
 
-        <div class="pagination">
-            <div class="pagination-area">
-                {{ $recentposts->links('vendor.pagination.custom') }}
-            </div>
+        <div class="pagination mt-3">
+            {{ $recentposts->links('vendor.pagination.custom') }}
         </div>
+
     </div>
+
 </div>

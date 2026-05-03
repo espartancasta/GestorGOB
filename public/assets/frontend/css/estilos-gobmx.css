@@ -704,3 +704,15 @@ footer a:hover,
 }
 
 
+
+/* 🔥 FIX DEFINITIVO LAYOUT */
+.page {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+}
+
+main.page {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}

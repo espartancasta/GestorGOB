@@ -5,108 +5,138 @@
 @section('content')
 
 <style>
-/* 🎨 BOTÓN GOB */
+/* BOTÓN GOB */
 .btn-gob {
     background-color: #611232;
-    color: #fff;
+    color: #fff !important;
     border: none;
 }
+
 .btn-gob:hover {
     background-color: #4a0e26;
-    color: #fff;
+    color: #fff !important;
 }
 
-/* 🔥 ALERTA BONITA */
+/* ALERTA GOB */
 .alert-gob {
     background-color: #e6f4ea;
     border-left: 5px solid #28a745;
     color: #155724;
 }
+
+/* TARJETAS */
+.gob-detail-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    margin-bottom: 25px;
+}
+
+.gob-detail-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #545454;
+}
 </style>
 
-<section class="mt-50 mb-50">
-<div class="container-fluid">
-<div class="row">
+<div class="gob-dashboard">
 
-    <div class="col-lg-9 gob-main-content">
+    {{-- SIDEBAR NUEVO CORRECTO --}}
+    @include('frontend.home.inc.sidebar')
 
-        {{-- 🔥 MENSAJES PRO --}}
+    {{-- CONTENIDO --}}
+    <div class="gob-main">
+
+        <div class="gob-header">
+            <h2>Detalle del documento</h2>
+            <p>Consulta la información del envío y asigna revisores al documento.</p>
+        </div>
+
+        {{-- MENSAJES --}}
         @if(session('success'))
             <div class="alert alert-gob mb-4">
-                ✔ {{ session('success') ?? 'Invitación enviada correctamente 🔥' }}
+                {{ session('success') }}
             </div>
         @endif
 
         @if(session('error'))
             <div class="alert alert-danger mb-4">
-                ❌ {{ session('error') }}
+                {{ session('error') }}
             </div>
         @endif
 
-        {{-- 🔥 TRAER REVISORES --}}
+        {{-- TRAER REVISORES --}}
         @php
             $reviewers = \App\Models\User::where('role', 2)->get();
         @endphp
 
-        {{-- 🔥 CARD: ASIGNAR REVISORES --}}
-        <div class="card mb-5 shadow-sm" style="border-radius:12px;">
-            <div class="card-body">
+        {{-- ASIGNAR REVISORES --}}
+        <div class="gob-detail-card">
 
-                <h4 class="mb-4 fw-bold">
-                    Asignar revisores
-                </h4>
+            <h4 class="gob-detail-title">
+                Asignar revisores
+            </h4>
 
-                <form method="POST" action="{{ route('submissions.assign', $submission->id) }}">
-                    @csrf
+            <form method="POST" action="{{ route('submissions.assign', $submission->id) }}">
+                @csrf
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-6 mb-3">
-                            <label class="mb-2"><b>Revisor 1</b></label>
-                            <select name="reviewers[]" class="form-control" required>
-                                <option value="">Seleccionar revisor</option>
-                                @foreach($reviewers as $user)
-                                    <option value="{{ $user->id }}">
-                                        {{ $user->name }} ({{ $user->email }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="mb-2">
+                            <b>Revisor 1</b>
+                        </label>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="mb-2"><b>Revisor 2</b></label>
-                            <select name="reviewers[]" class="form-control" required>
-                                <option value="">Seleccionar revisor</option>
-                                @foreach($reviewers as $user)
-                                    <option value="{{ $user->id }}">
-                                        {{ $user->name }} ({{ $user->email }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <select name="reviewers[]" class="form-control" required>
+                            <option value="">Seleccionar revisor</option>
 
+                            @foreach($reviewers as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }} ({{ $user->email }})
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
 
-                    <button class="btn btn-gob mt-2">
-                        Asignar revisores
-                    </button>
+                    <div class="col-md-6 mb-3">
+                        <label class="mb-2">
+                            <b>Revisor 2</b>
+                        </label>
 
-                </form>
+                        <select name="reviewers[]" class="form-control" required>
+                            <option value="">Seleccionar revisor</option>
 
-            </div>
+                            @foreach($reviewers as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }} ({{ $user->email }})
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-gob mt-2">
+                    Asignar revisores
+                </button>
+
+            </form>
+
         </div>
 
+        {{-- DETALLE DEL DOCUMENTO --}}
+        <div class="gob-detail-card">
 
-        {{-- 🔥 DETALLE --}}
-        <div class="card shadow-sm" style="border-radius:12px;">
-            <div class="card-body">
+            <h4 class="gob-detail-title">
+                Información del documento
+            </h4>
 
-                <h4 class="mb-4 fw-bold">
-                    Detalle del documento
-                </h4>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
 
-                <div class="table-responsive">
-                    <table class="table table-bordered align-middle">
+                    <tbody>
 
                         <tr>
                             <th style="width:30%">ID</th>
@@ -137,6 +167,10 @@
                                     Esperando aceptación de revisores
                                 @elseif($submission->status === 'in_review')
                                     En revisión
+                                @elseif($submission->status === 'pending_correction')
+                                    Pendiente de corrección
+                                @elseif($submission->status === 'final_review')
+                                    Revisión final
                                 @elseif($submission->status === 'completed')
                                     Completado
                                 @else
@@ -159,30 +193,26 @@
                                         Descargar documento
                                     </a>
                                 @else
-                                    <span class="text-muted">No disponible</span>
+                                    <span class="text-muted">
+                                        No disponible
+                                    </span>
                                 @endif
                             </td>
                         </tr>
 
-                    </table>
-                </div>
+                    </tbody>
 
-                <a href="{{ route('submissions.index') }}" class="btn btn-secondary mt-3">
-                    Regresar
-                </a>
-
+                </table>
             </div>
+
+            <a href="{{ route('submissions.index') }}" class="btn btn-secondary mt-3">
+                Regresar
+            </a>
+
         </div>
 
     </div>
 
-    {{-- SIDEBAR --}}
-    <div class="col-lg-3 gob-sidebar-col">
-        @include('frontend.user.inc.sidebar')
-    </div>
-
 </div>
-</div>
-</section>
 
 @endsection

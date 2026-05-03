@@ -1,71 +1,59 @@
-<div class="col-lg-3 oredoo-sidebar gob-home-sidebar-col">
+<div class="gob-sidebar">
 
-    <div class="theiaStickySidebar">
-
-        <div class="sidebar gob-home-sidebar-box"
-             style="background:#fff; border-radius:12px; min-height:500px; overflow:hidden;">
-
-            {{-- 🔥 HEADER --}}
-            <div style="background:#611232; color:#fff; padding:14px 16px; font-weight:600;">
-                Panel del sistema
-            </div>
-
-            {{-- 🔥 OPCIONES --}}
-            <div style="padding:0;">
-
-                {{-- REVISOR --}}
-                @if(auth()->user()->role == 2)
-                <div style="padding:14px 16px; border-bottom:1px solid #eee; background:#fafafa;">
-
-                    <a href="{{ url('/review-invite/my') }}"
-                       style="text-decoration:none; display:block;">
-
-                        <div style="color:#611232; font-weight:600;">
-                            📥 Mis invitaciones
-                        </div>
-
-                        <div style="font-size:13px; color:#777;">
-                            Revisa solicitudes pendientes
-                        </div>
-
-                    </a>
-
-                </div>
-                @endif
-
-                {{-- AUTOR --}}
-                @if(auth()->user()->role == 1)
-                <div style="padding:14px 16px; border-bottom:1px solid #eee;">
-                    <a href="{{ route('submissions.create') }}" style="text-decoration:none;">
-                        <div style="font-weight:600;">📄 Subir documento</div>
-                        <div style="font-size:13px; color:#777;">
-                            Enviar archivo a revisión
-                        </div>
-                    </a>
-                </div>
-                @endif
-
-                {{-- SECRETARIO --}}
-                @if(auth()->user()->role == 3)
-                <div style="padding:14px 16px; border-bottom:1px solid #eee;">
-                    <a href="{{ route('submissions.index') }}" style="text-decoration:none;">
-                        <div style="font-weight:600;">📋 Documentos pendientes</div>
-                        <div style="font-size:13px; color:#777;">
-                            Asignar revisores
-                        </div>
-                    </a>
-                </div>
-                @endif
-
-            </div>
-
-            {{-- 🔍 BUSCADOR (como antes) --}}
-            <div style="padding:16px;">
-                <x-frontend.sidebar-search/>
-            </div>
-
-        </div>
-
+    <div class="gob-logo">
+        <h4>Investigación</h4>
+        <small>Portal Académico</small>
     </div>
+
+    <ul class="gob-menu">
+
+        <li class="active">Inicio</li>
+
+        {{-- ACCIÓN PRINCIPAL SEGÚN ROL --}}
+        @auth
+
+            {{-- AUTOR --}}
+            @if(auth()->user()->role == 1)
+                <li>
+                    <a href="{{ route('submissions.create') }}">
+                        Subir documento
+                    </a>
+                </li>
+            @endif
+
+            {{-- REVISOR --}}
+            @if(auth()->user()->role == 2)
+                <li>
+                    <a href="{{ url('/review-invite/my') }}">
+                        Mis invitaciones
+                    </a>
+                </li>
+            @endif
+
+            {{-- SECRETARIO --}}
+            @if(auth()->user()->role == 3)
+                <li>
+                    <a href="{{ route('submissions.index') }}">
+                        Documentos pendientes
+                    </a>
+                </li>
+            @endif
+
+        @else
+            <li>
+                <a href="{{ route('auth.login') }}">
+                    Iniciar sesión
+                </a>
+            </li>
+        @endauth
+
+        <li>Mis Proyectos</li>
+        <li>Subir Proyecto</li>
+        <li>Explorar</li>
+        <li>Biblioteca</li>
+        <li>Favoritos</li>
+        <li>Colaboradores</li>
+
+    </ul>
 
 </div>
