@@ -152,7 +152,7 @@
     border-radius: 16px;
     padding: 18px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+   grid-template-columns: repeat(4, 1fr);
     gap: 18px;
     margin-bottom: 18px;
 }
@@ -411,30 +411,41 @@
 
                                 </div>
 
-                                <div class="review-meta-box">
+                             <div class="review-meta-box">
 
-                                    <div class="review-meta-item">
-                                        <small>Autor</small>
-                                        <strong>
-                                            {{ $invite->submission->author->name ?? 'N/A' }}
-                                        </strong>
-                                    </div>
+    <div class="review-meta-item">
+        <small>Autor</small>
+        <strong>
+            {{ $invite->submission->author->name ?? 'N/A' }}
+        </strong>
+    </div>
 
-                                    <div class="review-meta-item">
-                                        <small>Fecha de envío</small>
-                                        <strong>
-                                            {{ optional($invite->submission->created_at)->format('d/m/Y') ?? 'N/A' }}
-                                        </strong>
-                                    </div>
+    <div class="review-meta-item">
+        <small>Fecha de envío</small>
+        <strong>
+            {{ optional($invite->submission->created_at)->format('d/m/Y') ?? 'N/A' }}
+        </strong>
+    </div>
 
-                                    <div class="review-meta-item">
-                                        <small>ID documento</small>
-                                        <strong>
-                                            #{{ $invite->submission->id ?? 'N/A' }}
-                                        </strong>
-                                    </div>
+    <div class="review-meta-item">
+        <small>Fecha límite</small>
+        <strong>
+            @if($invite->review_due_at)
+                {{ $invite->review_due_at->format('d/m/Y') }}
+            @else
+                Pendiente
+            @endif
+        </strong>
+    </div>
 
-                                </div>
+    <div class="review-meta-item">
+        <small>ID documento</small>
+        <strong>
+            #{{ $invite->submission->id ?? 'N/A' }}
+        </strong>
+    </div>
+
+</div>
 
                                 <div class="review-actions">
                                     <a href="{{ url('/review-invite/'.$invite->invite_token_hash) }}"

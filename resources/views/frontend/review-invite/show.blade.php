@@ -568,15 +568,31 @@
                             </div>
                         </div>
 
-                        <div>
-                            <span class="review-field-label">
-                                ID del documento
-                            </span>
+                     <div>
+    <span class="review-field-label">
+        ID del documento
+    </span>
 
-                            <div class="review-field-box">
-                                #{{ $invite->submission_id }}
-                            </div>
-                        </div>
+    <div class="review-field-box">
+        #{{ $invite->submission_id }}
+    </div>
+</div>
+
+<div>
+    <span class="review-field-label">
+        Fecha límite de revisión
+    </span>
+
+    <div class="review-field-box">
+        <i class="las la-hourglass-half" style="margin-right:8px; color:#667085;"></i>
+
+        @if($invite->review_due_at)
+            {{ $invite->review_due_at->format('d/m/Y') }}
+        @else
+            Pendiente de aceptar
+        @endif
+    </div>
+</div>
 
                     </div>
 
@@ -659,11 +675,23 @@
                     {{-- ACCEPTED --}}
                     @elseif($invite->status === 'accepted')
 
-                        <div class="review-alert-success">
-                            Has aceptado esta revisión. Ya puedes subir tu archivo revisado.
-                        </div>
+                    <div class="review-alert-success">
+    Has aceptado esta revisión. Ya puedes subir tu archivo revisado.
 
-                        <div class="review-upload-card">
+    @if($invite->review_due_at)
+        <br>
+        Fecha límite de entrega:
+        <strong>{{ $invite->review_due_at->format('d/m/Y') }}</strong>
+    @endif
+</div>
+
+@if($invite->review_due_at && now()->greaterThan($invite->review_due_at))
+    <div class="review-alert-danger">
+        La fecha límite para entregar esta revisión ya venció.
+    </div>
+@endif
+
+<div class="review-upload-card">
 
                             <h4>Subir revisión</h4>
 
