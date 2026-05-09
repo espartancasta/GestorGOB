@@ -394,7 +394,154 @@
     background: #fff;
     margin-bottom: 16px;
 }
+/* =========================================================
+   SEMANA 15 - DESCARGA DEL DOCUMENTO ORIGINAL
+========================================================= */
 
+.review-download-card {
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-left: 5px solid #611232;
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+}
+
+.review-download-card h4 {
+    color: #1f2937;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.review-download-card p {
+    color: #667085;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+.review-download-meta {
+    background: #f9fafb;
+    border: 1px solid #edf0f2;
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    color: #1f2937;
+    font-weight: 800;
+}
+
+.review-download-meta small {
+    display: block;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.review-btn-download {
+    min-height: 58px;
+    width: 100%;
+    border-radius: 14px;
+    background: #235B4E;
+    color: #ffffff !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none !important;
+    transition: all .2s ease;
+}
+
+.review-btn-download:hover {
+    background: #13322E;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+/* =========================================================
+   SEMANA 16 - REVISIÓN COMPLETADA
+========================================================= */
+
+.review-completed-card {
+    background: #ffffff;
+    border: 1px solid #d7e7dc;
+    border-left: 5px solid #235B4E;
+    border-radius: 18px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+}
+
+.review-completed-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.review-completed-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e9f5ef;
+    color: #235B4E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.review-completed-card h4 {
+    color: #1f2937;
+    font-weight: 900;
+    margin: 0 0 8px 0;
+}
+
+.review-completed-card p {
+    color: #667085;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.review-completed-meta {
+    background: #f9fafb;
+    border: 1px solid #edf0f2;
+    border-radius: 14px;
+    padding: 14px 16px;
+    color: #1f2937;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.review-completed-meta small {
+    display: block;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+}
+
+.review-status-completed {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e9f5ef;
+    color: #235B4E;
+    border: 1px solid #b8dec7;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 900;
+}
 @media (max-width: 768px) {
     .review-show-page {
         padding: 24px 14px 50px;
@@ -672,26 +819,50 @@
                             </div>
                         </div>
 
-                    {{-- ACCEPTED --}}
+                                   {{-- ACCEPTED --}}
                     @elseif($invite->status === 'accepted')
 
-                    <div class="review-alert-success">
-    Has aceptado esta revisión. Ya puedes subir tu archivo revisado.
+                        <div class="review-alert-success">
+                            Has aceptado esta revisión. Ya puedes descargar el documento original y subir tu archivo revisado.
 
-    @if($invite->review_due_at)
-        <br>
-        Fecha límite de entrega:
-        <strong>{{ $invite->review_due_at->format('d/m/Y') }}</strong>
-    @endif
-</div>
+                            @if($invite->review_due_at)
+                                <br>
+                                Fecha límite de entrega:
+                                <strong>{{ $invite->review_due_at->format('d/m/Y') }}</strong>
+                            @endif
+                        </div>
 
-@if($invite->review_due_at && now()->greaterThan($invite->review_due_at))
-    <div class="review-alert-danger">
-        La fecha límite para entregar esta revisión ya venció.
-    </div>
-@endif
+                        @if($invite->review_due_at && now()->greaterThan($invite->review_due_at))
+                            <div class="review-alert-danger">
+                                La fecha límite para entregar esta revisión ya venció.
+                            </div>
+                        @endif
 
-<div class="review-upload-card">
+                        {{-- SEMANA 15 - DESCARGA DEL DOCUMENTO ORIGINAL --}}
+                        <div class="review-download-card">
+
+                            <h4>Documento original del Autor</h4>
+
+                            <p>
+                                Descarga el archivo original en formato Word (.docx) para realizar la revisión
+                                con observaciones, comentarios o control de cambios.
+                            </p>
+
+                            <div class="review-download-meta">
+                                <small>Documento asignado</small>
+                                {{ $invite->submission->title ?? 'Documento sin título' }}
+                            </div>
+
+                            <a href="{{ url('/review-invite/'.$invite->invite_token_hash.'/download-original') }}"
+                               class="review-btn-download">
+                                <i class="las la-download"></i>
+                                Descargar documento original (.docx)
+                            </a>
+
+                        </div>
+
+                        {{-- SUBIDA DE REVISIÓN --}}
+                        <div class="review-upload-card">
 
                             <h4>Subir revisión</h4>
 
@@ -720,12 +891,53 @@
 
                         </div>
 
-                    {{-- COMPLETED --}}
-                    @elseif($invite->status === 'completed')
+                  {{-- COMPLETED - SEMANA 16 --}}
+@elseif($invite->status === 'completed')
 
-                        <div class="review-alert-info">
-                            Ya subiste tu revisión correctamente. El sistema registró tu entrega.
-                        </div>
+    <div class="review-completed-card">
+
+        <div class="review-completed-header">
+
+            <div class="review-completed-icon">
+                <i class="las la-check"></i>
+            </div>
+
+            <div>
+                <h4>Revisión entregada correctamente</h4>
+
+                <span class="review-status-completed">
+                    <i class="las la-check-circle"></i>
+                    Estado: Completado
+                </span>
+            </div>
+
+        </div>
+
+        <p>
+            Tu archivo de revisión fue recibido por el sistema.
+            El Secretario podrá consultar tu entrega y continuar con el flujo del documento.
+        </p>
+
+        <div class="review-completed-meta">
+            <small>Documento revisado</small>
+            {{ $invite->submission->title ?? 'Documento sin título' }}
+        </div>
+
+        @if($invite->review_uploaded_at)
+            <div class="review-completed-meta">
+                <small>Fecha de entrega</small>
+                {{ $invite->review_uploaded_at->format('d/m/Y H:i') }}
+            </div>
+        @endif
+
+        @if($invite->review_due_at)
+            <div class="review-completed-meta">
+                <small>Fecha límite original</small>
+                {{ $invite->review_due_at->format('d/m/Y') }}
+            </div>
+        @endif
+
+    </div>
 
                     {{-- REJECTED --}}
                     @elseif($invite->status === 'rejected')

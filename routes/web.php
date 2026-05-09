@@ -27,7 +27,8 @@ use App\Http\Controllers\FileUploadController;
 | Upload
 |--------------------------------------------------------------------------
 */
-Route::post('/upload-file', [FileUploadController::class, 'store'])->name('upload.file');
+Route::post('/upload-file', [FileUploadController::class, 'store'])
+    ->name('upload.file');
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,31 @@ Route::name('auth.')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| 🔥 SUBMISSIONS - DETALLE COMPARTIDO AUTOR / SECRETARIO
+|--------------------------------------------------------------------------
+| Esta ruta permite abrir:
+| /submissions/{id}
+|
+| Se deja fuera de role:1 y role:3 para evitar rutas duplicadas.
+| La validación fina debe estar en SubmissionController@show:
+| - Autor: solo sus documentos
+| - Secretario: todos los documentos
+| - Revisor: no debe entrar
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])
+    ->prefix('submissions')
+    ->name('submissions.')
+    ->group(function () {
+
+        Route::get('/{submission}', [SubmissionController::class, 'show'])
+            ->whereNumber('submission')
+            ->name('show');
+
+    });
+
+/*
+|--------------------------------------------------------------------------
 | 🔥 SUBMISSIONS - AUTOR (ROLE 1)
 |--------------------------------------------------------------------------
 */
@@ -75,10 +101,13 @@ Route::middleware(['auth', 'role:1'])
     ->name('submissions.')
     ->group(function () {
 
-        Route::get('/create', [SubmissionController::class, 'create'])->name('create');
-        Route::post('/', [SubmissionController::class, 'store'])->name('store');
-        Route::get('/{submission}', [SubmissionController::class, 'show'])->name('show');
-});
+        Route::get('/create', [SubmissionController::class, 'create'])
+            ->name('create');
+
+        Route::post('/', [SubmissionController::class, 'store'])
+            ->name('store');
+
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -90,11 +119,18 @@ Route::middleware(['auth', 'role:3'])
     ->name('submissions.')
     ->group(function () {
 
-        Route::get('/', [SubmissionController::class, 'index'])->name('index');
-        Route::get('/{submission}', [SubmissionController::class, 'show'])->name('show');
-        Route::get('/{submission}/download', [SubmissionController::class, 'download'])->name('download');
-        Route::post('/{submission}/assign', [SubmissionController::class, 'assign'])->name('assign');
-});
+        Route::get('/', [SubmissionController::class, 'index'])
+            ->name('index');
+
+        Route::get('/{submission}/download', [SubmissionController::class, 'download'])
+            ->whereNumber('submission')
+            ->name('download');
+
+        Route::post('/{submission}/assign', [SubmissionController::class, 'assign'])
+            ->whereNumber('submission')
+            ->name('assign');
+
+    });
 
 /*
 |--------------------------------------------------------------------------
@@ -111,13 +147,22 @@ Route::middleware(['auth', 'role:2'])
             ->name('invites');
 
         // 👉 VER INVITACIÓN
-        Route::get('/{token}', [ReviewInviteController::class, 'show']);
+        Route::get('/{token}', [ReviewInviteController::class, 'show'])
+            ->name('show');
 
-        // 👉 ACCIONES
-        Route::post('/{token}/accept', [ReviewInviteController::class, 'accept']);
-        Route::post('/{token}/reject', [ReviewInviteController::class, 'reject']);
-        Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview']);
-});
+        // 👉 ACEPTAR INVITACIÓN
+        Route::post('/{token}/accept', [ReviewInviteController::class, 'accept'])
+            ->name('accept');
+
+        // 👉 RECHAZAR INVITACIÓN
+        Route::post('/{token}/reject', [ReviewInviteController::class, 'reject'])
+            ->name('reject');
+
+        // 👉 SUBIR REVISIÓN
+        Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview'])
+            ->name('uploadReview');
+
+    });
 
 /*
 |--------------------------------------------------------------------------
