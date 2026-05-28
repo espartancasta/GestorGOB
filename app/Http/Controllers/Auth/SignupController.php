@@ -12,7 +12,7 @@ class SignupController extends Controller
 {
     public function index() {
         if (Auth::check()) {
-            return redirect()->route("dashboard.home");
+            return redirect()->route("frontend.home");
         }
         $enable_registration = SiteSetting::first("enable_registration")->enable_registration;
         return view("auth.signup", compact("enable_registration"));
@@ -36,6 +36,6 @@ class SignupController extends Controller
         ]);
         $user = User::create($request->only(["name", "username", "email", "password"]));
         Auth::loginUsingId($user->id);
-        return redirect()->route("dashboard.home");
+        return redirect()->route("frontend.home");
     }
 }

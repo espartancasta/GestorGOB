@@ -16,11 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('summary');
 
-            $table->string('original_file_path');
-            $table->string('original_file_name');
-            $table->string('original_file_mime')->nullable();
-            $table->unsignedBigInteger('original_file_size')->nullable();
-
             $table->string('status')->default('pending_assignment');
 
             $table->timestamps();

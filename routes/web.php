@@ -39,12 +39,12 @@ Route::name('frontend.')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/search', [SearchController::class, 'index'])->name('search');
-    Route::get('/post/{slug}', [PostController::class, 'show'])->name('post');
+    Route::get('/post/{slug}', [PostController::class, 'index'])->name('post');
 
     Route::post('/comment/{id}', [CommentController::class, 'index'])->name('comment');
     Route::post('/comment-reply', [CommentController::class, 'reply'])->name('comment.reply');
 
-    Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category');
+    Route::get('/category/{slug}', [CategoryController::class, 'index'])->name('category');
     Route::get('/user/{username}', [UserController::class, 'show'])->name('user');
     Route::get('/tag/{name}', [TagController::class, 'index'])->name('tag');
     Route::get('/page/{slug}', [PageController::class, 'index'])->name('page');
@@ -157,6 +157,9 @@ Route::middleware(['auth', 'role:2'])
         // 👉 RECHAZAR INVITACIÓN
         Route::post('/{token}/reject', [ReviewInviteController::class, 'reject'])
             ->name('reject');
+
+        Route::get('/{token}/download-original', [ReviewInviteController::class, 'downloadOriginal'])
+            ->name('downloadOriginal');
 
         // 👉 SUBIR REVISIÓN
         Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview'])

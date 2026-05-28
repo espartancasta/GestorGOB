@@ -11,6 +11,13 @@ class SubmissionFile extends Model
         'uploaded_by',
         'type',
         'path',
+        'original_name',
+        'mime',
+        'size',
+    ];
+
+    protected $casts = [
+        'size' => 'integer',
     ];
 
     public function submission()
