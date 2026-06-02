@@ -7,6 +7,7 @@ use App\Models\Submission;
 use App\Models\SubmissionFile;
 use App\Models\SubmissionReviewer;
 use App\Models\User;
+use App\Notifications\AuthorReviewReadyNotification;
 use App\Notifications\ReviewProblemNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -216,6 +217,10 @@ class ReviewInviteController extends Controller
             if ($completedReviews >= 2) {
                 Submission::where('id', $invite->submission_id)
                     ->update(['status' => 'pending_correction']);
+
+                $invite->submission->author?->notify(
+                    new AuthorReviewReadyNotification($invite->submission)
+                );
             }
 
             DB::commit();
