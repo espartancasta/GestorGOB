@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="444" viewBox="0 0 960 444" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder de convocatoria Mayo Agosto</title>
+  <desc id="desc">Revision de una propuesta academica en escritorio.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#172033"/>
+      <stop offset=".55" stop-color="#d4d7de"/>
+      <stop offset="1" stop-color="#f1ede7"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#611232" stop-opacity=".05"/>
+      <stop offset="1" stop-color="#611232" stop-opacity=".48"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="444" fill="url(#bg)"/>
+  <rect x="356" y="54" width="420" height="318" rx="20" fill="#fff" opacity=".92"/>
+  <rect x="404" y="104" width="292" height="18" rx="9" fill="#b8beca"/>
+  <rect x="404" y="148" width="328" height="18" rx="9" fill="#ccd1da"/>
+  <rect x="404" y="192" width="254" height="18" rx="9" fill="#ccd1da"/>
+  <rect x="404" y="236" width="308" height="18" rx="9" fill="#ccd1da"/>
+  <path d="M167 286c69-49 165-67 254-45 42 10 64 44 53 78-12 37-56 56-103 45-55-13-108-4-153 27-39 27-90 25-113-4-23-30-5-72 62-101Z" fill="#c6a17e"/>
+  <path d="M734 242c48-3 93 14 122 48 26 31 22 76-8 99-33 24-83 14-109-19-14-18-31-25-52-25-39 1-72-26-73-60-1-27 42-40 120-43Z" fill="#86746c"/>
+  <rect width="960" height="444" fill="url(#shade)"/>
+</svg>

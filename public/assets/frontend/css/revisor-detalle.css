@@ -1,0 +1,343 @@
+.reviewer-detail-page {
+    background: #f8f7f6;
+    color: #2d2628;
+    padding: 102px 0 48px;
+}
+
+.reviewer-detail-heading {
+    max-width: 820px;
+    margin-bottom: 36px;
+}
+
+.reviewer-period {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 5px 16px;
+    border-radius: 4px;
+    background: #611232;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.reviewer-detail-heading h1 {
+    margin: 18px 0 12px;
+    color: #4b5563;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.reviewer-detail-heading p,
+.reviewer-muted {
+    color: #6b7280;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.reviewer-rule {
+    display: block;
+    width: 220px;
+    height: 2px;
+    margin-top: 24px;
+    background: linear-gradient(90deg, #a57f2c 0%, rgba(165, 127, 44, .18) 100%);
+}
+
+.reviewer-card {
+    margin-bottom: 26px;
+    padding: 28px 30px;
+    border: 1px solid #eadfe2;
+    border-top: 4px solid #8a1538;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 5px 16px rgba(17,24,39,.08);
+}
+
+.reviewer-proposal-top,
+.reviewer-file-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.reviewer-eyebrow,
+.reviewer-label,
+.reviewer-meta-grid span,
+.reviewer-upload-form label > span {
+    display: block;
+    color: #a57f2c;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.reviewer-proposal-card h2,
+.reviewer-section-title,
+.reviewer-expired-card h2 {
+    margin: 8px 0 12px;
+    color: #611232;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.reviewer-status-stack {
+    display: grid;
+    gap: 8px;
+    min-width: 250px;
+}
+
+.reviewer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    width: fit-content;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.reviewer-badge::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.reviewer-badge.is-pending,
+.reviewer-badge.is-reviewing {
+    background: #fff4c2;
+    color: #a16b00;
+}
+
+.reviewer-badge.is-accepted,
+.reviewer-badge.is-approved {
+    background: #e3f8e6;
+    color: #16803a;
+}
+
+.reviewer-badge.is-observed {
+    background: #ffe9cc;
+    color: #c65300;
+}
+
+.reviewer-badge.is-rejected {
+    background: #ffe4e8;
+    color: #b42318;
+}
+
+.reviewer-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.reviewer-meta-grid div {
+    border-radius: 6px;
+    background: #f8f4f2;
+    padding: 14px;
+}
+
+.reviewer-academic-block + .reviewer-academic-block {
+    margin-top: 20px;
+}
+
+.reviewer-academic-block p {
+    margin: 8px 0 0;
+    color: #3f3f46;
+    line-height: 1.7;
+}
+
+.reviewer-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.reviewer-keywords span {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #f9edf2;
+    color: #611232;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.reviewer-file-row {
+    margin-top: 18px;
+    border-radius: 8px;
+    background: #f8f4f2;
+    padding: 18px;
+}
+
+.reviewer-file-row strong,
+.reviewer-file-row span {
+    display: block;
+}
+
+.reviewer-file-row span,
+.reviewer-disabled-note {
+    color: #6b625d;
+    font-size: 13px;
+}
+
+.reviewer-primary-link,
+.reviewer-primary-btn,
+.reviewer-danger-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff !important;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.reviewer-primary-link,
+.reviewer-primary-btn {
+    background: #611232;
+}
+
+.reviewer-primary-link:hover,
+.reviewer-primary-btn:hover {
+    background: #4a0d26;
+}
+
+.reviewer-danger-btn {
+    background: #b42318;
+}
+
+.reviewer-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.reviewer-actions-grid button,
+.reviewer-upload-form button {
+    width: 100%;
+}
+
+.reviewer-upload-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.reviewer-upload-form select {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 8px;
+    border: 1px solid #d8d2d4;
+    border-radius: 6px;
+    padding: 0 12px;
+    background: #fff;
+}
+
+.reviewer-dropzone {
+    display: flex !important;
+    min-height: 180px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 2px dashed #d5c3bd;
+    border-radius: 10px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.reviewer-dropzone input {
+    display: none;
+}
+
+.reviewer-upload-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: #f3e8ed;
+    color: #611232;
+    font-size: 28px;
+}
+
+.reviewer-dropzone b {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #fff4c2;
+    color: #a16b00;
+}
+
+.reviewer-dropzone em {
+    color: #611232;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.reviewer-alert {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.reviewer-alert ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.reviewer-alert-success {
+    border: 1px solid #b8dfc2;
+    background: #edf8ef;
+    color: #245b30;
+}
+
+.reviewer-alert-danger,
+.reviewer-error {
+    color: #b42318;
+}
+
+.reviewer-alert-danger {
+    border: 1px solid #f1c4ca;
+    background: #fff1f3;
+}
+
+.reviewer-error {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+@media (max-width: 900px) {
+    .reviewer-detail-page {
+        padding-top: 72px;
+    }
+
+    .reviewer-proposal-top,
+    .reviewer-file-row {
+        flex-direction: column;
+    }
+
+    .reviewer-meta-grid,
+    .reviewer-actions-grid {
+        grid-template-columns: 1fr;
+    }
+}

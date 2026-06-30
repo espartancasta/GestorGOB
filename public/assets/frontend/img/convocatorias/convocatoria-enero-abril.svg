@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="444" viewBox="0 0 960 444" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder de convocatoria Enero Abril</title>
+  <desc id="desc">Mesa de trabajo con documentos academicos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8efe8"/>
+      <stop offset="1" stop-color="#b6a18f"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#611232" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#611232" stop-opacity=".5"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="444" fill="url(#bg)"/>
+  <rect x="86" y="58" width="520" height="328" rx="22" fill="#fffaf5" opacity=".92"/>
+  <rect x="126" y="100" width="430" height="24" rx="12" fill="#d7c7b6"/>
+  <rect x="126" y="150" width="360" height="20" rx="10" fill="#e2d6ca"/>
+  <rect x="126" y="196" width="410" height="20" rx="10" fill="#e2d6ca"/>
+  <rect x="126" y="242" width="300" height="20" rx="10" fill="#e2d6ca"/>
+  <path d="M585 303c76-23 154-20 229 14 31 14 49 45 39 74-12 33-54 46-93 29-62-27-119-29-178-10-42 13-84-4-96-37-12-34 32-58 99-70Z" fill="#c9987d"/>
+  <path d="M0 328c160-48 297-45 455 0 175 50 315 46 505-12v128H0Z" fill="#611232" opacity=".22"/>
+  <rect width="960" height="444" fill="url(#shade)"/>
+</svg>

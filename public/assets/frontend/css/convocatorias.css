@@ -1,0 +1,262 @@
+.convocatorias-page {
+    background: #f7f7f7;
+    color: #1f2933;
+    min-height: calc(100vh - 140px);
+    padding: 105px 0 36px;
+}
+
+.convocatorias-heading {
+    margin-bottom: 40px;
+    max-width: 720px;
+}
+
+.convocatorias-period {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    background: #611232;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.convocatorias-heading h1 {
+    margin: 18px 0 14px;
+    color: #101828;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.convocatorias-heading p {
+    margin: 0;
+    color: #596174;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.convocatorias-rule {
+    display: block;
+    width: 64px;
+    height: 4px;
+    margin-top: 20px;
+    border-radius: 999px;
+    background: #a57f2c;
+}
+
+.convocatorias-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 26px;
+}
+
+.convocatoria-card {
+    overflow: hidden;
+    border: 1px solid rgba(17, 24, 39, .08);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 3px 12px rgba(17, 24, 39, .10);
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.convocatoria-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 28px rgba(17, 24, 39, .16);
+}
+
+.convocatoria-media {
+    position: relative;
+    aspect-ratio: 16 / 7.4;
+    min-height: 188px;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.convocatoria-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(97, 18, 50, 0) 45%, rgba(97, 18, 50, .48) 100%);
+    pointer-events: none;
+}
+
+.convocatoria-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.convocatoria-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 6px 16px rgba(17, 24, 39, .12);
+}
+
+.status-closed {
+    background: #ffffff;
+    color: #344054;
+}
+
+.status-open {
+    background: #e7f8dc;
+    color: #0b7a2a;
+}
+
+.status-soon {
+    background: #fff1cb;
+    color: #9a5b00;
+}
+
+.convocatoria-body {
+    padding: 22px 20px 20px;
+}
+
+.convocatoria-term {
+    display: block;
+    margin-bottom: 8px;
+    color: #a57f2c;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.convocatoria-body h2 {
+    margin: 0 0 12px;
+    color: #101828;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.convocatoria-body p {
+    margin: 0 0 18px;
+    color: #667085;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.convocatoria-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: #667085;
+    font-size: 14px;
+}
+
+.convocatoria-date i {
+    color: #611232;
+    font-size: 18px;
+}
+
+.convocatoria-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 42px;
+    width: 100%;
+    border-radius: 8px;
+    background: #611232;
+    color: #ffffff !important;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none !important;
+    transition: background-color .18s ease;
+}
+
+.convocatoria-button:hover {
+    background: #4a0d26;
+    color: #ffffff !important;
+}
+
+.convocatoria-button i {
+    font-size: 16px;
+}
+
+.convocatorias-help {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+    padding: 24px 28px;
+    border-left: 4px solid #611232;
+    border-radius: 12px;
+    background: #f4e8ee;
+    color: #4f1a30;
+}
+
+.convocatorias-help > i {
+    margin-top: 4px;
+    color: #611232;
+    font-size: 28px;
+}
+
+.convocatorias-help h2 {
+    margin: 0 0 6px;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.convocatorias-help p {
+    margin: 0;
+    color: #5f5f71;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.convocatorias-help a {
+    color: #611232;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.convocatorias-help a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 991px) {
+    .convocatorias-grid {
+        grid-template-columns: repeat(2, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 680px) {
+    .convocatorias-page {
+        padding-top: 72px;
+    }
+
+    .convocatorias-heading {
+        margin-bottom: 28px;
+    }
+
+    .convocatorias-heading h1 {
+        font-size: 25px;
+    }
+
+    .convocatorias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .convocatoria-media {
+        min-height: 178px;
+    }
+
+    .convocatorias-help {
+        padding: 20px;
+    }
+}

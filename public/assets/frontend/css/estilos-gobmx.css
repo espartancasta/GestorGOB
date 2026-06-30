@@ -1,0 +1,718 @@
+/* =========================================================
+   estilos-gobmx.css
+   Estilo institucional GOB.MX para GestorGOB
+========================================================= */
+
+/* =========================================================
+   0) Variables institucionales
+========================================================= */
+:root {
+  --gob-primary: #9F2241;         /* guinda principal V3 */
+  --gob-primary-dark: #611232;    /* guinda oscuro V3 para encabezados */
+  --gob-footer-bg: #611232;       /* regresando a guinda por peticiÃ³n del usuario */
+  --gob-primary-soft: #f6eef1;    /* fondo suave guinda */
+  --gob-gold: #BC955C;            /* dorado institucional V3 */
+  --gob-gold-soft: #DDC9A3;       /* dorado claro V3 */
+  --gob-text: #545454;            /* texto fuerte V3 documentos */
+  --gob-text-doc: #545454;
+  --gob-muted: #98989A;           /* gris institucional V3 */
+  --gob-green-dark: #13322e;      /* verde oscuro Semarnat */
+  --gob-light: #f5f5f5;           /* fondo general */
+  --gob-white: #FFFFFF;           /* blanco V3 */
+  --gob-border: #e6e6e6;
+  --gob-border-strong: #d7d7d7;
+  --gob-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  --gob-shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --gob-radius: 12px;
+  --gob-radius-sm: 8px;
+}
+
+/* =========================================================
+   1) Base general
+========================================================= */
+html,
+body {
+  background: var(--gob-light) !important;
+}
+
+body,
+.text-body,
+p,
+span,
+li,
+td,
+th,
+label,
+small {
+  color: var(--gob-muted) !important;
+}
+
+a {
+  color: var(--gob-primary) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover,
+a:focus {
+  color: var(--gob-primary-dark) !important;
+  text-decoration: none !important;
+}
+
+.content a,
+.post-content a,
+.widget a {
+  color: var(--gob-primary) !important;
+}
+
+.content a:hover,
+.post-content a:hover,
+.widget a:hover {
+  color: var(--gob-primary-dark) !important;
+}
+
+/* =========================================================
+   2) TipografÃ­a / encabezados
+========================================================= */
+h1, h2, h3, h4, h5, h6,
+.widget-title,
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6,
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6,
+.blog-author h1, .blog-author h2, .blog-author h3, .blog-author h4, .blog-author h5, .blog-author h6 {
+  color: var(--gob-text) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+}
+
+.widget-title,
+.gob-section-title,
+.gob-upload-title,
+.blog-author .sidebar .widget h4,
+.blog-author .sidebar .widget h5 {
+  color: var(--gob-text) !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   3) Botones institucionales
+========================================================= */
+.btn-primary,
+.bg-primary {
+  background-color: var(--gob-primary) !important;
+  border-color: var(--gob-primary) !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--gob-primary-dark) !important;
+  border-color: var(--gob-primary-dark) !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary {
+  background-color: var(--gob-muted) !important;
+  border-color: var(--gob-muted) !important;
+  color: #fff !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+  background-color: #5c5f5f !important;
+  border-color: #5c5f5f !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.btn-subscribe,
+.gob-btn-primary {
+  background-color: var(--gob-primary) !important;
+  border: 1px solid var(--gob-primary) !important;
+  color: #fff !important;
+  padding: 12px 24px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  box-shadow: none !important;
+}
+
+.btn-subscribe:hover,
+.btn-subscribe:focus,
+.gob-btn-primary:hover,
+.gob-btn-primary:focus {
+  background-color: var(--gob-primary-dark) !important;
+  border-color: var(--gob-primary-dark) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.gob-btn-secondary {
+  background-color: var(--gob-white) !important;
+  border: 1px solid var(--gob-border-strong) !important;
+  color: var(--gob-text) !important;
+  padding: 12px 24px !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+}
+
+.gob-btn-secondary:hover,
+.gob-btn-secondary:focus {
+  background-color: #f3f3f3 !important;
+  border-color: #cfcfcf !important;
+  color: var(--gob-text) !important;
+  text-decoration: none !important;
+}
+
+/* BotÃ³n de bÃºsqueda */
+.search-form .search-btn,
+.search-form button,
+.sidebar .search-form button {
+  background-color: var(--gob-text) !important;
+  border-color: var(--gob-text) !important;
+  color: #fff !important;
+  border-radius: 0 !important;
+}
+
+.search-form .search-btn:hover,
+.search-form button:hover,
+.sidebar .search-form button:hover {
+  background-color: var(--gob-primary) !important;
+  border-color: var(--gob-primary) !important;
+}
+
+/* =========================================================
+   4) Header institucional
+========================================================= */
+header.header {
+  background: var(--gob-primary-dark) !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  min-height: 80px !important;
+}
+
+header.header .container-fluid,
+header.header .container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+header.header .header-area {
+  width: 100% !important;
+  min-height: 80px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: transparent !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: normal;
+}
+
+header.header .logo {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  background: transparent !important;
+  min-height: 80px !important;
+  padding: 0 20px !important;
+}
+
+header.header .header-right {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 14px !important;
+  padding-right: 0 !important;
+}
+
+/* =========================================================
+   5) Logo responsivo
+========================================================= */
+.logo-img {
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 0 !important;
+}
+
+/* =========================================================
+   6) Botón Iniciar Sesión (Encabezado)
+========================================================= */
+header.header .btn-subscribe {
+  background-color: var(--gob-primary-dark) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  font-weight: 700 !important;
+  transition: all 0.3s ease !important;
+}
+
+header.header .btn-subscribe:hover {
+  background-color: var(--gob-primary) !important;
+  border-color: #fff !important;
+}
+
+.logo img,
+.logo .logo-dark,
+.logo .logo-white {
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  header.header .header-area {
+    min-height: 84px !important;
+    padding: 0 16px !important;
+  }
+
+  header.header .logo {
+    min-height: 84px !important;
+    padding: 0 14px !important;
+  }
+
+  .logo-img {
+    max-width: 128px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img {
+    max-width: 108px;
+  }
+}
+
+/* =========================================================
+   6) Iconos header / notificaciones / perfil
+========================================================= */
+.header-right .search-toggle,
+.header-right .notification-btn,
+.header-right .profile-btn,
+.header-right .icon,
+.header-right a {
+  color: var(--gob-text) !important;
+}
+
+.header-right .notification-btn,
+.header-right .profile-btn,
+.header-right .search-toggle {
+  width: 44px !important;
+  height: 44px !important;
+  border: 1px solid #dedede !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.header-right .notification-btn:hover,
+.header-right .profile-btn:hover,
+.header-right .search-toggle:hover {
+  border-color: var(--gob-primary) !important;
+  color: var(--gob-primary) !important;
+}
+
+.notification-badge,
+.badge-notification,
+.count {
+  background: #d0021b !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* =========================================================
+   7) Evitar texto roto
+========================================================= */
+.sidebar,
+.sidebar *,
+.widget,
+.widget *,
+.card-title,
+h1, h2, h3, h4, h5, h6,
+p, a, span,
+td, th,
+label,
+small {
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* =========================================================
+   8) Layout general
+========================================================= */
+.blog-author {
+  padding-top: 36px !important;
+  padding-bottom: 36px !important;
+}
+
+.blog-author .container {
+  max-width: 1140px !important;
+}
+
+.blog-author .container-fluid {
+  max-width: 1320px !important;
+}
+
+.blog-author .row > [class*="col-"] {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.blog-author .col-lg-4 {
+  min-width: 320px;
+}
+
+/* =========================================================
+   9) Sidebar / widgets institucionales
+========================================================= */
+.blog-author .oredoo-sidebar,
+.blog-author .sidebar {
+  background: transparent !important;
+}
+
+.blog-author .widget,
+.blog-author .sidebar-widget,
+.blog-author .oredoo-sidebar .sidebar > div {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid #dddddd !important;
+  border-radius: 0 !important;
+  padding: 0 0 26px 0 !important;
+  margin-bottom: 28px !important;
+  box-shadow: none !important;
+}
+
+.blog-author .widget:last-child,
+.blog-author .sidebar-widget:last-child,
+.blog-author .oredoo-sidebar .sidebar > div:last-child {
+  margin-bottom: 0 !important;
+}
+
+.blog-author .widget-title,
+.blog-author .widget h3,
+.blog-author .widget h4,
+.blog-author .widget h5 {
+  font-size: 1.7rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 18px !important;
+  color: var(--gob-text) !important;
+}
+
+.blog-author .widget a,
+.blog-author .widget p,
+.blog-author .widget li,
+.blog-author .sidebar-widget a {
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+  color: var(--gob-muted) !important;
+}
+
+.blog-author .widget ul,
+.blog-author .widget ol {
+  padding-left: 18px !important;
+}
+
+/* =========================================================
+   10) Caja institucional reutilizable
+========================================================= */
+.gob-card,
+.user-upload-box,
+.blog-author .user-upload-box,
+.blog-author .submission-box,
+.blog-author .detail-box,
+.blog-author .card {
+  background: var(--gob-white) !important;
+  border: 1px solid var(--gob-border) !important;
+  border-radius: var(--gob-radius) !important;
+  padding: 24px !important;
+  box-shadow: var(--gob-shadow-soft) !important;
+}
+
+.gob-card h3,
+.user-upload-box h4,
+.blog-author .card h3,
+.blog-author .card h4 {
+  margin: 0 0 10px 0 !important;
+  color: var(--gob-text) !important;
+  font-weight: 800 !important;
+}
+
+.gob-card p,
+.user-upload-box p,
+.blog-author .card p {
+  color: var(--gob-muted) !important;
+}
+
+/* =========================================================
+   11) Formularios institucionales
+========================================================= */
+.form-group label,
+.gob-form-label {
+  font-weight: 700 !important;
+  color: var(--gob-text) !important;
+  margin-bottom: 8px !important;
+}
+
+.form-control,
+.form-select,
+textarea,
+input[type="text"],
+input[type="file"],
+input[type="email"],
+input[type="password"],
+input[type="search"] {
+  background: #fff !important;
+  border-radius: 0 !important;
+  border: 1px solid #dddddd !important;
+  min-height: 48px !important;
+  color: var(--gob-text) !important;
+  box-shadow: none !important;
+}
+
+textarea.form-control,
+textarea {
+  min-height: 120px !important;
+  padding-top: 12px !important;
+}
+
+.form-control::placeholder,
+textarea::placeholder,
+input::placeholder {
+  color: #8b8b8b !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+textarea:focus,
+input:focus {
+  border-color: var(--gob-primary) !important;
+  box-shadow: 0 0 0 0.18rem rgba(122, 12, 52, 0.10) !important;
+}
+
+/* =========================================================
+   12) Tablas institucionales
+========================================================= */
+.table {
+  margin-bottom: 0 !important;
+  background: #fff !important;
+}
+
+.table thead th {
+  background-color: var(--gob-primary) !important;
+  color: #fff !important;
+  border-color: #8f1a45 !important;
+  vertical-align: middle !important;
+  font-weight: 700 !important;
+}
+
+.table td,
+.table th {
+  vertical-align: middle !important;
+}
+
+.table tbody td {
+  color: var(--gob-text) !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(122, 12, 52, 0.04) !important;
+}
+
+.table-responsive {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--gob-border) !important;
+  background: #fff !important;
+}
+
+/* =========================================================
+   13) Alertas
+========================================================= */
+.alert {
+  border-radius: 10px !important;
+  padding: 14px 18px !important;
+}
+
+.alert-success {
+  background: #edf7ef !important;
+  border: 1px solid #c9e4cf !important;
+  color: #2d5c36 !important;
+}
+
+.alert-danger {
+  background: #fff1f2 !important;
+  border: 1px solid #f2c7cc !important;
+  color: #7a1c28 !important;
+}
+
+/* =========================================================
+   14) TÃ­tulos de secciÃ³n
+========================================================= */
+.gob-section-title {
+  font-weight: 800 !important;
+  color: var(--gob-text) !important;
+  margin-bottom: 20px !important;
+}
+
+/* =========================================================
+   15) Cajas de contenido gris suave
+========================================================= */
+.gob-content-box {
+  background: #fafafa !important;
+  border: 1px solid #ececec !important;
+  border-radius: 10px !important;
+  padding: 15px !important;
+}
+
+/* =========================================================
+   16) Panel "Subir documento"
+========================================================= */
+.gob-upload-panel {
+  margin-bottom: 22px !important;
+  border-top: 5px solid var(--gob-primary) !important;
+}
+
+.gob-upload-panel__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.gob-upload-panel__text {
+  flex: 1;
+  min-width: 260px;
+}
+
+.gob-upload-badge {
+  display: inline-block;
+  background: rgba(179, 142, 63, 0.12);
+  color: #866823;
+  border: 1px solid rgba(179, 142, 63, 0.24);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.gob-upload-title {
+  margin: 0 0 8px 0 !important;
+  color: var(--gob-text) !important;
+  font-weight: 800 !important;
+  font-size: 1.9rem !important;
+  line-height: 1.15 !important;
+}
+
+.gob-upload-description {
+  margin: 0 !important;
+  color: var(--gob-muted) !important;
+  max-width: 700px;
+  font-size: 15px !important;
+}
+
+.gob-upload-panel__action {
+  flex: 0 0 auto;
+}
+
+.gob-upload-btn {
+  min-width: 220px !important;
+  min-height: 48px !important;
+}
+
+/* =========================================================
+   17) Cards y bloques del contenido principal
+========================================================= */
+.blog-author .post-item,
+.blog-author .post-card,
+.blog-author .content-box,
+.blog-author .main-content-card {
+  background: #fff !important;
+  border: 1px solid var(--gob-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--gob-shadow-soft) !important;
+}
+
+/* =========================================================
+   18) Dropdowns / menÃºs
+========================================================= */
+.dropdown-menu {
+  border: 1px solid #e4e4e4 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08) !important;
+  padding: 10px !important;
+}
+
+.dropdown-item {
+  border-radius: 8px !important;
+  color: var(--gob-text) !important;
+  font-weight: 500 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: var(--gob-primary-soft) !important;
+  color: var(--gob-primary) !important;
+}
+
+/* =========================================================
+   19) Footer (si el tema lo usa)
+========================================================= */
+footer,
+.footer-area {
+  background: #13322b !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+footer a,
+.footer-area a {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+footer a:hover,
+.footer-area a:hover {
+  color: #fff !important;
+}
+
+
+
+/* 🔥 FIX DEFINITIVO LAYOUT */
+.page {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
+}
+
+main.page {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}

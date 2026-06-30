@@ -1,0 +1,424 @@
+.proposal-page {
+    background: #f8f8f8;
+    color: #161616;
+    padding: 112px 0 38px;
+}
+
+.proposal-heading {
+    max-width: 760px;
+    margin-bottom: 30px;
+}
+
+.proposal-period {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 5px 16px;
+    border-radius: 4px;
+    background: #611232;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .6px;
+}
+
+.proposal-heading h1 {
+    margin: 18px 0 10px;
+    color: #611232;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.proposal-heading p {
+    margin: 0;
+    color: #4f5968;
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.proposal-rule {
+    display: block;
+    width: 240px;
+    height: 3px;
+    margin-top: 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a57f2c 0%, rgba(165, 127, 44, .18) 100%);
+}
+
+.proposal-card {
+    overflow: hidden;
+    max-width: 100%;
+    border-radius: 14px;
+    border: 1px solid #ede7df;
+    border-top: 4px solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(90deg, #611232, #a57f2c) border-box;
+    box-shadow: 0 12px 28px rgba(16, 24, 40, .08);
+}
+
+.proposal-card-body {
+    padding: 40px 48px;
+}
+
+.proposal-field {
+    margin-bottom: 28px;
+}
+
+.proposal-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.proposal-field label span {
+    color: #611232;
+}
+
+.proposal-field input,
+.proposal-field textarea,
+.proposal-field select {
+    width: 100%;
+    border: 1px solid #d6d6d6;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #333333;
+    font-size: 15px;
+    outline: none;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.proposal-field input,
+.proposal-field select {
+    min-height: 48px;
+    padding: 0 16px;
+}
+
+.proposal-field textarea {
+    min-height: 150px;
+    padding: 14px 16px;
+    resize: vertical;
+}
+
+.proposal-field input:focus,
+.proposal-field textarea:focus,
+.proposal-field select:focus {
+    border-color: #611232;
+    box-shadow: 0 0 0 3px rgba(97, 18, 50, .10);
+}
+
+.proposal-field input::placeholder,
+.proposal-field textarea::placeholder {
+    color: #8a8f98;
+}
+
+.proposal-select-wrap {
+    position: relative;
+}
+
+.proposal-select-wrap select {
+    appearance: none;
+    color: #7d8490;
+}
+
+.proposal-select-wrap i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    color: #7d8490;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.proposal-counter {
+    margin-top: 10px;
+    color: #9aa0aa;
+    font-size: 12px;
+    text-align: right;
+}
+
+.proposal-tags-box {
+    min-height: 94px;
+    padding: 12px;
+    border: 1px solid #d6d6d6;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.proposal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 10px;
+}
+
+.proposal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 30px;
+    padding: 5px 12px;
+    border: 1px solid rgba(97, 18, 50, .20);
+    border-radius: 999px;
+    background: #f9edf2;
+    color: #611232;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.proposal-tag button {
+    border: 0;
+    background: transparent;
+    color: #8f536b;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+}
+
+.proposal-tags-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.proposal-tags-row input {
+    min-height: 38px;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+.proposal-tags-row input:focus {
+    box-shadow: none;
+}
+
+.proposal-add-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 0 14px;
+    border: 1px solid #a57f2c;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #8a6118;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.proposal-add-tag:hover {
+    background: #fbf7ed;
+}
+
+.proposal-two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.proposal-field small {
+    display: block;
+    margin-top: 8px;
+    color: #8a7a66;
+    font-size: 12px;
+}
+
+.proposal-dropzone {
+    display: flex !important;
+    min-height: 188px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 11px;
+    border: 2px dashed #cfcfcf;
+    border-radius: 10px;
+    background: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .18s ease, background-color .18s ease;
+}
+
+.proposal-dropzone:hover,
+.proposal-dropzone.is-dragging {
+    border-color: #611232;
+    background: #fbf7f9;
+}
+
+.proposal-dropzone input {
+    display: none;
+}
+
+.proposal-upload-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: #f3e8ed;
+    color: #611232;
+    font-size: 30px;
+}
+
+.proposal-dropzone strong {
+    color: #111111;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.proposal-dropzone span {
+    color: #8a7a66;
+    font-size: 13px;
+}
+
+.proposal-dropzone b {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: #f9edf2;
+    color: #611232;
+}
+
+.proposal-dropzone em {
+    color: #611232;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.proposal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 26px 48px;
+    border-top: 1px solid #eee4dd;
+    background: #fffdfc;
+}
+
+.proposal-actions > span {
+    color: #9b8061;
+    font-size: 12px;
+}
+
+.proposal-actions > div {
+    display: flex;
+    gap: 12px;
+}
+
+.proposal-secondary-btn,
+.proposal-primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 0 26px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.proposal-secondary-btn {
+    border: 1px solid #d6d6d6;
+    background: #ffffff;
+    color: #433c35;
+}
+
+.proposal-secondary-btn:hover {
+    background: #f8f8f8;
+}
+
+.proposal-primary-btn {
+    border: 1px solid #611232;
+    background: #611232;
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(97, 18, 50, .20);
+}
+
+.proposal-primary-btn:hover {
+    background: #4a0d26;
+}
+
+.proposal-alert {
+    max-width: 100%;
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.proposal-alert-success {
+    border: 1px solid #b8dfc2;
+    background: #edf8ef;
+    color: #245b30;
+}
+
+.proposal-alert-danger {
+    border: 1px solid #f1c4ca;
+    background: #fff1f3;
+    color: #842434;
+}
+
+.proposal-alert ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+}
+
+.proposal-error {
+    margin: 7px 0 0;
+    color: #b42318;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+@media (max-width: 991px) {
+    .proposal-page {
+        padding-top: 78px;
+    }
+
+    .proposal-card-body,
+    .proposal-actions {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+}
+
+@media (max-width: 720px) {
+    .proposal-heading h1 {
+        font-size: 32px;
+    }
+
+    .proposal-rule {
+        width: 190px;
+    }
+
+    .proposal-two-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .proposal-tags-row,
+    .proposal-actions,
+    .proposal-actions > div {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .proposal-actions > span {
+        order: 2;
+        text-align: right;
+    }
+
+    .proposal-secondary-btn,
+    .proposal-primary-btn {
+        width: 100%;
+    }
+}

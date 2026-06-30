@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="444" viewBox="0 0 960 444" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder de convocatoria Septiembre Diciembre</title>
+  <desc id="desc">Estudiantes consultando material academico.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#e7c36c"/>
+      <stop offset=".55" stop-color="#caa468"/>
+      <stop offset="1" stop-color="#835f41"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#611232" stop-opacity=".03"/>
+      <stop offset="1" stop-color="#611232" stop-opacity=".5"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="444" fill="url(#bg)"/>
+  <rect x="86" y="72" width="236" height="246" rx="118" fill="#27364d"/>
+  <rect x="620" y="54" width="214" height="274" rx="107" fill="#5d2f45"/>
+  <rect x="255" y="106" width="438" height="248" rx="24" fill="#fff6dc" opacity=".94"/>
+  <rect x="306" y="150" width="315" height="20" rx="10" fill="#d8b76b"/>
+  <rect x="306" y="196" width="248" height="18" rx="9" fill="#e2ca86"/>
+  <rect x="306" y="240" width="334" height="18" rx="9" fill="#e2ca86"/>
+  <path d="M0 337c145-58 291-63 436-16 166 54 331 51 524-18v141H0Z" fill="#611232" opacity=".24"/>
+  <rect width="960" height="444" fill="url(#shade)"/>
+</svg>
