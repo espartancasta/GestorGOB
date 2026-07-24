@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-// ðŸ” Auth
+// Ã°Å¸â€Â Auth
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 
-// ðŸŒ Frontend
+// Ã°Å¸Å’Â Frontend
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -22,7 +22,7 @@ use App\Http\Controllers\Frontend\ReviewInviteController;
 use App\Http\Controllers\Frontend\SubmissionChatController;
 use App\Models\Submission;
 
-// ðŸ“ Upload
+// Ã°Å¸â€œÂ Upload
 use App\Http\Controllers\FileUploadController;
 
 /*
@@ -35,7 +35,7 @@ Route::post('/upload-file', [FileUploadController::class, 'store'])
 
 /*
 |--------------------------------------------------------------------------
-| Frontend pÃºblico
+| Frontend pÃƒÂºblico
 |--------------------------------------------------------------------------
 */
 Route::name('frontend.')->group(function () {
@@ -68,18 +68,17 @@ Route::name('auth.')->group(function () {
 
     Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
 
-    Route::get('/logout', fn () => redirect()->route('frontend.home'));
 });
 
 /*
 |--------------------------------------------------------------------------
-| ðŸ”¥ SUBMISSIONS - DETALLE COMPARTIDO AUTOR / SECRETARIO
+| Ã°Å¸â€Â¥ SUBMISSIONS - DETALLE COMPARTIDO AUTOR / SECRETARIO
 |--------------------------------------------------------------------------
 | Esta ruta permite abrir:
 | /submissions/{id}
 |
 | Se deja fuera de role:1 y role:3 para evitar rutas duplicadas.
-| La validaciÃ³n fina debe estar en SubmissionController@show:
+| La validaciÃƒÂ³n fina debe estar en SubmissionController@show:
 | - Autor: solo sus documentos
 | - Secretario: todos los documentos
 | - Revisor: no debe entrar
@@ -98,7 +97,7 @@ Route::middleware(['auth'])
 
 /*
 |--------------------------------------------------------------------------
-| ðŸ”¥ SUBMISSIONS - AUTOR (ROLE 1)
+| Ã°Å¸â€Â¥ SUBMISSIONS - AUTOR (ROLE 1)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:1'])
@@ -143,7 +142,7 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| ðŸ”¥ SUBMISSIONS - SECRETARIO (ROLE 3)
+| Ã°Å¸â€Â¥ SUBMISSIONS - SECRETARIO (ROLE 3)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:3'])
@@ -166,7 +165,7 @@ Route::middleware(['auth', 'role:3'])
 
 /*
 |--------------------------------------------------------------------------
-| ðŸ”¥ REVIEW INVITE - REVISOR (ROLE 2)
+| Ã°Å¸â€Â¥ REVIEW INVITE - REVISOR (ROLE 2)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:2'])
@@ -174,26 +173,26 @@ Route::middleware(['auth', 'role:2'])
     ->name('review.')
     ->group(function () {
 
-        // ðŸ‘‰ LISTA DE INVITACIONES
+        // Ã°Å¸â€˜â€° LISTA DE INVITACIONES
         Route::get('/my', [ReviewInviteController::class, 'myInvitations'])
             ->name('invites');
 
-        // ðŸ‘‰ VER INVITACIÃ“N
+        // Ã°Å¸â€˜â€° VER INVITACIÃƒâ€œN
         Route::get('/{token}', [ReviewInviteController::class, 'show'])
             ->name('show');
 
-        // ðŸ‘‰ ACEPTAR INVITACIÃ“N
+        // Ã°Å¸â€˜â€° ACEPTAR INVITACIÃƒâ€œN
         Route::post('/{token}/accept', [ReviewInviteController::class, 'accept'])
             ->name('accept');
 
-        // ðŸ‘‰ RECHAZAR INVITACIÃ“N
+        // Ã°Å¸â€˜â€° RECHAZAR INVITACIÃƒâ€œN
         Route::post('/{token}/reject', [ReviewInviteController::class, 'reject'])
             ->name('reject');
 
         Route::get('/{token}/download-original', [ReviewInviteController::class, 'downloadOriginal'])
             ->name('downloadOriginal');
 
-        // ðŸ‘‰ SUBIR REVISIÃ“N
+        // Ã°Å¸â€˜â€° SUBIR REVISIÃƒâ€œN
         Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview'])
             ->name('uploadReview');
 
@@ -201,7 +200,7 @@ Route::middleware(['auth', 'role:2'])
 
 /*
 |--------------------------------------------------------------------------
-| ðŸ”¥ SEMANA 13 â€” PROBLEMAS DE REVISIÃ“N (SECRETARIO)
+| Ã°Å¸â€Â¥ SEMANA 13 Ã¢â‚¬â€ PROBLEMAS DE REVISIÃƒâ€œN (SECRETARIO)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:3'])

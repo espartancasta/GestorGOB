@@ -28,8 +28,8 @@
         |--------------------------------------------------------------------------
         | AUTOR
         |--------------------------------------------------------------------------
-        | Por ahora se cuentan documentos que regresaron a corrección.
-        | Cuando tengas pantalla de correcciones, aquí se cambia la URL.
+        | Por ahora se cuentan documentos que regresaron a correcciÃƒÆ’Ã‚Â³n.
+        | Cuando tengas pantalla de correcciones, aquÃƒÆ’Ã‚Â­ se cambia la URL.
         */
         if (Auth::user()->role == 1) {
             $notificationCount = Submission::where('author_id', Auth::id())
@@ -37,7 +37,7 @@
                 ->count();
 
             $notificationTitle = 'Correcciones pendientes';
-            $notificationText = 'Tienes documentos que requieren corrección.';
+            $notificationText = 'Tienes documentos que requieren correcciÃƒÆ’Ã‚Â³n.';
             $notificationUrl = route('frontend.home');
         }
 
@@ -53,7 +53,7 @@
                 ->count();
 
             $notificationTitle = 'Invitaciones pendientes';
-            $notificationText = 'Tienes solicitudes de revisión por atender.';
+            $notificationText = 'Tienes solicitudes de revisiÃƒÆ’Ã‚Â³n por atender.';
             $notificationUrl = url('/review-invite/my');
         }
 
@@ -61,14 +61,14 @@
         |--------------------------------------------------------------------------
         | SECRETARIO
         |--------------------------------------------------------------------------
-        | Cuenta documentos pendientes de asignación.
+        | Cuenta documentos pendientes de asignaciÃƒÆ’Ã‚Â³n.
         */
         if (Auth::user()->role == 3) {
             $notificationCount = Submission::where('status', 'pending_assignment')
                 ->count();
 
             $notificationTitle = 'Documentos pendientes';
-            $notificationText = 'Hay documentos esperando asignación de revisores.';
+            $notificationText = 'Hay documentos esperando asignaciÃƒÆ’Ã‚Â³n de revisores.';
             $notificationUrl = route('submissions.index');
         }
 
@@ -188,32 +188,27 @@
     </div>
 </header>
 @else
-<header class="header fixed-top"
-        style="background-color: var(--gob-primary-dark) !important; min-height:80px; display:flex; align-items:center; width:100%;">
+<header class="header fixed-top gob-institutional-header">
 
-    <div class="container">
+    <div class="gob-header__inner container">
         <div class="d-flex align-items-center justify-content-between w-100">
 
             {{-- LOGO --}}
             <div class="logo d-flex align-items-center">
                 <a href="{{ route('frontend.home') }}">
-                    <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg"
-                         alt="Logo Gobierno de México"
-                         style="height:48px;">
+                    <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg" alt="Logo Gobierno de M&eacute;xico">
                 </a>
             </div>
 
             {{-- DERECHA --}}
-            <div class="header-right d-flex align-items-center" style="gap:20px;">
+            <div class="header-right d-flex align-items-center gob-header__actions">
 
                 {{-- LINK GOBIERNO --}}
-                <div class="gob-header-links d-flex" style="gap:20px;">
-                    <a href="https://www.gob.mx/gobierno"
-                       target="_blank"
-                       style="color:#fff; text-decoration:none;">
-                        Gobierno
-                    </a>
-                </div>
+                <div class="gob-header-links gob-header__utility" aria-label="Enlaces institucionales">
+    <a href="https://www.gob.mx/tramites" target="_blank" rel="noopener noreferrer">Tr&aacute;mites</a>
+    <a href="https://www.gob.mx/gobierno" target="_blank" rel="noopener noreferrer">Gobierno</a>
+    <a href="https://www.gob.mx/en" target="_blank" rel="noopener noreferrer">English</a>
+</div>
 
                 {{-- BUSCADOR FUNCIONAL --}}
                 <div class="dropdown">
@@ -240,7 +235,7 @@
                                 <input type="text"
                                        name="q"
                                        class="gob-search-input"
-                                       placeholder="Título, autor o palabra clave..."
+                                       placeholder="T&iacute;tulo, autor o palabra clave..."
                                        autocomplete="off">
 
                                 <button type="submit"
@@ -323,7 +318,7 @@
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
-                            <i class="las la-user-circle" style="font-size:30px;"></i>
+                            <i class="las la-user-circle gob-user-icon"></i>
                         </button>
 
                         <div class="dropdown-menu dropdown-menu-right gob-dropdown">
@@ -349,7 +344,7 @@
 
                             <div class="dropdown-divider"></div>
 
-                            {{-- CERRAR SESIÓN CORRECTO: POST + CSRF --}}
+                            {{-- Cierre de sesión: POST + CSRF --}}
                             <form method="POST"
                                   action="{{ route('auth.logout') }}"
                                   style="margin:0;">
@@ -357,7 +352,7 @@
 
                                 <button type="submit"
                                         class="dropdown-item gob-logout-btn">
-                                    Cerrar sesión
+                                    Cerrar sesi&oacute;n
                                 </button>
                             </form>
 
@@ -368,8 +363,8 @@
                 @else
 
                     <a href="{{ route('auth.login') }}"
-                       class="btn btn-light">
-                        Iniciar sesión
+                       class="btn gob-header__login">
+                        Iniciar sesi&oacute;n
                     </a>
 
                 @endauth
@@ -382,7 +377,23 @@
 </header>
 @endif
 
-<style>
+@guest
+<nav class="gob-inifap-nav" aria-label="NavegaciÃƒÂ³n principal INIFAP">
+    <div class="gob-inifap-nav__inner">
+        <a class="gob-inifap-nav__brand" href="{{ route('frontend.home') }}">Inifap</a>
+        <ul class="gob-inifap-nav__menu">
+            <li><a href="https://www.gob.mx/inifap#blog" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://www.gob.mx/inifap#galeria" target="_blank" rel="noopener noreferrer">&Aacute;lbum de fotos</a></li>
+            <li><a href="https://www.gob.mx/inifap#prensa" target="_blank" rel="noopener noreferrer">Prensa</a></li>
+            <li><a href="https://www.gob.mx/inifap#agenda" target="_blank" rel="noopener noreferrer">Agenda</a></li>
+            <li><a href="https://www.gob.mx/inifap#acciones" target="_blank" rel="noopener noreferrer">Acciones y Programas</a></li>
+            <li><a href="https://www.gob.mx/inifap#documentos" target="_blank" rel="noopener noreferrer">Documentos</a></li>
+            <li><a href="https://www.gob.mx/inifap#transparencia" target="_blank" rel="noopener noreferrer">Transparencia</a></li>
+            <li><a href="https://www.gob.mx/inifap#contacto" target="_blank" rel="noopener noreferrer">Contacto</a></li>
+        </ul>
+    </div>
+</nav>
+@endguest<style>
 /* =========================================================
    HEADER GOB
 ========================================================= */
@@ -410,7 +421,7 @@
     font-size: 22px;
 }
 
-/* BADGE DE NOTIFICACIÓN */
+/* BADGE DE NOTIFICACIÃƒÆ’Ã¢â‚¬Å“N */
 .gob-badge {
     position: absolute;
     top: -5px;
