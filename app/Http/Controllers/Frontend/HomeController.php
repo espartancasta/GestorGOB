@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Submission;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        if (Auth::check() && Auth::user()->role === User::ROLE_SECRETARY) {
+            return app(SubmissionController::class)->index(request());
+        }
         $recentposts = Post::with("category")
             ->where("status", true)
             ->orderBy("id", "DESC")

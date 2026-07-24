@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-// 🔐 Auth
+// ðŸ” Auth
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignupController;
 
-// 🌐 Frontend
+// ðŸŒ Frontend
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -22,7 +22,7 @@ use App\Http\Controllers\Frontend\ReviewInviteController;
 use App\Http\Controllers\Frontend\SubmissionChatController;
 use App\Models\Submission;
 
-// 📁 Upload
+// ðŸ“ Upload
 use App\Http\Controllers\FileUploadController;
 
 /*
@@ -35,7 +35,7 @@ Route::post('/upload-file', [FileUploadController::class, 'store'])
 
 /*
 |--------------------------------------------------------------------------
-| Frontend público
+| Frontend pÃºblico
 |--------------------------------------------------------------------------
 */
 Route::name('frontend.')->group(function () {
@@ -67,17 +67,19 @@ Route::name('auth.')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
     Route::post('/logout', [LogoutController::class, 'index'])->name('logout');
+
+    Route::get('/logout', fn () => redirect()->route('frontend.home'));
 });
 
 /*
 |--------------------------------------------------------------------------
-| 🔥 SUBMISSIONS - DETALLE COMPARTIDO AUTOR / SECRETARIO
+| ðŸ”¥ SUBMISSIONS - DETALLE COMPARTIDO AUTOR / SECRETARIO
 |--------------------------------------------------------------------------
 | Esta ruta permite abrir:
 | /submissions/{id}
 |
 | Se deja fuera de role:1 y role:3 para evitar rutas duplicadas.
-| La validación fina debe estar en SubmissionController@show:
+| La validaciÃ³n fina debe estar en SubmissionController@show:
 | - Autor: solo sus documentos
 | - Secretario: todos los documentos
 | - Revisor: no debe entrar
@@ -96,7 +98,7 @@ Route::middleware(['auth'])
 
 /*
 |--------------------------------------------------------------------------
-| 🔥 SUBMISSIONS - AUTOR (ROLE 1)
+| ðŸ”¥ SUBMISSIONS - AUTOR (ROLE 1)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:1'])
@@ -141,7 +143,7 @@ Route::middleware(['auth'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| 🔥 SUBMISSIONS - SECRETARIO (ROLE 3)
+| ðŸ”¥ SUBMISSIONS - SECRETARIO (ROLE 3)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:3'])
@@ -164,7 +166,7 @@ Route::middleware(['auth', 'role:3'])
 
 /*
 |--------------------------------------------------------------------------
-| 🔥 REVIEW INVITE - REVISOR (ROLE 2)
+| ðŸ”¥ REVIEW INVITE - REVISOR (ROLE 2)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:2'])
@@ -172,26 +174,26 @@ Route::middleware(['auth', 'role:2'])
     ->name('review.')
     ->group(function () {
 
-        // 👉 LISTA DE INVITACIONES
+        // ðŸ‘‰ LISTA DE INVITACIONES
         Route::get('/my', [ReviewInviteController::class, 'myInvitations'])
             ->name('invites');
 
-        // 👉 VER INVITACIÓN
+        // ðŸ‘‰ VER INVITACIÃ“N
         Route::get('/{token}', [ReviewInviteController::class, 'show'])
             ->name('show');
 
-        // 👉 ACEPTAR INVITACIÓN
+        // ðŸ‘‰ ACEPTAR INVITACIÃ“N
         Route::post('/{token}/accept', [ReviewInviteController::class, 'accept'])
             ->name('accept');
 
-        // 👉 RECHAZAR INVITACIÓN
+        // ðŸ‘‰ RECHAZAR INVITACIÃ“N
         Route::post('/{token}/reject', [ReviewInviteController::class, 'reject'])
             ->name('reject');
 
         Route::get('/{token}/download-original', [ReviewInviteController::class, 'downloadOriginal'])
             ->name('downloadOriginal');
 
-        // 👉 SUBIR REVISIÓN
+        // ðŸ‘‰ SUBIR REVISIÃ“N
         Route::post('/{token}/upload-review', [ReviewInviteController::class, 'uploadReview'])
             ->name('uploadReview');
 
@@ -199,7 +201,7 @@ Route::middleware(['auth', 'role:2'])
 
 /*
 |--------------------------------------------------------------------------
-| 🔥 SEMANA 13 — PROBLEMAS DE REVISIÓN (SECRETARIO)
+| ðŸ”¥ SEMANA 13 â€” PROBLEMAS DE REVISIÃ“N (SECRETARIO)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:3'])
@@ -232,6 +234,44 @@ Route::middleware(['auth'])
 */
 Route::middleware(['auth'])->get('/messages', function () {
     $user = auth()->user();
+
+    if ($user->role === \App\Models\User::ROLE_SECRETARY) {
+        $search = trim((string) request('q', ''));
+        $filter = in_array(request('filter'), ['recent', 'empty', 'pending'], true)
+            ? request('filter')
+            : 'all';
+        $recentSince = now()->subDays(7);
+
+        $baseQuery = Submission::query()
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                        ->orWhere('titulo_publicacion', 'like', "%{$search}%")
+                        ->orWhereHas('author', fn ($author) => $author->where('name', 'like', "%{$search}%"));
+                    if (ctype_digit($search)) {
+                        $query->orWhere('id', (int) $search);
+                    }
+                });
+            });
+
+        $filterCounts = [
+            'all' => (clone $baseQuery)->count(),
+            'recent' => (clone $baseQuery)->whereHas('chatThread.messages', fn ($messages) => $messages->where('created_at', '>=', $recentSince))->count(),
+            'empty' => (clone $baseQuery)->whereDoesntHave('chatThread.messages')->count(),
+            'pending' => (clone $baseQuery)->whereHas('chatThread.latestMessage', fn ($message) => $message->where('user_id', '!=', $user->id))->count(),
+        ];
+
+        $submissions = $baseQuery
+            ->with(['author', 'chatThread.latestMessage.user'])
+            ->when($filter === 'recent', fn ($query) => $query->whereHas('chatThread.messages', fn ($messages) => $messages->where('created_at', '>=', $recentSince)))
+            ->when($filter === 'empty', fn ($query) => $query->whereDoesntHave('chatThread.messages'))
+            ->when($filter === 'pending', fn ($query) => $query->whereHas('chatThread.latestMessage', fn ($message) => $message->where('user_id', '!=', $user->id)))
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('messages.secretary', compact('submissions', 'search', 'filter', 'filterCounts'));
+    }
 
     $submissions = Submission::query()
         ->with(['author', 'chatThread.messages.user'])

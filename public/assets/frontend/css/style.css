@@ -6427,6 +6427,65 @@ input:checked + .slider:before {
     background: transparent !important;
 }
 
+/* Menú lateral móvil compartido (Autor, Revisor y paneles relacionados). */
+.gob-sidebar-toggle {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    .gob-sidebar {
+        padding: 12px 16px !important;
+    }
+
+    .gob-sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px 14px;
+        border: 1px solid #611232;
+        border-radius: 8px;
+        background: #611232;
+        color: #ffffff;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .gob-sidebar-toggle i {
+        color: #d4af37;
+        font-size: 20px;
+    }
+
+    .gob-sidebar-navigation {
+        display: none;
+        padding-top: 10px;
+    }
+
+    .gob-sidebar.is-mobile-open .gob-sidebar-navigation {
+        display: block;
+    }
+
+    .gob-sidebar .gob-menu {
+        display: block !important;
+        width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .gob-sidebar .gob-menu li {
+        width: 100% !important;
+        margin-bottom: 6px !important;
+        white-space: normal !important;
+    }
+
+    .gob-main {
+        min-width: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+}
+
 /* Sin cambio visual al pasar cursor */
 .gob-menu li:hover,
 .gob-menu li a:hover,

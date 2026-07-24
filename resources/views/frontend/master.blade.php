@@ -19,12 +19,14 @@
     @auth
         @if(auth()->user()->role == 1)
             <link rel="stylesheet" href="{{ asset('assets/frontend/css/author-layout.css') }}"/>
+        @elseif(auth()->user()->role == 3)
+            <link rel="stylesheet" href="{{ asset('assets/frontend/css/secretary-layout.css') }}"/>
         @endif
     @endauth
     @stack('styles')
     
 </head>
-<body class="@auth{{ auth()->user()->role == 1 ? 'author-layout' : '' }}@endauth">
+<body class="@auth{{ auth()->user()->role == 1 ? 'author-layout' : (auth()->user()->role == 3 ? 'secretary-layout' : '') }}@endauth">
     <div class="loader">
         <div class="loader-element"></div>
     </div>
@@ -55,7 +57,7 @@
     <script src="{{ asset('assets/frontend/js/jquery.marquee.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 
-    {{-- Script para abrir los enlaces de widgets en nueva pestaña --}}
+    {{-- Script para abrir los enlaces de widgets en nueva pestaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â±a --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.widget a').forEach(function(link) {

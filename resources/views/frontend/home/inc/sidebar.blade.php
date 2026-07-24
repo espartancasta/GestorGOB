@@ -6,9 +6,19 @@
         </span>
         <div>
             <small>Panel de</small>
-            <h4>Autor</h4>
+            <h4>@auth{{ auth()->user()->role_name }}@else Usuario @endauth</h4>
         </div>
     </div>
+
+    <button type="button"
+            class="gob-sidebar-toggle"
+            aria-expanded="false"
+            aria-controls="gob-sidebar-navigation">
+        <i class="las la-bars" aria-hidden="true"></i>
+        <span>Men&uacute;</span>
+    </button>
+
+    <div id="gob-sidebar-navigation" class="gob-sidebar-navigation">
 
     @if(!auth()->check() || auth()->user()->role != 1)
         <ul class="gob-menu">
@@ -69,13 +79,6 @@
                 </li>
             @endif
 
-            @if(auth()->user()->role == 3)
-                <li class="{{ request()->routeIs('submissions.index') ? 'active' : '' }}">
-                    <a href="{{ route('submissions.index') }}">
-                        Documentos pendientes
-                    </a>
-                </li>
-            @endif
 
             @if(auth()->user()->role == 4)
                 <li class="{{ request()->routeIs('frontend.home') ? 'active' : '' }}">
@@ -85,10 +88,13 @@
                 </li>
             @endif
 
-            @if(auth()->user()->role != 1)
-                <li class="{{ request()->routeIs('messages.index') ? 'active' : '' }}">
+            @if(auth()->user()->role != 1 && auth()->user()->role != 2)
+                <li class="{{ request()->routeIs('messages.index', 'submissions.chat.*') ? 'active' : '' }}">
                     <a href="{{ route('messages.index') }}">
                         Mensajes
+                        @if(request()->routeIs('messages.index') && isset($submissions))
+                            <span class="secretary-menu-badge">{{ $submissions->count() }}</span>
+                        @endif
                     </a>
                 </li>
             @endif
@@ -97,4 +103,20 @@
 
     @endauth
 
+    </div>
+
 </div>
+
+@once
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.gob-sidebar-toggle').forEach(function (toggle) {
+                toggle.addEventListener('click', function () {
+                    var sidebar = toggle.closest('.gob-sidebar');
+                    var isOpen = sidebar.classList.toggle('is-mobile-open');
+                    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+            });
+        });
+    </script>
+@endonce

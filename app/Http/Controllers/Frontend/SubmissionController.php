@@ -15,13 +15,40 @@ use Illuminate\Support\Str;
 
 class SubmissionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $submissions = Submission::with(['author', 'files', 'reviewers.reviewer'])
-            ->latest()
-            ->get();
+        $allowedStatuses = ['pending_assignment', 'waiting_acceptance', 'in_review', 'pending_correction', 'final_review', 'completed', 'approved', 'rejected', 'revision_completed'];
+        $search = trim((string) $request->query('q', ''));
+        $status = (string) $request->query('status', '');
+        $status = in_array($status, $allowedStatuses, true) ? $status : '';
 
-        return view('frontend.submissions.index', compact('submissions'));
+        $statistics = Submission::query()
+            ->selectRaw('COUNT(*) as total')
+            ->selectRaw("SUM(CASE WHEN status = 'pending_assignment' THEN 1 ELSE 0 END) as pending_assignment")
+            ->selectRaw("SUM(CASE WHEN status = 'in_review' THEN 1 ELSE 0 END) as in_review")
+            ->selectRaw("SUM(CASE WHEN status = 'pending_correction' THEN 1 ELSE 0 END) as pending_correction")
+            ->first();
+
+        $submissions = Submission::query()
+            ->with(['author', 'reviewers'])
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('title', 'like', "%{$search}%")
+                        ->orWhere('titulo_publicacion', 'like', "%{$search}%")
+                        ->orWhereHas('author', fn ($authorQuery) => $authorQuery->where('name', 'like', "%{$search}%"));
+                    if (ctype_digit($search)) {
+                        $query->orWhere('id', (int) $search);
+                    }
+                });
+            })
+            ->when($status !== '', fn ($query) => $query->where('status', $status))
+            ->latest()
+            ->paginate(8)
+            ->withQueryString();
+
+        $listRoute = request()->routeIs('frontend.home') ? 'frontend.home' : 'submissions.index';
+
+        return view('frontend.submissions.index', compact('submissions', 'statistics', 'allowedStatuses', 'search', 'status', 'listRoute'));
     }
 
     public function myProjects()
