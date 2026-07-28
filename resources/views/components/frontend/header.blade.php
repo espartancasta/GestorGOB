@@ -28,8 +28,8 @@
         |--------------------------------------------------------------------------
         | AUTOR
         |--------------------------------------------------------------------------
-        | Por ahora se cuentan documentos que regresaron a correcciÃƒÆ’Ã‚Â³n.
-        | Cuando tengas pantalla de correcciones, aquÃƒÆ’Ã‚Â­ se cambia la URL.
+        | Por ahora se cuentan documentos que regresaron a correcciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n.
+        | Cuando tengas pantalla de correcciones, aquÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­ se cambia la URL.
         */
         if (Auth::user()->role == 1) {
             $notificationCount = Submission::where('author_id', Auth::id())
@@ -37,7 +37,7 @@
                 ->count();
 
             $notificationTitle = 'Correcciones pendientes';
-            $notificationText = 'Tienes documentos que requieren correcciÃƒÆ’Ã‚Â³n.';
+            $notificationText = 'Tienes documentos que requieren correcciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n.';
             $notificationUrl = route('frontend.home');
         }
 
@@ -53,7 +53,7 @@
                 ->count();
 
             $notificationTitle = 'Invitaciones pendientes';
-            $notificationText = 'Tienes solicitudes de revisiÃƒÆ’Ã‚Â³n por atender.';
+            $notificationText = 'Tienes solicitudes de revisiÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n por atender.';
             $notificationUrl = url('/review-invite/my');
         }
 
@@ -61,14 +61,14 @@
         |--------------------------------------------------------------------------
         | SECRETARIO
         |--------------------------------------------------------------------------
-        | Cuenta documentos pendientes de asignaciÃƒÆ’Ã‚Â³n.
+        | Cuenta documentos pendientes de asignaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n.
         */
         if (Auth::user()->role == 3) {
             $notificationCount = Submission::where('status', 'pending_assignment')
                 ->count();
 
             $notificationTitle = 'Documentos pendientes';
-            $notificationText = 'Hay documentos esperando asignaciÃƒÆ’Ã‚Â³n de revisores.';
+            $notificationText = 'Hay documentos esperando asignaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n de revisores.';
             $notificationUrl = route('submissions.index');
         }
 
@@ -344,7 +344,7 @@
 
                             <div class="dropdown-divider"></div>
 
-                            {{-- Cierre de sesión: POST + CSRF --}}
+                            {{-- Cierre de sesiÃƒÂ³n: POST + CSRF --}}
                             <form method="POST"
                                   action="{{ route('auth.logout') }}"
                                   style="margin:0;">
@@ -359,14 +359,7 @@
                         </div>
 
                     </div>
-
                 @else
-
-                    <a href="{{ route('auth.login') }}"
-                       class="btn gob-header__login">
-                        Iniciar sesi&oacute;n
-                    </a>
-
                 @endauth
 
             </div>
@@ -377,8 +370,7 @@
 </header>
 @endif
 
-@guest
-<nav class="gob-inifap-nav" aria-label="NavegaciÃƒÂ³n principal INIFAP">
+<nav class="gob-inifap-nav" aria-label="NavegaciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n principal INIFAP">
     <div class="gob-inifap-nav__inner">
         <a class="gob-inifap-nav__brand" href="{{ route('frontend.home') }}">Inifap</a>
         <ul class="gob-inifap-nav__menu">
@@ -392,8 +384,7 @@
             <li><a href="https://www.gob.mx/inifap#contacto" target="_blank" rel="noopener noreferrer">Contacto</a></li>
         </ul>
     </div>
-</nav>
-@endguest<style>
+</nav><style>
 /* =========================================================
    HEADER GOB
 ========================================================= */
@@ -421,7 +412,7 @@
     font-size: 22px;
 }
 
-/* BADGE DE NOTIFICACIÃƒÆ’Ã¢â‚¬Å“N */
+/* BADGE DE NOTIFICACIÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“N */
 .gob-badge {
     position: absolute;
     top: -5px;

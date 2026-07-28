@@ -1,15 +1,5 @@
 <div class="gob-sidebar author-sidebar">
 
-    <div class="gob-logo author-sidebar-panel">
-        <span class="author-panel-icon" aria-hidden="true">
-            <i class="las la-clipboard-list"></i>
-        </span>
-        <div>
-            <small>Panel de</small>
-            <h4>@auth{{ auth()->user()->role_name }}@else Usuario @endauth</h4>
-        </div>
-    </div>
-
     <button type="button"
             class="gob-sidebar-toggle"
             aria-expanded="false"
@@ -22,10 +12,13 @@
 
     @if(!auth()->check() || auth()->user()->role != 1)
         <ul class="gob-menu">
-            <li class="{{ request()->routeIs('frontend.home') ? 'active' : '' }}">
+            <li class="gob-sidebar-home {{ request()->routeIs('frontend.home') ? 'active' : '' }}">
                 <a href="{{ route('frontend.home') }}">Inicio</a>
             </li>
-        </ul>
+<li class="gob-sidebar-login">
+                    <a href="{{ route('auth.login') }}"><span class="gob-sidebar-login__label">Iniciar sesi&oacute;n</span></a>
+                </li>
+</ul>
     @endif
 
     @auth
@@ -81,7 +74,7 @@
 
 
             @if(auth()->user()->role == 4)
-                <li class="{{ request()->routeIs('frontend.home') ? 'active' : '' }}">
+                <li class="gob-sidebar-home {{ request()->routeIs('frontend.home') ? 'active' : '' }}">
                     <a href="{{ route('frontend.home') }}">
                         Revisi&oacute;n final
                     </a>

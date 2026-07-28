@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    estilos-gobmx.css
    Estilo institucional GOB.MX para GestorGOB
 ========================================================= */
@@ -9,7 +9,7 @@
 :root {
   --gob-primary: #9F2241;         /* guinda principal V3 */
   --gob-primary-dark: #611232;    /* guinda oscuro V3 para encabezados */
-  --gob-footer-bg: #611232;       /* regresando a guinda por peticiÃ³n del usuario */
+  --gob-footer-bg: #611232;       /* regresando a guinda por peticiÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n del usuario */
   --gob-primary-soft: #f6eef1;    /* fondo suave guinda */
   --gob-gold: #BC955C;            /* dorado institucional V3 */
   --gob-gold-soft: #DDC9A3;       /* dorado claro V3 */
@@ -71,7 +71,7 @@ a:focus {
 }
 
 /* =========================================================
-   2) TipografÃ­a / encabezados
+   2) TipografÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­a / encabezados
 ========================================================= */
 h1, h2, h3, h4, h5, h6,
 .widget-title,
@@ -176,7 +176,7 @@ h1, h2, h3, h4, h5, h6,
   text-decoration: none !important;
 }
 
-/* BotÃ³n de bÃºsqueda */
+/* BotÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n de bÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºsqueda */
 .search-form .search-btn,
 .search-form button,
 .sidebar .search-form button {
@@ -256,7 +256,7 @@ header.header .header-right {
 }
 
 /* =========================================================
-   6) Botón Iniciar Sesión (Encabezado)
+   6) BotÃƒÆ’Ã‚Â³n Iniciar SesiÃƒÆ’Ã‚Â³n (Encabezado)
 ========================================================= */
 header.header .btn-subscribe {
   background-color: var(--gob-primary-dark) !important;
@@ -574,7 +574,7 @@ input:focus {
 }
 
 /* =========================================================
-   14) TÃ­tulos de secciÃ³n
+   14) TÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­tulos de secciÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â³n
 ========================================================= */
 .gob-section-title {
   font-weight: 800 !important;
@@ -663,7 +663,7 @@ input:focus {
 }
 
 /* =========================================================
-   18) Dropdowns / menÃºs
+   18) Dropdowns / menÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºs
 ========================================================= */
 .dropdown-menu {
   border: 1px solid #e4e4e4 !important;
@@ -705,7 +705,7 @@ footer a:hover,
 
 
 
-/* 🔥 FIX DEFINITIVO LAYOUT */
+/* ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ‚Â¥ FIX DEFINITIVO LAYOUT */
 .page {
     padding-left: 0 !important;
     margin-left: 0 !important;
@@ -716,7 +716,7 @@ main.page {
     padding-left: 0 !important;
     margin-left: 0 !important;
 }
-/* Dos barras institucionales: alcance exclusivo de la cabecera pública. */
+/* Dos barras institucionales: alcance exclusivo de la cabecera pÃƒÆ’Ã‚Âºblica. */
 .gob-institutional-header {
   width: 100%;
   height: 80px !important;
@@ -729,11 +729,11 @@ main.page {
 .gob-institutional-header .gob-header__inner {
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 1200px !important;
+  width: calc(100% - 48px);
+  max-width: 1120px !important;
   min-height: 80px;
   margin: 0 auto;
-  padding: 0 24px !important;
+  padding: 0 !important;
 }
 .gob-institutional-header .logo {
   display: flex;
@@ -750,12 +750,12 @@ main.page {
   object-fit: contain;
 }
 .gob-institutional-header .gob-header__actions {
-  gap: 22px !important;
+  gap: 30px !important;
 }
 .gob-header__utility {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 30px;
 }
 .gob-header__utility a {
   color: #fff !important;
@@ -773,7 +773,7 @@ main.page {
 }
 .gob-institutional-header .gob-header__login {
   min-height: 40px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   border: 0;
   border-radius: 4px;
   background: #fff;
@@ -795,19 +795,19 @@ main.page {
   width: 100%;
   min-height: 74px;
   margin-top: 80px;
-  background: #3b0718;
+  background-color: #3A0B1E;
 }
 .gob-inifap-nav__inner {
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 1200px;
+  width: calc(100% - 48px);
+  max-width: 1120px;
   min-height: 74px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0;
 }
 .gob-inifap-nav__brand {
-  flex: 0 0 190px;
+  flex: 0 0 150px;
   color: #fff !important;
   font-family: inherit;
   font-size: 18px;
@@ -818,7 +818,8 @@ main.page {
   display: flex;
   flex: 1 1 auto;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 34px;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -830,7 +831,7 @@ main.page {
 }
 .gob-inifap-nav__menu a {
   display: block;
-  padding: 27px 9px;
+  padding: 27px 0;
   color: #fff !important;
   font-size: 15px;
   font-weight: 600;
@@ -857,3 +858,433 @@ main.page {
   .gob-inifap-nav__brand { flex-basis: 88px; }
   .gob-inifap-nav__menu a { padding-top: 21px; padding-bottom: 21px; font-size: 14px; }
 }
+
+.gob-sidebar .gob-menu .gob-sidebar-login {
+  margin-top: 18px;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: #611232;
+  color: #fff !important;
+  font-weight: 700;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login a:hover,
+.gob-sidebar .gob-menu .gob-sidebar-login a:focus {
+  background: #4d0e28;
+  color: #fff !important;
+}
+
+.gob-dashboard > .gob-sidebar {
+  min-height: calc(100vh - 154px) !important;
+  padding: 28px 20px 20px !important;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login {
+  margin-top: 24px;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login a {
+  justify-content: center;
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 16px;
+}
+
+.gob-sidebar .gob-menu .gob-sidebar-home,
+.gob-sidebar .gob-menu .gob-sidebar-login {
+  margin-top: 16px;
+  margin-bottom: 0 !important;
+}
+.gob-sidebar .gob-menu .gob-sidebar-home a,
+.gob-sidebar .gob-menu .gob-sidebar-login a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 16px !important;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.gob-sidebar .gob-menu .gob-sidebar-home a {
+  border: 1px solid #611232;
+  background: #fff;
+  color: #611232 !important;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login a {
+  border: 1px solid #611232;
+  background: #611232;
+  color: #fff !important;
+}
+
+.gob-sidebar .gob-menu .gob-sidebar-home,
+.gob-sidebar .gob-menu .gob-sidebar-login {
+  margin-top: 16px;
+}
+.gob-sidebar .gob-menu .gob-sidebar-home a,
+.gob-sidebar .gob-menu .gob-sidebar-login a {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 16px !important;
+  font-size: 15px;
+  line-height: 1;
+  text-align: center;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login a,
+.gob-sidebar .gob-menu .gob-sidebar-login__label {
+  background-color: #611232 !important;
+  color: #fff !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.gob-sidebar .gob-menu .gob-sidebar-login__label {
+  display: inline-block !important;
+  background: transparent !important;
+  font-weight: 700;
+}
+
+.gob-institutional-header .logo {
+  transform: translateX(-20px);
+}
+
+.gob-inifap-nav__inner {
+  transform: translateX(20px);
+}
+
+.gob-inifap-nav__brand {
+  margin-right: 20px;
+}
+
+.gob-footer {
+  min-height: 440px;
+  padding: 58px 0 92px;
+  background: #611232 !important;
+  color: #fff !important;
+}
+.gob-footer__inner {
+  max-width: 1140px;
+}
+.gob-footer__grid {
+  align-items: flex-start;
+}
+.gob-footer__brand,
+.gob-footer__column {
+  margin-bottom: 28px;
+}
+.gob-footer__brand img {
+  display: block;
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+}
+.gob-footer__column h2 {
+  margin: 0 0 26px;
+  color: #fff !important;
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.gob-footer__column p,
+.gob-footer__column li,
+.gob-footer__column a {
+  color: #fff !important;
+  font-size: 14px;
+  line-height: 1.42;
+}
+.gob-footer__column p {
+  max-width: 248px;
+  margin: 0 0 18px;
+}
+.gob-footer__column ul {
+  margin: 0;
+  padding: 0;
+}
+.gob-footer__column li {
+  margin-bottom: 6px;
+}
+.gob-footer__column a {
+  text-decoration: none !important;
+}
+.gob-footer__column a:hover,
+.gob-footer__column a:focus {
+  color: #fff !important;
+  text-decoration: underline !important;
+}
+.gob-footer__legal li {
+  margin-bottom: 7px;
+}
+.gob-footer__complaint {
+  display: block;
+  max-width: 220px;
+  margin-bottom: 29px;
+  font-weight: 400;
+  text-decoration: underline !important;
+}
+.gob-footer__contact h2 {
+  margin-bottom: 27px;
+}
+.gob-footer__social-title {
+  margin: 17px 0 8px !important;
+}
+.gob-footer__social {
+  display: flex;
+  gap: 12px;
+}
+.gob-footer__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff !important;
+  font-size: 21px;
+  line-height: 1;
+}
+.gob-footer__help {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 36px;
+  color: #fff !important;
+}
+.gob-footer__help span {
+  font-size: 36px;
+  line-height: 1;
+}
+.gob-footer__help strong {
+  color: #fff !important;
+  font-size: 25px;
+  line-height: 1;
+}
+.gob-footer__help small {
+  color: #fff !important;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+@media (max-width: 767.98px) {
+  .gob-footer { min-height: 0; padding: 44px 0 58px; }
+  .gob-footer__column h2 { margin-bottom: 16px; }
+  .gob-footer__brand img { width: 165px; }
+}
+
+.gob-inifap-nav {
+  position: fixed;
+  z-index: 1035;
+  top: 80px;
+  right: 0;
+  left: 0;
+  margin-top: 0;
+}
+main.page {
+  padding-top: 154px !important;
+}
+body.author-layout main.page,
+body.secretary-layout main.page {
+  padding-top: 154px !important;
+}
+.gob-footer {
+  border-top: 26px solid #fff;
+}
+
+.gob-footer {
+  border-top: 46px solid #fff !important;
+}
+
+/* Reserva una franja de contenido real después de las dos barras fijas. */
+main.page {
+  min-height: 200px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.gob-footer {
+  border-top: 0 !important;
+}
+
+.gob-footer-separator {
+  display: block;
+  width: 100%;
+  height: 46px;
+  background: #fff;
+}
+
+/* La separación pertenece al layout, no al borde del footer. */
+main.page {
+  min-height: 0 !important;
+}
+
+.gob-footer-separator {
+  height: 46px !important;
+  flex: 0 0 46px;
+}
+
+/* El espacio pertenece al alto mínimo de la página, no al footer. */
+main.page {
+  min-height: 200px !important;
+}
+
+.gob-footer-separator {
+  display: none !important;
+}
+
+/* En escritorio, el footer no debe ocupar toda la ventana junto al header fijo. */
+@media (min-width: 768px) {
+  .gob-footer {
+    min-height: 428px !important;
+    padding-bottom: 66px !important;
+  }
+}
+
+/* Breadcrumb institucional para las vistas públicas. */
+.gob-institutional-breadcrumb {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 154px;
+  background: #fff;
+}
+.gob-institutional-breadcrumb__inner {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 48px);
+  max-width: 1120px;
+  min-height: 58px;
+  margin: 0 auto;
+  color: #343434;
+  font-size: 18px;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+.gob-institutional-breadcrumb__home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  margin-right: 8px;
+  color: #f1edef !important;
+  text-decoration: none !important;
+}
+.gob-institutional-breadcrumb__home i {
+  font-size: 15px;
+}
+.gob-institutional-breadcrumb__separator {
+  margin-right: 8px;
+  color: #611232;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+}
+.gob-institutional-breadcrumb__inner > a:not(.gob-institutional-breadcrumb__home),
+.gob-institutional-breadcrumb__inner > span:not(.gob-institutional-breadcrumb__separator) {
+  color: #343434 !important;
+}
+.gob-institutional-breadcrumb__current {
+  font-weight: 700;
+}
+.gob-institutional-breadcrumb + main.page {
+  padding-top: 0 !important;
+}
+@media (max-width: 767.98px) {
+  .gob-institutional-breadcrumb { margin-top: 142px; min-height: 50px; }
+  .gob-institutional-breadcrumb__inner { min-height: 50px; font-size: 14px; overflow: hidden; text-overflow: ellipsis; }
+  .gob-institutional-breadcrumb__separator { font-size: 20px; }
+}
+
+/* Ajuste tipográfico institucional: alcance exclusivo de header y footer. */
+.gob-institutional-header .gob-header__utility a {
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+
+.gob-inifap-nav__brand {
+  font-family: "Rubik", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: .005em;
+}
+
+.gob-inifap-nav__menu a {
+  font-family: "Rubik", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: .005em;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.gob-footer,
+.gob-footer__column h2,
+.gob-footer__column p,
+.gob-footer__column li,
+.gob-footer__column a,
+.gob-footer__help small {
+  font-family: "Rubik", sans-serif;
+}
+
+.gob-footer__column h2 {
+  font-size: 19px;
+  font-weight: 400 !important;
+  line-height: 1.35;
+  letter-spacing: .005em;
+  margin-bottom: 28px;
+}
+
+.gob-footer__column p,
+.gob-footer__column li,
+.gob-footer__column a,
+.gob-footer__complaint {
+  font-size: 14px;
+  font-weight: 400 !important;
+  line-height: 1.5;
+  letter-spacing: .002em;
+}
+
+.gob-footer__column p {
+  margin-bottom: 20px;
+}
+
+.gob-footer__column li,
+.gob-footer__legal li {
+  margin-bottom: 8px;
+}
+
+.gob-footer__complaint {
+  margin-bottom: 31px;
+}
+
+.gob-footer__social-title {
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+}
+
+.gob-footer__help small {
+  font-weight: 500 !important;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .gob-footer {
+    padding-top: 62px !important;
+    padding-bottom: 74px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gob-inifap-nav__menu a {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-top: 21px;
+    padding-bottom: 21px;
+  }
+}
+
