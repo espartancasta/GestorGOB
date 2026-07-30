@@ -177,61 +177,6 @@
                     </div>
                 </section>
 
-                <section class="signup-section">
-                    <h2 class="signup-section-title"><i class="las la-address-card" aria-hidden="true"></i> Informacion personal</h2>
-
-                    <div class="signup-grid">
-                        <div class="signup-field">
-                            <label for="phone">Telefono</label>
-                            <div class="signup-control">
-                                <i class="las la-phone" aria-hidden="true"></i>
-                                <input id="phone" type="text" name="phone" value="{{ old('phone') }}" placeholder="(55) 1234-5678">
-                            </div>
-                            @error('phone')<span class="signup-error">{{ $message }}</span>@enderror
-                        </div>
-
-                        <div class="signup-field">
-                            <label for="sex">Sexo</label>
-                            <div class="signup-control">
-                                <i class="las la-venus-mars" aria-hidden="true"></i>
-                                <select id="sex" name="sex">
-                                    <option value="">Selecciona</option>
-                                    <option value="Femenino" {{ old('sex') === 'Femenino' ? 'selected' : '' }}>Femenino</option>
-                                    <option value="Masculino" {{ old('sex') === 'Masculino' ? 'selected' : '' }}>Masculino</option>
-                                    <option value="No especificado" {{ old('sex') === 'No especificado' ? 'selected' : '' }}>No especificado</option>
-                                </select>
-                            </div>
-                            @error('sex')<span class="signup-error">{{ $message }}</span>@enderror
-                        </div>
-
-                        <div class="signup-field">
-                            <label for="age">Edad</label>
-                            <div class="signup-control">
-                                <i class="las la-calendar" aria-hidden="true"></i>
-                                <input id="age" type="number" min="1" max="120" name="age" value="{{ old('age') }}" placeholder="Edad">
-                            </div>
-                            @error('age')<span class="signup-error">{{ $message }}</span>@enderror
-                        </div>
-
-                        <div class="signup-field">
-                            <label for="curp">CURP</label>
-                            <div class="signup-control">
-                                <i class="las la-id-card" aria-hidden="true"></i>
-                                <input id="curp" type="text" maxlength="18" name="curp" value="{{ old('curp') }}" placeholder="CURP">
-                            </div>
-                            @error('curp')<span class="signup-error">{{ $message }}</span>@enderror
-                        </div>
-
-                        <div class="signup-field">
-                            <label for="rfc">RFC</label>
-                            <div class="signup-control">
-                                <i class="las la-address-card" aria-hidden="true"></i>
-                                <input id="rfc" type="text" maxlength="13" name="rfc" value="{{ old('rfc') }}" placeholder="RFC">
-                            </div>
-                            @error('rfc')<span class="signup-error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                </section>
 
                 <section class="signup-section">
                     <h2 class="signup-section-title"><i class="las la-clipboard-list" aria-hidden="true"></i> Informacion adicional</h2>
@@ -253,7 +198,7 @@
 
                 <button type="submit" class="signup-submit">Registrarse</button>
 
-                <p class="signup-login">¿Ya tienes cuenta? <a href="{{ route('auth.login') }}">Iniciar sesion</a></p>
+                <p class="signup-login">Â¿Ya tienes cuenta? <a href="{{ route('auth.login') }}">Iniciar sesion</a></p>
             </form>
         @else
             <div class="signup-alert">El registro de usuarios actualmente no esta permitido.</div>

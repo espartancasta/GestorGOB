@@ -20,7 +20,7 @@
 .tracking-hero {
     max-width: 820px;
     margin: 0 0 40px;
-    padding: 102px 0 0;
+    padding: 8px 0 0;
     background: transparent;
     border-bottom: 0;
     color: #4b5563;

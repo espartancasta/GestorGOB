@@ -15,9 +15,19 @@
             <li class="gob-sidebar-home {{ request()->routeIs('frontend.home') ? 'active' : '' }}">
                 <a href="{{ route('frontend.home') }}">Inicio</a>
             </li>
-<li class="gob-sidebar-login">
+@if(auth()->check() && auth()->user()->role == 2)
+                <li class="gob-sidebar-login {{ request()->routeIs('review.invites') ? 'active' : '' }}">
+                    <a href="{{ route('review.invites') }}"><span class="gob-sidebar-login__label">Revisiones asignadas</span></a>
+                </li>
+            @elseif(auth()->check() && auth()->user()->role == 3)
+                <li class="gob-sidebar-login {{ request()->routeIs('messages.index', 'submissions.chat.*') ? 'active' : '' }}">
+                    <a href="{{ route('messages.index') }}"><span class="gob-sidebar-login__label">Mensajes</span></a>
+                </li>
+            @else
+                <li class="gob-sidebar-login">
                     <a href="{{ route('auth.login') }}"><span class="gob-sidebar-login__label">Iniciar sesi&oacute;n</span></a>
                 </li>
+            @endif
 </ul>
     @endif
 
@@ -64,13 +74,6 @@
             </div>
         @else
             <ul class="gob-menu">
-            @if(auth()->user()->role == 2)
-                <li class="{{ request()->routeIs('review.invites') ? 'active' : '' }}">
-                    <a href="{{ route('review.invites') }}">
-                        Revisiones asignadas
-                    </a>
-                </li>
-            @endif
 
 
             @if(auth()->user()->role == 4)
@@ -81,7 +84,7 @@
                 </li>
             @endif
 
-            @if(auth()->user()->role != 1 && auth()->user()->role != 2)
+            @if(auth()->user()->role != 1 && auth()->user()->role != 2 && auth()->user()->role != 3)
                 <li class="{{ request()->routeIs('messages.index', 'submissions.chat.*') ? 'active' : '' }}">
                     <a href="{{ route('messages.index') }}">
                         Mensajes

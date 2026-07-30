@@ -450,3 +450,38 @@ body.author-layout .dropdown-menu {
         min-width: 0 !important;
     }
 }
+
+/* Las dos barras del Autor forman un bloque continuo: 72px + 74px. */
+body.author-layout .gob-inifap-nav {
+    top: 72px;
+}
+
+body.author-layout main.page {
+    padding-top: 146px !important;
+}
+
+body.author-layout .gob-dashboard {
+    min-height: calc(100vh - 146px) !important;
+}
+
+body.author-layout .gob-sidebar.author-sidebar {
+    top: 146px;
+    height: calc(100vh - 146px) !important;
+    min-height: calc(100vh - 146px) !important;
+}
+
+@media (max-width: 575.98px) {
+    body.author-layout main.page {
+        padding-top: 134px !important;
+    }
+
+    body.author-layout .gob-dashboard {
+        min-height: calc(100vh - 134px) !important;
+    }
+
+    body.author-layout .gob-sidebar.author-sidebar {
+        top: 134px;
+        height: auto !important;
+        min-height: auto !important;
+    }
+}

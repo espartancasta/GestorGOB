@@ -1,4 +1,4 @@
-ï»¿/* =========================================================
+/* =========================================================
    estilos-gobmx.css
    Estilo institucional GOB.MX para GestorGOB
 ========================================================= */
@@ -1288,3 +1288,39 @@ main.page {
   }
 }
 
+
+
+/* Breadcrumb único en los layouts autenticados. */
+body.author-layout .gob-institutional-breadcrumb {
+  margin-top: 146px;
+}
+
+body.author-layout .gob-institutional-breadcrumb + main.page,
+body.secretary-layout .gob-institutional-breadcrumb + main.page {
+  padding-top: 0 !important;
+}
+
+body.secretary-layout .gob-sidebar {
+  top: 212px !important;
+}
+
+@media (max-width: 575.98px) {
+  body.author-layout .gob-institutional-breadcrumb {
+    margin-top: 134px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.secretary-layout .gob-sidebar {
+    top: 0 !important;
+  }
+}
+
+/* Los menús del perfil deben mostrarse sobre la segunda barra institucional. */
+.gob-institutional-header {
+  z-index: 1040 !important;
+}
+
+.gob-institutional-header .dropdown-menu {
+  z-index: 1060 !important;
+}
